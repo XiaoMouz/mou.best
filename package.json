@@ -10,8 +10,29 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@unovis/ts": "^1.4.2",
+    "@unovis/vue": "^1.4.2",
+    "@vee-validate/zod": "^4.13.2",
+    "@vueuse/core": "^10.11.0",
+    "@vueuse/nuxt": "^10.11.0",
+    "appwrite": "^15.0.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "embla-carousel-vue": "^8.1.6",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-vue-next": "^0.408.0",
     "nuxt": "^3.12.3",
-    "vue": "latest"
+    "radix-vue": "^1.9.1",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7",
+    "v-calendar": "^3.1.2",
+    "vaul-vue": "^0.2.0",
+    "vee-validate": "^4.13.2",
+    "vue": "latest",
+    "vue-sonner": "^1.1.3",
+    "zod": "^3.23.8"
   },
   "packageManager": "pnpm@9.1.0+sha512.67f5879916a9293e5cf059c23853d571beaf4f753c707f40cb22bed5fb1578c6aad3b6c4107ccb3ba0b35be003eb621a16471ac836c87beb53f9d54bb4612724",
   "devDependencies": {
