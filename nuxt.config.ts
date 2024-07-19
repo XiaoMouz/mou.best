@@ -10,6 +10,8 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
   ],
   auth: {
+    isEnabled: true,
+    disableServerSideAuth: false,
     provider: {
       type: 'local',
       endpoints: {
@@ -26,8 +28,7 @@ export default defineNuxtConfig({
           id: 'string',
           email: 'string',
           name: 'string',
-          role: "'admin' | 'guest' | 'account'",
-          subscriptions: "{ id: number, status: 'ACTIVE' | 'INACTIVE' }[]",
+          labels: 'string[]',
         },
         dataResponsePointer: '/',
       },
