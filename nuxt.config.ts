@@ -42,5 +42,6 @@ export default defineNuxtConfig({
     globalAppMiddleware: {
       isEnabled: true,
     },
+    
   },
 })
