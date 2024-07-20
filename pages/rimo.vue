@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   auth: false,
+  layout: 'rimo',
 })
 const countdown = ref(0) //  max 6
 const strokeDashoffset = ref(717) // max 717
@@ -179,15 +180,17 @@ function loadNext() {
         </div>
       </div>
     </section>
-    <article class="flex flex-col bg-blue-400 relative simulation-animation">
-      <div>
-        <div class="flex flex-row pt-5 h-[100vh]">
-          <div v-for="link in images">
-            <img class="h-20 w-20 object-cover object-center" :src="link" />
+    <section>
+      <article class="flex flex-col bg-blue-400 relative simulation-animation">
+        <div>
+          <div class="flex flex-row pt-5 h-[100vh]">
+            <div v-for="link in images">
+              <img class="h-20 w-20 object-cover object-center" :src="link" />
+            </div>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </section>
   </main>
 </template>
 <style scoped>
