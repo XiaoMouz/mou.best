@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vueuse/nuxt',
   ],
+  ssr: false,
   auth: {
     provider: {
       type: 'local',
@@ -41,6 +42,5 @@ export default defineNuxtConfig({
     globalAppMiddleware: {
       isEnabled: true,
     },
-    
   },
 })

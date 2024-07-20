@@ -1,5 +1,35 @@
 <template>
-  <main class="h-screen w-full">
+  <main ref="main" class="w-screen min-h-screen h-screen">
     <slot />
   </main>
 </template>
+
+<script setup lang="ts">
+const main = ref(null)
+const darkMode = ref(false)
+
+// read local storage dark mode
+onMounted(() => {
+  const darkModeStorage = localStorage.getItem('darkMode')
+  if (darkModeStorage) {
+    darkMode.value = JSON.parse(darkModeStorage)
+  } else {
+    // read device dark mode
+    const darkModeMedia = window.matchMedia('(prefers-color-scheme: dark)')
+    darkMode.value = darkModeMedia.matches
+  }
+  // add dark mode class
+  watchEffect(() => {
+    if (darkMode.value) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  })
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (e) => {
+      darkMode.value = e.matches
+    })
+})
+</script>
