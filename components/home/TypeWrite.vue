@@ -1,5 +1,5 @@
 <template>
-  <div class="text-sm md:text-lg">
+  <div class="text-lg md:text-lg">
     <div
       class="absolute w-0 h-0 overflow-hidden"
       role="marquee"
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted } from 'vue'
 
 enum TypewriterTransitionStage {
   Deleting = 0,
