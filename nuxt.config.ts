@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth',
     '@pinia/nuxt',
     '@vueuse/nuxt',
+    '@nuxt/fonts',
   ],
   ssr: false,
   auth: {

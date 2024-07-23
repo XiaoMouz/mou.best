@@ -42,6 +42,7 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        'black-shadow': '#00000080',
       },
       borderRadius: {
         xl: 'calc(var(--radius) + 4px)',
@@ -72,7 +73,17 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'collapsible-down': 'collapsible-down 0.2s ease-in-out',
         'collapsible-up': 'collapsible-up 0.2s ease-in-out',
+        'smooth-blink': 'smoothBlink 1s linear infinite',
       },
+      keyframes: {
+        smoothBlink: {
+          '0%, 40%, 100%': { opacity: 1 },
+          '55%, 90%': { opacity: 0 },
+        },
+      },
+    },
+    backgroundImage: {
+      'index-hero': "url('https://mou.best/images/banner.jpg')",
     },
   },
   plugins: [animate],
