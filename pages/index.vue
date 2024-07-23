@@ -21,20 +21,34 @@ const snippets = [
     <div class="bg-inner"></div>
     <div class="w-full h-full">
       <div
-        class="md:absolute md:left-[15%] md:top-[35%] flex p-10 dark:bg-[#0000004d] rounded-2xl"
+        class="md:items-center w-full h-full md:flex md:p-40 md:justify-between md:space-x-10"
       >
-        <div>
-          <img
-            class="w-40 h-40 rounded-full"
-            src="https://avatars.githubusercontent.com/u/54032212?v=4"
-          />
+        <div class="flex p-10 dark:bg-[#0000004d] md:rounded-2xl">
+          <div>
+            <img
+              class="w-40 h-40 rounded-full"
+              src="https://avatars.githubusercontent.com/u/54032212?v=4"
+            />
+          </div>
+          <div class="ml-8 flex flex-col space-y-5">
+            <h1 class="text-4xl font-bold">Hej! 👋</h1>
+            <p class="text-2xl font-bold md:mr-10">I'm XiaoMouz</p>
+            <p class="text-lg">
+              <HomeTypeWrite :snippets="snippets" />
+            </p>
+          </div>
         </div>
-        <div class="ml-8 flex flex-col space-y-5">
-          <h1 class="text-4xl font-bold">Hej! 👋</h1>
-          <p class="text-2xl font-bold md:mr-10">I'm XiaoMouz</p>
-          <p class="text-lg">
-            <HomeTypeWrite :snippets="snippets" />
-          </p>
+        <div class="flex flex-col items-center justify-center mt-10 md:mt-0">
+          <div class="flex space-x-5">
+            <div
+              class="flex flex-col p-9 space-y-4 dark:bg-[#0000004d] rounded-2xl"
+            >
+              <h1 class="text-2xl font-bold">You might want know</h1>
+              <p>
+                <ButtonList />
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
