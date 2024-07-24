@@ -14,6 +14,16 @@ const snippets = [
   'A Frontend Developer',
   'An Android Developer',
 ]
+
+const post = reactive({
+  cid: 1,
+  slug: '1',
+  title: 'Hello World',
+  views: 100,
+  stars: 10,
+  commentsNum: 5,
+  headImage: 'https://mou.best/images/banner.jpg',
+})
 </script>
 
 <template>
@@ -23,7 +33,7 @@ const snippets = [
       <div
         class="md:items-center w-full h-full md:flex md:p-40 md:justify-between md:space-x-10"
       >
-        <div class="flex p-10 dark:bg-[#0000004d] md:rounded-2xl">
+        <HomeCard class="flex">
           <div>
             <img
               class="w-40 h-40 rounded-full"
@@ -37,18 +47,18 @@ const snippets = [
               <HomeTypeWrite :snippets="snippets" />
             </p>
           </div>
-        </div>
-        <div class="flex flex-col items-center justify-center mt-10 md:mt-0">
-          <div class="flex space-x-5">
-            <div
-              class="flex flex-col p-9 space-y-4 dark:bg-[#0000004d] rounded-2xl"
-            >
-              <h1 class="text-2xl font-bold">You might want know</h1>
-              <p>
-                <ButtonList />
-              </p>
-            </div>
-          </div>
+        </HomeCard>
+        <div class="flex flex-col space-y-8 justify-center mt-10 md:mt-0">
+          <HomeCard class="rounded-2xl flex-col">
+            <h1 class="text-2xl font-bold">You might want know</h1>
+            <p>
+              <HomeButtonList />
+            </p>
+          </HomeCard>
+          <HomeCard class="rounded-2xl flex-col"
+            ><h1 class="text-2xl font-bold">Latest update</h1>
+            <PostCard v-bind="post"></PostCard>
+          </HomeCard>
         </div>
       </div>
     </div>
