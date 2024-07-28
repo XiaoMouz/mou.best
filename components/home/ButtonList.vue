@@ -1,9 +1,9 @@
 <template>
   <section class="flex items-center justify-center gap-4">
-    <a class="button" href="https://x.com/XiaoMouz"
+    <a class="button" target="_blank" href="https://x.com/XiaoMouz"
       ><IconTwitter class="primary-fill button-icon"
     /></a>
-    <a class="button" href="https://github.com/XiaoMouz">
+    <a class="button" target="_blank" href="https://github.com/XiaoMouz">
       <IconGithub class="primary-fill button-icon" />
     </a>
     <a class="button" target="_blank" href="https://t.me/XiaoMouz"

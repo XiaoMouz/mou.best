@@ -1,3 +1,7 @@
+<!--
+Thanks component design from @unixzii/cyandev.io 
+source: https://github.com/unixzii/cyandev.io/blob/main/src/components/typewriter.tsx
+-->
 <template>
   <div class="text-lg md:text-lg">
     <div
@@ -123,12 +127,9 @@ export default {
     const update = () => {
       const currentIndex = index.value
       const nextIndex = (currentIndex + 1) % props.snippets.length
-      console.log('delay:', delay.value)
 
       // todo:令人恶心的 if，但是不是很想改
       if (transition.value?.stage === TypewriterTransitionStage.Idle) {
-        console.log('idle', transition.value?.stage)
-
         delay.value = rangedRandom(1500, 3000)
         idle.value = true
       } else {

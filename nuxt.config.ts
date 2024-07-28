@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vueuse/nuxt',
     '@nuxt/fonts',
+    "@nuxtjs/supabase"
   ],
   ssr: false,
   auth: {

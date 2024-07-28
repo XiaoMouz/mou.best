@@ -1,5 +1,5 @@
 <template>
-  <main ref="main" class="w-screen min-h-screen h-screen">
+  <main ref="main" class="min-h-screen h-screen">
     <slot />
   </main>
 </template>
