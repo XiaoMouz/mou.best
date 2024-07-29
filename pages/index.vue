@@ -31,7 +31,7 @@ const post = reactive({
     <div class="bg-inner"></div>
     <div class="w-full h-full">
       <div
-        class="md:items-center w-full h-full md:flex sm:p-5 md:p-20 lg:p-50 xl:p-80 lg:justify-between md:space-x-10"
+        class="md:items-center w-full h-full md:flex sm:p-5 md:p-20 lg:p-50 xl:p-80 lg:justify-evenly md:space-x-10"
       >
         <div class="flex flex-col space-y-8">
           <HomeCard
