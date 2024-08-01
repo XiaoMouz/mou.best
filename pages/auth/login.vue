@@ -5,7 +5,7 @@ import CardHeader from '~/components/ui/card/CardHeader.vue'
 
 definePageMeta({
   layout: 'auth',
-  title: '登录到',
+  title: 'Login to mou.best',
 })
 
 const pending = ref(false)
@@ -15,17 +15,17 @@ const errorMessage = ref('')
 const schema = z.object({
   email: z
     .string({
-      required_error: '必须填写邮箱',
+      required_error: 'Must fill in email',
     })
     .email({
-      message: '邮箱格式不正确',
+      message: 'Invalid email address',
     }),
   password: z
     .string({
-      required_error: '必须填写密码',
+      required_error: 'Must fill in password',
     })
     .min(6, {
-      message: '密码至少6个字符',
+      message: 'Password must be at least 6 characters',
     }),
 })
 
@@ -47,14 +47,14 @@ async function onSubmit(values: Record<string, any>) {
       })
       .catch((e) => {
         if (e.message.includes('401')) {
-          errorMessage.value = '用户名或密码错误'
+          errorMessage.value = 'User not found or password is incorrect'
           haveError.value = true
         } else {
           throw e
         }
       })
   } catch (e: any) {
-    errorMessage.value = '内部错误'
+    errorMessage.value = 'Unknown error: ' + e.message
     haveError.value = true
   }
   lockOnPending(false)
@@ -64,13 +64,18 @@ async function onSubmit(values: Record<string, any>) {
   <div class="my-auto min-w-[340px] space-y-6" :class="pending ? 'blur' : ''">
     <Card>
       <CardHeader>
-        <CardTitle>登录</CardTitle>
+        <CardTitle class="pointer-events-none"
+          >Login to &nbsp;
+          <code class="bg-[#00000030] dark:bg-[#ffffff30] rounded-md px-1"
+            >&lt;mou.best&gt;</code
+          >
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Alert variant="destructive" v-if="haveError" class="mb-4">
-          <AlertTitle>错误</AlertTitle>
+          <AlertTitle>Fucked up</AlertTitle>
           <AlertDescription>
-            {{ '登录失败:&nbsp;' + errorMessage }}
+            {{ 'Failed:&nbsp;' + errorMessage }}
           </AlertDescription>
         </Alert>
 
@@ -85,16 +90,16 @@ async function onSubmit(values: Record<string, any>) {
               },
             },
             password: {
-              label: '密码',
+              label: 'Password',
               inputProps: {
                 type: 'password',
-                placeholder: '密码',
+                placeholder: 'Password',
               },
             },
           }"
           @submit="onSubmit"
         >
-          <Button class="mt-6" type="submit" :disabled="pending">登录</Button>
+          <Button class="mt-6" type="submit" :disabled="pending">Login</Button>
         </AutoForm>
       </CardContent>
     </Card>
