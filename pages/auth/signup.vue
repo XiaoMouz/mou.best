@@ -15,6 +15,13 @@ const pendingEmail = ref('unknown email')
 const success = ref(false)
 
 const schema = z.object({
+  username: z
+    .string({
+      required_error: 'Must fill in username',
+    })
+    .min(3, {
+      message: 'Username must be at least 3 characters',
+    }),
   email: z
     .string({
       required_error: 'Must fill in email',
@@ -41,12 +48,17 @@ async function onSubmit(values: Record<string, any>) {
 
   const supabase = useSupabaseClient()
   try {
-    const { email, password } = schema.parse(values)
+    const { email, password, username } = schema.parse(values)
     pendingEmail.value = email
     await supabase.auth
       .signUp({
         email,
         password,
+        options: {
+          data: {
+            username,
+          },
+        },
       })
       .then(() => {
         success.value = true
@@ -74,11 +86,12 @@ onMounted(() => {
   <div class="my-auto min-w-[340px] space-y-6" :class="pending ? 'blur' : ''">
     <Card>
       <CardHeader>
-        <CardTitle class="pointer-events-none"
-          >Sign up &nbsp;
-          <!-- <code class="bg-[#00000030] dark:bg-[#ffffff30] rounded-md px-1"
-            >&lt;mou.best&gt;</code
-          > -->
+        <CardTitle class="space-y-2"
+          ><div>Sign up &nbsp;</div>
+          <div class="text-sm font-thin">
+            Already have an account?
+            <NuxtLink to="/auth/login" class="font-bold">Login</NuxtLink>
+          </div>
         </CardTitle>
       </CardHeader>
       <Transition v-if="!success">
@@ -93,6 +106,13 @@ onMounted(() => {
           <AutoForm
             :schema="schema"
             :field-config="{
+              username: {
+                label: 'Username',
+                inputProps: {
+                  type: 'text',
+                  placeholder: 'Username',
+                },
+              },
               email: {
                 label: 'Email',
                 inputProps: {
@@ -113,13 +133,6 @@ onMounted(() => {
             <Button class="mt-6" type="submit" :disabled="pending"
               >Sign up</Button
             >
-            <!-- <Button
-              class="mt-6 ml-4"
-              @click="inputPIN = true"
-              variant="secondary"
-            >
-              To PIN
-            </Button> -->
           </AutoForm>
         </CardContent>
       </Transition>

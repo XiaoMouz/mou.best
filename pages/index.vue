@@ -15,6 +15,14 @@ const snippets = [
   'An Android Developer',
 ]
 
+const info = {
+  name: 'XiaoMouz',
+  avatarLink: 'https://avatars.githubusercontent.com/u/54032212?v=4',
+}
+
+const user = useSupabaseUser()
+
+
 const post = reactive({
   cid: 1,
   slug: '1',
@@ -27,6 +35,9 @@ const post = reactive({
 </script>
 
 <template>
+  <div class="absolute top-4 left-[50%] z-10">
+    <HomeWelcome v-bind="info" />
+  </div>
   <div class="relative dark:bg-black-shadow w-full h-full">
     <div class="bg-inner"></div>
     <div class="w-full h-full">

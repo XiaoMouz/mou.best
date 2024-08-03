@@ -45,6 +45,10 @@ async function onSubmit(values: Record<string, any>) {
         email,
         password,
       })
+      .then(() => {
+        const router = useRouter()
+        router.push('/service')
+      })
       .catch((e) => {
         if (e.message.includes('401')) {
           errorMessage.value = 'User not found or password is incorrect'
@@ -64,11 +68,17 @@ async function onSubmit(values: Record<string, any>) {
   <div class="my-auto min-w-[340px] space-y-6" :class="pending ? 'blur' : ''">
     <Card>
       <CardHeader>
-        <CardTitle class="pointer-events-none"
-          >Login to &nbsp;
-          <code class="bg-[#00000030] dark:bg-[#ffffff30] rounded-md px-1"
-            >&lt;mou.best&gt;</code
-          >
+        <CardTitle class="space-y-2"
+          ><div>
+            Login to &nbsp;
+            <code class="bg-[#00000030] dark:bg-[#ffffff30] rounded-md px-1"
+              >&lt;mou.best&gt;</code
+            >
+          </div>
+          <div class="text-sm font-thin">
+            Don't have an account?
+            <NuxtLink to="/auth/signup" class="font-bold">Sign up</NuxtLink>
+          </div>
         </CardTitle>
       </CardHeader>
       <CardContent>

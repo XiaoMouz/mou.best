@@ -7,7 +7,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 
 definePageMeta({
   layout: 'auth',
-  title: 'Sign up',
+  title: 'Login',
 })
 
 const inputPIN = ref(false)
