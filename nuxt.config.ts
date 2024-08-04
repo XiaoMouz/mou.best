@@ -12,6 +12,9 @@ export default defineNuxtConfig({
   ],
   ssr: false,
   supabase: {
+    url: process.env.SUPABASE_URL,
+    key: process.env.SUPABASE_KEY,
+    serviceKey: process.env.SUPABASE_SERVICE_KEY,
     redirect: true,
     cookieOptions: {
       maxAge: 60 * 60 * 24 * 7,

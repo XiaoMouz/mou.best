@@ -3,6 +3,7 @@ d
 import { computed, reactive, ref } from 'vue'
 import type { CSSProperties } from 'vue'
 import { useMediaQuery, useParallax } from '@vueuse/core'
+import { type Database, type Tables } from '@/types/supabase.types'
 
 definePageMeta({
   auth: false,
@@ -15,18 +16,10 @@ const snippets = [
   'An Android Developer',
 ]
 
-const info = {
-  name: 'XiaoMouz',
-  avatarLink: 'https://avatars.githubusercontent.com/u/54032212?v=4',
-}
-
-const user = useSupabaseUser()
-
-
 const post = reactive({
   cid: 1,
   slug: '1',
-  title: 'Hello World',
+  title: 'Hello  World',
   views: 100,
   stars: 10,
   commentsNum: 5,
@@ -35,9 +28,8 @@ const post = reactive({
 </script>
 
 <template>
-  <div class="absolute top-4 left-[50%] z-10">
-    <HomeWelcome v-bind="info" />
-  </div>
+  <HomeWelcome />
+
   <div class="relative dark:bg-black-shadow w-full h-full">
     <div class="bg-inner"></div>
     <div class="w-full h-full">

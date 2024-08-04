@@ -47,35 +47,26 @@ async function onSubmit(values: Record<string, any>) {
   haveError.value = false
 
   const supabase = useSupabaseClient()
-  try {
-    const { email, password, username } = schema.parse(values)
-    pendingEmail.value = email
-    await supabase.auth
-      .signUp({
-        email,
-        password,
-        options: {
-          data: {
-            username,
-          },
-        },
-      })
-      .then(() => {
-        success.value = true
-      })
-      .catch((e) => {
-        if (e.message.includes('401')) {
-          errorMessage.value = 'User not found or password is incorrect'
-          haveError.value = true
-        } else {
-          throw e
-        }
-      })
-  } catch (e: any) {
-    errorMessage.value = 'Unknown error: ' + e.message
+  const { email, password, username } = schema.parse(values)
+  pendingEmail.value = email
+  const res = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        username,
+      },
+    },
+  })
+  if (res.error) {
     haveError.value = true
+    errorMessage.value = res.error.message
+    lockOnPending(false)
+  } else {
+    pendingEmail.value = email
+    success.value = true
+    lockOnPending(false)
   }
-  lockOnPending(false)
 }
 
 onMounted(() => {
@@ -136,8 +127,19 @@ onMounted(() => {
           </AutoForm>
         </CardContent>
       </Transition>
-      <Transition v-if="!success">
-        <CardContent> </CardContent>
+      <Transition v-if="success">
+        <CardContent>
+          <Alert variant="default" class="mb-4">
+            <AlertTitle>Info</AlertTitle>
+            <AlertDescription>
+              <div>
+                <div>Check your email</div>
+                <div class="font-bold">{{ pendingEmail }}</div>
+                <div>to verify your account</div>
+              </div>
+            </AlertDescription>
+          </Alert>
+        </CardContent>
       </Transition>
     </Card>
   </div>

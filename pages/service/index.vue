@@ -2,5 +2,8 @@
 definePageMeta({
   layout: 'service',
 })
+
+const user = useSupabaseUser()
+console.log(user.value)
 </script>
 <template></template>
