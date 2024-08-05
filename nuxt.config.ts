@@ -31,7 +31,7 @@ export default defineNuxtConfig({
         '/post(/*)?',
         '/about(/*)?',
         '/rimo(/*)?',
-        'hr(/*)?',
+        '/hr(/*)?',
       ],
       cookieRedirect: true,
     },

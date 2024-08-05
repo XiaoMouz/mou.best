@@ -6,6 +6,7 @@ import CardHeader from '~/components/ui/card/CardHeader.vue'
 definePageMeta({
   layout: 'auth',
   title: 'Sign up',
+  middleware: 'auth',
 })
 
 const pending = ref(false)

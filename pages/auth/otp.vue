@@ -7,7 +7,8 @@ import { toTypedSchema } from '@vee-validate/zod'
 
 definePageMeta({
   layout: 'auth',
-  title: 'Login',
+  title: 'OTP Login',
+  middleware: 'auth',
 })
 
 const inputPIN = ref(false)
