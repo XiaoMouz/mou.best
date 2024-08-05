@@ -66,10 +66,12 @@ if (user.value) {
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
-      <DropdownMenuItem>
-        Log out
-        <DropdownMenuShortcut>Q</DropdownMenuShortcut>
-      </DropdownMenuItem>
+      <nuxt-link to="/auth/logout">
+        <DropdownMenuItem>
+          Log out
+          <DropdownMenuShortcut>Q</DropdownMenuShortcut>
+        </DropdownMenuItem>
+      </nuxt-link>
     </DropdownMenuContent>
   </DropdownMenu>
 </template>
