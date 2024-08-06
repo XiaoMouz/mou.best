@@ -52,10 +52,12 @@ if (user.value) {
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <DropdownMenuItem>
-          Profile
-          <DropdownMenuShortcut>P</DropdownMenuShortcut>
-        </DropdownMenuItem>
+        <nuxt-link to="/service/account">
+          <DropdownMenuItem>
+            Profile
+            <DropdownMenuShortcut>P</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </nuxt-link>
         <DropdownMenuItem>
           Billing
           <DropdownMenuShortcut>B</DropdownMenuShortcut>
