@@ -2,7 +2,6 @@
 import { h, ref } from 'vue'
 import * as z from 'zod'
 import { toTypedSchema } from '@vee-validate/zod'
-import { cn } from '@/utils/shadcn'
 
 import { toast } from '../ui/toast'
 

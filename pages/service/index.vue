@@ -4,9 +4,14 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const user = useSupabaseUser()
-console.log(user.value)
-const session = useSupabaseSession()
-console.log(session.value)
+const router = useRouter()
+
+onMounted(() => {
+  router.push('/service/overview')
+})
 </script>
-<template></template>
+<template>
+  <div class="w-full h-full m-auto flex justify-center rounded-md">
+    <LoadingCycle sizeClass="w-6 h-6" />
+  </div>
+</template>
