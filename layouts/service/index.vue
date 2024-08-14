@@ -1,5 +1,5 @@
 <template>
-  <main class="min-h-screen h-screen">
+  <div class="min-h-screen h-screen">
     <div class="border-b">
       <div class="flex h-16 items-center px-4">
         <NavDomain />
@@ -9,8 +9,10 @@
         </div>
       </div>
     </div>
-    <slot />
-  </main>
+    <div class="p-4 min-h-full">
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">

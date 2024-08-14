@@ -26,3 +26,13 @@
 <script setup lang="ts">
 const info = await useProfile()
 </script>
+<style scoped>
+.minimized {
+  padding: 0.5rem 1rem;
+}
+.avatar-container .expanded {
+  /* Make the avatar fill 90% of the container */
+  width: 90%;
+  height: 90%;
+}
+</style>
