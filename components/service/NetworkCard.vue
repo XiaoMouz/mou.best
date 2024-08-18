@@ -1,5 +1,7 @@
 <template>
-  <div class="rounded-lg border bg-outcard text-card-foreground shadow-sm">
+  <div
+    class="rounded-lg border bg-outcard text-card-foreground shadow-sm flex-nowarp"
+  >
     <div class="p-2 px-4 flex flex-col space-y-2">
       <div class="flex flow-row items-center space-x-2">
         <h1 class="text-l text-outcard-foreground tracking-tight">
@@ -50,6 +52,10 @@
             </span>
           </div>
         </div>
+        <div class="flex flex-row items-center space-x-2" v-if="serviceFrom">
+          <span class="text-sm text-outcard-foreground">Provider:</span>
+          <span class="text-sm text-outcard-foreground">{{ serviceFrom }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -62,6 +68,7 @@ const props = defineProps<{
   description: string | undefined
   address: string
   serverSideStatus: 'up' | 'down' | 'unknown' | undefined
+  serviceFrom: string | undefined
 }>()
 
 const pingStatus = ref<'up' | 'down' | 'pending' | undefined>('pending')

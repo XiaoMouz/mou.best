@@ -85,7 +85,7 @@ const selectedDomain = ref<Domain>(groups[0].domains[0])
                   <AvatarFallback>SC</AvatarFallback>
                 </Avatar>
                 {{ domain.label }}
-                <CheckIcon
+                <IconCheck
                   :class="
                     cn(
                       'ml-auto h-4 w-4',
