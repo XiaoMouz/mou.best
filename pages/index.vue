@@ -1,54 +1,31 @@
-d
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
-import Me from '~/components/home/Me.vue'
-import NowPlaying from '~/components/home/NowPlaying.vue'
 
 definePageMeta({
   auth: false,
 })
 
-const selected = ref<TabName>('Me')
+const menu = useHomeMeta()
 
-type TabName = 'Me' | 'NowPlaying'
+const selected = ref(menu.value[0].key)
 
 const currentComponent = computed(() => {
-  switch (selected.value) {
-    case 'Me':
-      return Me
-    case 'NowPlaying':
-      return NowPlaying
-    default:
-      throw new Error(`Unexpected tab name: ${selected.value}`)
-  }
+  return menu.value.find((item) => item.active === true)?.component
 })
 
 const nestedProps = computed(() => {
-  switch (selected.value) {
-    case 'Me':
-      return {}
-    case 'NowPlaying':
-      return {}
-    default:
-      throw new Error(`Unexpected tab name: ${selected.value}`)
-  }
+  return menu.value.find((item) => item.active === true)?.props
 })
 
 onMounted(() => {})
-
-const snippets = [
-  'A Gamer',
-  'A Backend Developer',
-  'A Frontend Developer',
-  'An Android Developer',
-]
 </script>
 
 <template>
   <HomeWelcome />
+  <HomeMenu />
   <div class="relative bg-[#ffffff30] dark:bg-black-shadow w-full h-full">
     <div class="bg-inner"></div>
-    <div class="w-full h-full flex items-center justify-center">
+    <div class="w-full h-full flex flex-col items-center justify-center">
       <Transition name="fade">
         <component
           :is="currentComponent"
@@ -79,11 +56,23 @@ body {
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  /* 保持淡入淡出的动画，并且增加垂直移动 */
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
+  /* 初始透明度为0，表示完全透明 */
   opacity: 0;
+  /* 在Y轴方向上向上或向下移动30px，根据实际需求调整 */
+  transform: translateY(-100%);
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  /* 结束时透明度为1，完全不透明 */
+  opacity: 1;
+  /* 结束时Y轴方向回到原点 */
+  transform: translateY(0);
 }
 </style>

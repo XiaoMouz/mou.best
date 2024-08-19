@@ -1,7 +1,7 @@
 <template>
   <div class="absolute top-4 left-[50%] z-10 translate-x-[-50%]" v-if="info">
     <div
-      class="animate-slide-in-from-top flex flex-row space-x-4 bg-[#00000070] py-3 px-6 rounded-full items-center backdrop-blur-[2px] hover:backdrop-blur-sm shadow-md hover:shadow-lg transition-shadow duration-150! shadow-gray-400 hover:shadow-gray-400 dark:shadow-zinc-700"
+      class="animate-slide-in-from-top flex flex-row space-x-4 bg-[#99999970] dark:bg-[#00000070] py-2 px-5 rounded-full items-center justify-center backdrop-blur-[2px] hover:backdrop-blur-sm shadow-md hover:shadow-lg transition-shadow duration-150! shadow-gray-400 hover:shadow-gray-400 dark:shadow-zinc-700"
     >
       <div>
         <Avatar>

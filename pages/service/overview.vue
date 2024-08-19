@@ -34,8 +34,8 @@ onMounted(async () => {
 <template>
   <div class="py-4 px-8 space-y-6">
     <h1 class="text-3xl font-bold tracking-tight">Overview</h1>
-    <div class="flex flex-col xl:flex-row">
-      <div class="space-y-4">
+    <div class="flex flex-col xl:flex-row flex-wrap">
+      <div class="space-y-4 m-4">
         <h1 class="text-xl font-bold tracking-tight">Network</h1>
         <span class="text-sm text-gray-500"
           >The network connection stands as the pivotal linchpin for accessing
@@ -63,7 +63,21 @@ onMounted(async () => {
           </div>
         </ClientOnly>
       </div>
-      <div class="space-y-4">
+      <div class="space-y-4 m-4">
+        <h1 class="text-xl font-bold tracking-tight">Proxy</h1>
+        <span class="text-sm text-gray-500"
+          >Here is the information from the proxy providers. You can check the
+          usage and remaining balance.</span
+        >
+        <ClientOnly>
+          <div>
+            <div class="flex flex-col md:flex-row flex-nowrap md:space-x-6">
+              <ServicePendingCard class="mt-4 md:mt-0" v-for="n in 2" />
+            </div>
+          </div>
+        </ClientOnly>
+      </div>
+      <div class="space-y-4 m-4">
         <h1 class="text-xl font-bold tracking-tight">Proxy</h1>
         <span class="text-sm text-gray-500"
           >Here is the information from the proxy providers. You can check the
