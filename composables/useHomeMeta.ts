@@ -10,28 +10,33 @@ export const useHomeMeta = () => {
     return [
       {
         key: 'Me',
-        component: Me,
-        icon: Pokemon,
+        component: shallowRef(Me),
+        icon: shallowRef(Pokemon),
         active: true,
         enable: true,
         props: {},
       },
       {
         key: 'NowPlaying',
-        component: NowPlaying,
-        icon: HumenTransfer,
+        component: shallowRef(NowPlaying),
+        icon: shallowRef(HumenTransfer),
         active: false,
-        enable: false,
+        enable: true,
         props: {},
       },
       {
         key: 'Game',
         component: 'Contact',
-        icon: Gamepad,
+        icon: shallowRef(Gamepad),
         active: false,
         enable: false,
         props: {},
       },
     ]
+  })
+}
+export const useHomeMetaIsReverse = () => {
+  return useState<boolean>('homeMetaIsReverse', (): boolean => {
+    return false
   })
 }
