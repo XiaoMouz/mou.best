@@ -1,10 +1,10 @@
 <template>
   <div
-    class="rounded-lg border bg-outcard text-card-foreground shadow-sm flex-nowarp"
+    class="rounded-lg border bg-outcard text-card-foreground shadow-sm flex-nowarp md:w-56 md:h-32"
   >
     <div class="p-2 px-4 flex flex-col space-y-2">
       <div class="flex flow-row items-center space-x-2">
-        <h1 class="text-l text-outcard-foreground tracking-tight">
+        <h1 class="text-l text-outcard-foreground tracking-tight overflow-clip">
           {{ title }}
         </h1>
         <HoverCard v-if="description">
@@ -25,10 +25,7 @@
         </div>
         <div class="flex flex-row items-center space-x-2">
           <span class="text-sm text-outcard-foreground">Status:</span>
-          <div
-            @click="ping"
-            class="flex flex-row items-center space-x-1 cursor-pointer"
-          >
+          <div class="flex flex-row items-center space-x-1">
             <div
               class="text-outcard-foreground w-2 h-2 rounded-full"
               :class="{
@@ -39,18 +36,23 @@
             ></div>
             <span class="text-sm text-outcard-foreground">
               {{
-                pingTime
-                  ? pingTime + 'ms'
-                  : pingStatus
-                  ? {
-                      up: 'Up',
-                      down: 'Down',
-                      pending: 'Pending',
-                    }[pingStatus]
-                  : 'Unknown'
+                pingStatus === 'up'
+                  ? 'Up'
+                  : pingStatus === 'down'
+                  ? 'Down'
+                  : 'Pending'
               }}
             </span>
           </div>
+        </div>
+        <div class="flex flex-row items-center space-x-2" v-if="pingStatus">
+          <span class="text-sm text-outcard-foreground">Delay:</span>
+          <span
+            class="text-sm text-outcard-foreground cursor-pointer"
+            @click="ping"
+          >
+            {{ pingTime ? pingTime + 'ms' : 'Unknown' }}
+          </span>
         </div>
         <div class="flex flex-row items-center space-x-2" v-if="serviceFrom">
           <span class="text-sm text-outcard-foreground">Provider:</span>
@@ -79,6 +81,7 @@ onMounted(async () => {
 })
 
 async function ping() {
+  pingStatus.value = 'pending'
   const start = new Date().getTime()
   fetch(`https://${props.address}`)
     .then(() => {

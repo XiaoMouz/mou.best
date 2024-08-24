@@ -25,17 +25,17 @@ onMounted(async () => {
     let content: Array<NetTestNode> = JSON.parse(
       JSON.stringify(data[0].content)
     )
-
     source.value = content
-    console.log(source.value)
   }
+
+  
 })
 </script>
 <template>
   <div class="py-4 px-8 space-y-6">
     <h1 class="text-3xl font-bold tracking-tight">Overview</h1>
-    <div class="flex flex-col xl:flex-row flex-wrap">
-      <div class="space-y-4 m-4">
+    <div class="flex flex-col xl:flex-row flex-wrap gap-12">
+      <div class="space-y-4">
         <h1 class="text-xl font-bold tracking-tight">Network</h1>
         <span class="text-sm text-gray-500"
           >The network connection stands as the pivotal linchpin for accessing
@@ -63,11 +63,11 @@ onMounted(async () => {
           </div>
         </ClientOnly>
       </div>
-      <div class="space-y-4 m-4">
-        <h1 class="text-xl font-bold tracking-tight">Proxy</h1>
+      <div class="space-y-4">
+        <h1 class="text-xl font-bold tracking-tight">Service</h1>
         <span class="text-sm text-gray-500"
-          >Here is the information from the proxy providers. You can check the
-          usage and remaining balance.</span
+          >Here are the services that have been deployed. You can check their
+          statuses here.</span
         >
         <ClientOnly>
           <div>
@@ -77,7 +77,7 @@ onMounted(async () => {
           </div>
         </ClientOnly>
       </div>
-      <div class="space-y-4 m-4">
+      <div class="space-y-4">
         <h1 class="text-xl font-bold tracking-tight">Proxy</h1>
         <span class="text-sm text-gray-500"
           >Here is the information from the proxy providers. You can check the
