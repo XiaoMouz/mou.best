@@ -19,7 +19,9 @@ const profile = await useProfile()
         class="flex py-1 w-10 h-10 items-center justify-center rounded-full transition duration-300 cursor-pointer hover:bg-slate-400 dark:hover:bg-gray-400 fill-gray-900 dark:fill-slate-100 ease-in-out"
       >
         <nuxt-link to="/service">
-          <img class="w-8 h-8 rounded-full" :src="profile.avatarLink" />
+          <img v-if="profile.avatarLink" class="w-8 h-8 rounded-full" :src="profile.avatarLink" />
+            <IconExit v-else-if="profile && !profile.avatarLink" class="w-6 h-6 rounded-full fill-black dark:fill-white" />
+            <IconExit v-else class="w-6 h-6 rounded-full fill-black dark:fill-white"/>
         </nuxt-link>
       </div>
     </div>
