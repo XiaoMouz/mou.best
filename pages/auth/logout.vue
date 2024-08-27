@@ -24,7 +24,7 @@ setTimeout(() => {
 <template>
   <div class="my-auto text-center">
     <IconBikeLane class="mx-auto h-14 w-14 fill-green-300" />
-    <h1 class="text-2xl">已登出</h1>
-    <span>返回至登录还有 {{ countDown }} 秒</span>
+    <h1 class="text-2xl">Logging out...</h1>
+    <span>Redirecting to login page in {{ countDown }} seconds</span>
   </div>
 </template>

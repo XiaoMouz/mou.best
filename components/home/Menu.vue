@@ -4,7 +4,7 @@ const profile = await useProfile()
 </script>
 <template>
   <div
-    class="absolute top-[90%] right-[20%] md:top-[50%] z-10 md:right-[10%] flex flex-row md:flex-col items-center justify-center"
+    class="absolute top-[80%] right-[20%] md:top-[40%] z-10 md:right-[10%] flex flex-row md:flex-col items-center justify-center"
   >
     <div
       class="space-x-4 md:space-x-0 md:space-y-4 flex items-center justify-center md:flex-col bg-[#99999970] dark:bg-[#00000070] p-3 rounded-3xl"

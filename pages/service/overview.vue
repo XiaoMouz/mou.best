@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type NetTestNode } from '~/types/net-test-node'
+import { type NetTestNode } from '~/types/overview/net-test-node'
 import { type Database, type Tables } from '~/types/supabase.types'
 import NetworkCard from '~/components/service/NetworkCard.vue'
 
@@ -27,8 +27,6 @@ onMounted(async () => {
     )
     source.value = content
   }
-
-  
 })
 </script>
 <template>
@@ -49,11 +47,8 @@ onMounted(async () => {
             <NetworkCard
               class="mt-4 md:mt-0"
               v-for="network in source"
-              :title="network.title"
-              :description="network.description"
-              :address="network.address"
-              :server-side-status="network.serverSideStatus"
-              :service-from="network.serviceFrom"
+              :key="network.id"
+              v-bind="network"
             />
           </div>
           <div v-else>

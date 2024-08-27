@@ -10,5 +10,5 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div>Hello world</div>
+  <div></div>
 </template>

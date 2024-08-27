@@ -43,7 +43,7 @@ const selectedDomain = ref<Domain>(groups[0].domains[0])
         >
           <Avatar class="mr-2 h-5 w-5">
             <AvatarImage
-              :src="`https://avatar.vercel.sh/${selectedDomain.value}.png`"
+              :src="`https://${selectedDomain.value}/favicon.ico`"
               :alt="selectedDomain.label"
             />
             <AvatarFallback>SC</AvatarFallback>
@@ -78,9 +78,13 @@ const selectedDomain = ref<Domain>(groups[0].domains[0])
               >
                 <Avatar class="mr-2 h-5 w-5">
                   <AvatarImage
-                    :src="`https://avatar.vercel.sh/${domain.value}.png`"
+                    :src="`https://${domain.value}/favicon.ico`"
                     :alt="domain.label"
-                    class="grayscale"
+                    :class="
+                      cn(
+                        selectedDomain.value !== domain.value ? 'grayscale' : ''
+                      )
+                    "
                   />
                   <AvatarFallback>SC</AvatarFallback>
                 </Avatar>
@@ -112,7 +116,7 @@ const selectedDomain = ref<Domain>(groups[0].domains[0])
                   "
                 >
                   <IconAdd class="mr-2 h-5 w-5 dark:fill-slate-200" />
-                  Create Team
+                  New Domain
                 </CommandItem>
               </DialogTrigger>
             </CommandGroup>
