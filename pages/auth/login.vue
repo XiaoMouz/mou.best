@@ -1,1 +1,119 @@
-<template>No</template>
+<script setup lang="ts">
+import { ref } from 'vue'
+import * as z from 'zod'
+import CardHeader from '~/components/ui/card/CardHeader.vue'
+
+definePageMeta({
+  layout: 'auth',
+  title: 'Login to mou.best',
+  middleware: 'auth',
+})
+
+const pending = ref(false)
+const haveError = ref(false)
+const errorMessage = ref('')
+
+const schema = z.object({
+  email: z
+    .string({
+      required_error: 'Must fill in email',
+    })
+    .email({
+      message: 'Invalid email address',
+    }),
+  password: z
+    .string({
+      required_error: 'Must fill in password',
+    })
+    .min(6, {
+      message: 'Password must be at least 6 characters',
+    }),
+})
+
+function lockOnPending(enable: boolean) {
+  pending.value = enable
+}
+
+async function onSubmit(values: Record<string, any>) {
+  lockOnPending(true)
+  haveError.value = false
+
+  const supabase = useSupabaseClient()
+  try {
+    const { email, password } = schema.parse(values)
+    const res = await supabase.auth
+      .signInWithPassword({
+        email,
+        password,
+      })
+      .then(() => {
+        const router = useRouter()
+        router.push('/service')
+      })
+      .catch((e) => {
+        if (e.message.includes('401')) {
+          errorMessage.value = 'User not found or password is incorrect'
+          haveError.value = true
+        } else {
+          throw e
+        }
+      })
+  } catch (e: any) {
+    errorMessage.value = 'Unknown error: ' + e.message
+    haveError.value = true
+  }
+  lockOnPending(false)
+}
+</script>
+<template>
+  <div class="my-auto min-w-[340px] space-y-6" :class="pending ? 'blur' : ''">
+    <Card>
+      <CardHeader>
+        <CardTitle class="space-y-2"
+          ><div>
+            Login to &nbsp;
+            <code class="bg-[#00000030] dark:bg-[#ffffff30] rounded-md px-1"
+              >&lt;mou.best&gt;</code
+            >
+          </div>
+          <div class="text-sm font-thin">
+            Don't have an account?
+            <NuxtLink to="/auth/signup" class="font-bold">Sign up</NuxtLink>
+          </div>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Alert variant="destructive" v-if="haveError" class="mb-4">
+          <AlertTitle>Fucked up</AlertTitle>
+          <AlertDescription>
+            {{ 'Failed:&nbsp;' + errorMessage }}
+          </AlertDescription>
+        </Alert>
+
+        <AutoForm
+          :schema="schema"
+          :field-config="{
+            email: {
+              label: 'Email',
+              inputProps: {
+                type: 'text',
+                placeholder: 'Email',
+              },
+            },
+            password: {
+              label: 'Password',
+              inputProps: {
+                type: 'password',
+                placeholder: 'Password',
+              },
+            },
+          }"
+          @submit="onSubmit"
+        >
+          <Button class="mt-6" type="submit" :disabled="pending">Login</Button>
+        </AutoForm>
+      </CardContent>
+    </Card>
+  </div>
+  <LoadingCycle v-if="pending" sizeClass="w-6 h-6" layoutClass="fixed" />
+</template>

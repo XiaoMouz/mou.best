@@ -42,6 +42,11 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        outcard: {
+          DEFAULT: 'hsl(var(--outcard))',
+          foreground: 'hsl(var(--outcard-foreground))',
+        },
+        'black-shadow': '#00000080',
       },
       borderRadius: {
         xl: 'calc(var(--radius) + 4px)',
@@ -72,7 +77,22 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'collapsible-down': 'collapsible-down 0.2s ease-in-out',
         'collapsible-up': 'collapsible-up 0.2s ease-in-out',
+        'smooth-blink': 'smoothBlink 1s linear infinite',
+        'slide-in-from-top': 'slideInFromTop 0.5s ease-out',
       },
+      keyframes: {
+        smoothBlink: {
+          '0%, 40%, 100%': { opacity: 1 },
+          '55%, 90%': { opacity: 0 },
+        },
+        slideInFromTop: {
+          '0%': { transform: 'translateY(-100%)', opacity: 0 },
+          '100%': { transform: 'translateY(0)', opacity: 1 },
+        },
+      },
+    },
+    backgroundImage: {
+      'index-hero': "url('https://mou.best/images/banner.jpg')",
     },
   },
   plugins: [animate],

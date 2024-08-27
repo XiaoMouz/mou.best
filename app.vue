@@ -1,5 +1,13 @@
 <template>
+  <NuxtLoadingIndicator />
   <NuxtLayout>
     <NuxtPage></NuxtPage>
   </NuxtLayout>
 </template>
+
+<style>
+body {
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+</style>
