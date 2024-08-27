@@ -46,7 +46,7 @@ const selectedDomain = ref<Domain>(groups[0].domains[0])
               :src="`https://${selectedDomain.value}/favicon.ico`"
               :alt="selectedDomain.label"
             />
-            <AvatarFallback>SC</AvatarFallback>
+            <AvatarFallback>M</AvatarFallback>
           </Avatar>
           {{ selectedDomain.label }}
           <IconNavSwap

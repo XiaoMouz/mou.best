@@ -1,9 +1,9 @@
 <template>
   <Alert>
     <IconBuild class="fill-yellow-300" />
-    <AlertTitle>This page cannot work</AlertTitle>
+    <AlertTitle>There not have anything</AlertTitle>
     <AlertDescription>
-      Because this page is still in progress, please come back later.
+      Because there is still in progress, please come back in next release.
     </AlertDescription>
   </Alert>
 </template>

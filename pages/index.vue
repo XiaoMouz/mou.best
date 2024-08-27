@@ -132,7 +132,6 @@ body {
 }
 .fade-enter-active,
 .fade-leave-active {
-  /* 保持淡入淡出的动画，并且增加垂直移动 */
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 

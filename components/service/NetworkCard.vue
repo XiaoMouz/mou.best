@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-lg border bg-outcard text-card-foreground shadow-sm flex-nowarp md:w-56 h-32 md:h-32"
+    class="rounded-lg border border-gray-300 dark:border-gray-800 bg-outcard text-card-foreground shadow-sm flex-nowarp md:w-56 h-32 md:h-32"
   >
     <div class="p-2 px-4 flex flex-col space-y-2">
       <div class="flex flow-row items-center justify-between">
@@ -68,8 +68,8 @@
             </div>
             <div>
               <LineChart
-                v-if="remoteTest && remoteTest.results"
-                :data="remoteTest?.results"
+                v-if="remoteTestResult && remoteTestResult.results"
+                :data="remoteTestResult?.results"
                 index="time"
                 class="w-52 h-12"
                 :margin="{ top: 0, right: 0, bottom: 0, left: 0 }"
@@ -102,25 +102,26 @@ const LineChart = defineAsyncComponent(() => import('../ui/chart-line/LineChart.
 
 const props = defineProps<NetTestNode>()
 
-const serverDelay = computed<number | undefined>(() => {
-  if (!remoteTest.value) return undefined
-  if (!remoteTest.value.results) return undefined
-  return remoteTest.value.results[remoteTest.value.results.length - 1].delay
-})
+const { remoteTestResult,fetchRemoteTest  } = useNetworkCardData(props.id)
+
+// Server Side Delay
+// const serverDelay = computed<number | undefined>(() => {
+//   if (!remoteTestResult.value) return undefined
+//   if (!remoteTestResult.value.results) return undefined
+//   return remoteTestResult.value.results[remoteTestResult.value.results.length - 1].delay
+// })
 
 const showServerReport = ref(false)
 
-const remoteTest = ref<RemoteNetTestResults | undefined>(undefined)
+
+
 
 const { pingStatus, pingTime, ping } = usePing(props.address)
 
 
 onMounted(async () => {
   ping()
-  remoteTest.value = await fetch(`https://api.mou.best/node/record/${props.id}`)
-    .then((res) => res.json())
-    .then((data) => data)
-    .catch(() => undefined)
+  fetchRemoteTest() 
 })
 
 
