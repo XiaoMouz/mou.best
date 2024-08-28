@@ -3,23 +3,23 @@ import NowPlaying from '~/components/home/NowPlaying.vue'
 import Pokemon from '~/components/icon/Pokemon.vue'
 import HumenTransfer from '~/components/icon/HumenTransfer.vue'
 import Gamepad from '~/components/icon/Gamepad.vue'
+import type { MenuItem } from '~/types/home-menu'
 
-import { type MenuItem } from '~/types/home-menu'
 export const useHomeMeta = () => {
   return useState<MenuItem[]>('homeMeta', (): MenuItem[] => {
     return [
       {
         key: 'Me',
-        component: shallowRef(Me),
-        icon: shallowRef(Pokemon),
+        component: markRaw(Me),
+        icon: markRaw(Pokemon),
         active: true,
         enable: true,
         props: {},
       },
       {
         key: 'NowPlaying',
-        component: shallowRef(NowPlaying),
-        icon: shallowRef(HumenTransfer),
+        component: markRaw(NowPlaying),
+        icon: markRaw(HumenTransfer),
         active: false,
         enable: true,
         props: {},
@@ -27,7 +27,7 @@ export const useHomeMeta = () => {
       {
         key: 'Game',
         component: 'Contact',
-        icon: shallowRef(Gamepad),
+        icon: markRaw(Gamepad),
         active: false,
         enable: false,
         props: {},
