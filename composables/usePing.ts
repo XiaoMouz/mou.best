@@ -6,7 +6,7 @@ export function usePing(address: string) {
     pingStatus.value = 'pending'
     const start = new Date().getTime()
     try {
-      await fetch(`http://${address}`, {
+      await fetch(`https://${address}`, {
         mode: 'no-cors',
         cache: 'no-cache',
         headers: {
@@ -16,7 +16,7 @@ export function usePing(address: string) {
       const end = new Date().getTime()
       pingStatus.value = 'up'
       pingTime.value = end - start
-    } catch {
+    } catch (error){
       pingStatus.value = 'down'
       pingTime.value = undefined
     }
