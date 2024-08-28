@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const menu = useHomeMeta()
-const profile = await useProfile()
+const { profile } = await useProfile()
 </script>
 <template>
   <div

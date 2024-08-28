@@ -5,6 +5,16 @@ import { toTypedSchema } from '@vee-validate/zod'
 
 import { toast } from '../ui/toast'
 
+
+const avatar = ref<string|undefined>(undefined)
+
+const user = useSupabaseUser()
+const client = useSupabaseClient()
+
+const profile = await useProfile()
+
+
+
 const accountFormSchema = toTypedSchema(
   z.object({
     name: z

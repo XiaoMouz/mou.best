@@ -115,13 +115,125 @@ export type Database = {
         }
         Relationships: []
       }
+      permission: {
+        Row: {
+          access_comment: boolean | null
+          access_control: boolean | null
+          access_post: boolean | null
+          access_proxy: boolean | null
+          create_at: string | null
+          create_by: string
+          create_friendlink_ticket: boolean | null
+          create_new_post: boolean | null
+          edit_nodes_info: boolean | null
+          edit_post: boolean | null
+          edit_proxy: boolean | null
+          edit_remote_api: boolean | null
+          edit_service_info: boolean | null
+          give_role: boolean | null
+          handle_friendlink_ticket: boolean | null
+          handle_new_comment: boolean | null
+          handle_new_user: boolean | null
+          id: number
+          invite_new_user: boolean | null
+          manage_comment: boolean | null
+          manage_nodes: boolean | null
+          manage_post: boolean | null
+          manage_proxy: boolean | null
+          manage_remote_api: boolean | null
+          manage_role: boolean | null
+          manage_service: boolean | null
+          manage_user: boolean | null
+          name: string
+          permission_control: boolean | null
+          remote_api_access: boolean | null
+          send_comment: boolean | null
+          update_at: string | null
+        }
+        Insert: {
+          access_comment?: boolean | null
+          access_control?: boolean | null
+          access_post?: boolean | null
+          access_proxy?: boolean | null
+          create_at?: string | null
+          create_by?: string
+          create_friendlink_ticket?: boolean | null
+          create_new_post?: boolean | null
+          edit_nodes_info?: boolean | null
+          edit_post?: boolean | null
+          edit_proxy?: boolean | null
+          edit_remote_api?: boolean | null
+          edit_service_info?: boolean | null
+          give_role?: boolean | null
+          handle_friendlink_ticket?: boolean | null
+          handle_new_comment?: boolean | null
+          handle_new_user?: boolean | null
+          id?: number
+          invite_new_user?: boolean | null
+          manage_comment?: boolean | null
+          manage_nodes?: boolean | null
+          manage_post?: boolean | null
+          manage_proxy?: boolean | null
+          manage_remote_api?: boolean | null
+          manage_role?: boolean | null
+          manage_service?: boolean | null
+          manage_user?: boolean | null
+          name: string
+          permission_control?: boolean | null
+          remote_api_access?: boolean | null
+          send_comment?: boolean | null
+          update_at?: string | null
+        }
+        Update: {
+          access_comment?: boolean | null
+          access_control?: boolean | null
+          access_post?: boolean | null
+          access_proxy?: boolean | null
+          create_at?: string | null
+          create_by?: string
+          create_friendlink_ticket?: boolean | null
+          create_new_post?: boolean | null
+          edit_nodes_info?: boolean | null
+          edit_post?: boolean | null
+          edit_proxy?: boolean | null
+          edit_remote_api?: boolean | null
+          edit_service_info?: boolean | null
+          give_role?: boolean | null
+          handle_friendlink_ticket?: boolean | null
+          handle_new_comment?: boolean | null
+          handle_new_user?: boolean | null
+          id?: number
+          invite_new_user?: boolean | null
+          manage_comment?: boolean | null
+          manage_nodes?: boolean | null
+          manage_post?: boolean | null
+          manage_proxy?: boolean | null
+          manage_remote_api?: boolean | null
+          manage_role?: boolean | null
+          manage_service?: boolean | null
+          manage_user?: boolean | null
+          name?: string
+          permission_control?: boolean | null
+          remote_api_access?: boolean | null
+          send_comment?: boolean | null
+          update_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "permission_create_by_fkey"
+            columns: ["create_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_link: string | null
           display_name: string | null
           id: string
           invite_from: string | null
-          roles: string[] | null
           site_owner: boolean
           username: string
         }
@@ -130,7 +242,6 @@ export type Database = {
           display_name?: string | null
           id: string
           invite_from?: string | null
-          roles?: string[] | null
           site_owner?: boolean
           username: string
         }
@@ -139,7 +250,6 @@ export type Database = {
           display_name?: string | null
           id?: string
           invite_from?: string | null
-          roles?: string[] | null
           site_owner?: boolean
           username?: string
         }
@@ -153,27 +263,85 @@ export type Database = {
           },
         ]
       }
+      role_bind: {
+        Row: {
+          expired_time: string | null
+          granted_by: string | null
+          granted_time: string
+          id: number
+          role_id: string
+          special_permission: string | null
+          user_id: string
+        }
+        Insert: {
+          expired_time?: string | null
+          granted_by?: string | null
+          granted_time?: string
+          id?: number
+          role_id: string
+          special_permission?: string | null
+          user_id: string
+        }
+        Update: {
+          expired_time?: string | null
+          granted_by?: string | null
+          granted_time?: string
+          id?: number
+          role_id?: string
+          special_permission?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "role_bind_role_id_fkey"
+            columns: ["role_id"]
+            isOneToOne: false
+            referencedRelation: "roles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "role_bind_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       roles: {
         Row: {
+          bind_permission: number | null
           create_by: string
           id: string
+          parent: string | null
           role_name: string
         }
         Insert: {
-          create_by: string
-          id: string
+          bind_permission?: number | null
+          create_by?: string
+          id?: string
+          parent?: string | null
           role_name: string
         }
         Update: {
+          bind_permission?: number | null
           create_by?: string
           id?: string
+          parent?: string | null
           role_name?: string
         }
         Relationships: [
           {
-            foreignKeyName: "roles_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
+            foreignKeyName: "roles_bind_permission_fkey"
+            columns: ["bind_permission"]
+            isOneToOne: false
+            referencedRelation: "permission"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "roles_create_by_fkey"
+            columns: ["create_by"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
