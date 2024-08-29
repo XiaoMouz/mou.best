@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { MenuItem } from '~/types/home-menu'
 
-const menu = useHomeMeta()
+const menu = useHomeMeta().homeMeta
 const props = defineProps<{ item: MenuItem }>()
-const isReverse = useHomeMetaIsReverse()
+const icon = useHomeMeta().getIcon(props.item.key)
+const isReverse = useHomeMeta().homeMetaIsReverse
 function changeToActive() {
   if (props.item.enable) {
     const index = menu.value.findIndex((item) => item.active === true)
@@ -37,6 +38,6 @@ function changeToActive() {
     }"
     @click="changeToActive"
   >
-    <component class="w-6 h-6" :is="item.icon" />
+    <component class="w-6 h-6" :is="icon" />
   </div>
 </template>

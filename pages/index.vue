@@ -5,19 +5,21 @@ definePageMeta({
   auth: false,
 })
 
-const menu = useHomeMeta()
+const menu = useHomeMeta().homeMeta
 
-const selected = ref(menu.value.find((item) => item.active === true)?.key)
+const selected = computed(
+  () => menu.value.find((item) => item.active === true)?.key
+)
 
 const currentComponent = computed(() => {
-  return menu.value.find((item) => item.active === true)?.component
+  return useHomeMeta().getComponent(selected.value || 'Me')
 })
 
 const nestedProps = computed(() => {
   return menu.value.find((item) => item.active === true)?.props
 })
 
-const isReverse = useHomeMetaIsReverse()
+const isReverse = useHomeMeta().homeMetaIsReverse
 const translateYout = computed(() => {
   return isReverse.value ? '-100%' : '100%'
 })

@@ -5,7 +5,7 @@ export const useProfile = () => {
   const info = ref({
     name: '',
     avatarLink: '',
-    email: '' as string | undefined,
+    email: '' as string,
     username: '',
   })
 
@@ -22,7 +22,7 @@ export const useProfile = () => {
       if (res && res.data) {
         info.value.name = res.data.display_name || res.data.username
         info.value.avatarLink = res.data.avatar_link
-        info.value.email = user.value.email
+        info.value.email = user.value.email || "No Email"
         info.value.username = res.data.username
       }
       if (!info.value.avatarLink && user.value.email) {
