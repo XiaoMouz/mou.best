@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const info = await useProfile()
+const { profile } = await useProfile()
 </script>
 
 <template>
@@ -7,17 +7,17 @@ const info = await useProfile()
     <DropdownMenuTrigger as-child>
       <Button variant="ghost" class="relative h-8 w-8 rounded-full">
         <Avatar class="h-8 w-8">
-          <AvatarImage :src="info.avatarLink" alt="@shadcn" />
-          <AvatarFallback>{{ info.name.charAt(0) }}</AvatarFallback>
+          <AvatarImage :src="profile.avatarLink" alt="@shadcn" />
+          <AvatarFallback>{{ profile.name.charAt(0) }}</AvatarFallback>
         </Avatar>
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent class="w-56" align="end">
       <DropdownMenuLabel class="font-normal flex">
         <div class="flex flex-col space-y-1">
-          <p class="text-sm font-medium leading-none">{{ info.name }}</p>
+          <p class="text-sm font-medium leading-none">{{ profile.name }}</p>
           <p class="text-xs leading-none text-muted-foreground">
-            {{ info.email }}
+            {{ profile.email }}
           </p>
         </div>
       </DropdownMenuLabel>

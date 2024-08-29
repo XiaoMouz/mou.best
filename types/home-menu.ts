@@ -1,12 +1,16 @@
-import type { Component } from 'vue'
+import type { Component, ComponentPropsOptions } from 'vue'
 
 export interface MenuItem {
   key: KeyName
-  component: Component | string
-  icon: Component
   active: boolean
   enable: boolean
-  props: Component
+  props: ComponentPropsOptions
 }
 
-type KeyName = 'Me' | 'NowPlaying' | 'Game' | 'Blog' | 'About' | 'Contact'
+export type KeyName =
+  | 'Me'
+  | 'NowPlaying'
+  | 'Game'
+  | 'Blog'
+  | 'About'
+  | 'Contact'

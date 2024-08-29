@@ -5,6 +5,7 @@
     </div>
     <div class="flex flex-col space-y-8">
       <Avatar class="md:w-40 md:h-40">
+        <AvatarImage :src="profile.avatarLink" />
         <AvatarFallback>X</AvatarFallback>
       </Avatar>
       <Button> Upload new avatar</Button>
@@ -15,4 +16,7 @@
 definePageMeta({
   layout: 'service-account',
 })
+
+const { profile } = await useProfile()  
+
 </script>
