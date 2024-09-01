@@ -18,9 +18,9 @@ const snippets = [
       <div class="md:ml-8 flex flex-col justify-start space-y-5 xl:min-w-48">
         <h1 class="text-4xl font-bold">Hej! 👋</h1>
         <p class="text-2xl font-bold md:mr-10">I'm XiaoMouz</p>
-        <p class="text-lg">
+        <div class="text-lg">
           <HomeTypeWrite :snippets="snippets" />
-        </p>
+        </div>
       </div>
     </div>
     <HomeButtonList />

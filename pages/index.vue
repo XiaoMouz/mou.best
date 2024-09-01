@@ -102,9 +102,10 @@ onMounted(() => {
   <div class="relative bg-[#ffffff30] dark:bg-black-shadow w-full h-full">
     <div class="bg-inner"></div>
     <div class="w-full h-full flex flex-col items-center justify-center">
-      <Transition class="absolute" name="fade">
+      <Transition name="fade">
         <KeepAlive>
           <component
+            class="absolute"
             :is="currentComponent"
             :key="selected"
             v-bind="nestedProps"
