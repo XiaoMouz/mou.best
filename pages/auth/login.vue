@@ -51,7 +51,7 @@ async function onSubmit(values: Record<string, any>) {
         router.push('/service')
       })
       .catch((e) => {
-        if (e.message.includes('401')) {
+        if (e.message.includes('401') || e.message.includes('400')) {
           errorMessage.value = 'User not found or password is incorrect'
           haveError.value = true
         } else {
