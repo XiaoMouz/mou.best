@@ -4,9 +4,9 @@ export interface NetService {
   name: string
   linkTo: string
   address: string
-  provide: string | undefined
+  provide?: string
   appAddress: string
-  status: 'online' | 'offline' | 'maintenance' | 'expired' | 'error' | undefined
-  description: string | undefined
-  dueTimestamp: number | undefined
+  status?: 'online' | 'offline' | 'maintenance' | 'expired' | 'error'
+  description?: string
+  dueTimestamp?: number
 }
