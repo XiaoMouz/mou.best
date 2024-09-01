@@ -4,6 +4,18 @@ import { ConfigProvider } from 'radix-vue'
 const useIdFunction = () => useId()
 const loading = ref(false)
 
+useHead({
+  script: [
+    `(function () {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      const setting = localStorage.getItem('color-schema') || 'auto'
+      if (setting === 'dark' || (prefersDark && setting !== 'light'))
+        document.documentElement.classList.toggle('dark', true)
+    })()`,
+  ],
+})
+useDark() 
+
 onMounted(() => {
   loading.value = true
 })
@@ -18,8 +30,13 @@ onMounted(() => {
       </NuxtLayout>
     </div>
     <div v-show="!loading">
-      <div class="flex items-center justify-center h-screen bg-black">
-        <LoadingCycle class="border-gray-200" :size-class="`w-10 h-10`" />
+      <div
+        class="flex items-center justify-center h-screen bg-white dark:bg-black"
+      >
+        <LoadingCycle
+          class="border-gray-800 dark:border-gray-200"
+          :size-class="`w-10 h-10`"
+        />
       </div>
     </div>
   </ConfigProvider>
