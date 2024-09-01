@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  status: 'up' | 'down' | 'pending' | 'unknown' | 'maintenance'
+  status?: 'up' | 'down' | 'pending' | 'unknown' | 'maintenance'
 }>()
 
 const statusText = computed(() => {
