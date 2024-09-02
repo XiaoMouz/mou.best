@@ -94,6 +94,14 @@ onMounted(() => {
     }
   })
 })
+
+onMounted(() => {
+  document.body.style.overflow = 'hidden'
+})
+onUnmounted(() => {
+  document.body.style.overflowX = 'hidden'
+  document.body.style.overflowY = 'auto'
+})
 </script>
 
 <template>
@@ -118,11 +126,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-body {
-  margin: 0;
-  overflow: hidden;
-}
-
 .bg-inner {
   position: absolute;
   left: 0;
