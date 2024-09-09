@@ -1,11 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'service',
+  layout: 'service-manage',
   middleware: 'auth',
 })
 </script>
-<template>
-  <div>
-    <WorkingOnProgree />
-  </div>
-</template>
+<template></template>
