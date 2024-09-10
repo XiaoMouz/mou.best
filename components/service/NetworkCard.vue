@@ -12,7 +12,10 @@
           </h1>
           <HoverCard v-if="description">
             <HoverCardTrigger>
-              <IconInfo class="fill-black dark:fill-white" />
+              <Icon
+                name="mdi:information-slab-circle"
+                class="fill-black dark:fill-white"
+              />
             </HoverCardTrigger>
             <HoverCardContent>
               <p class="text-sm text-outcard-foreground">
@@ -21,8 +24,9 @@
             </HoverCardContent>
           </HoverCard>
         </div>
-        <div>
-          <IconChartLine
+        <div class="flex">
+          <Icon
+            name="mdi:chart-line"
             class="fill-black dark:fill-white cursor-pointer"
             @click="showReport"
           />

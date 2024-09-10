@@ -49,7 +49,8 @@ const selectedDomain = ref<Domain>(groups[0].domains[0])
             <AvatarFallback>M</AvatarFallback>
           </Avatar>
           {{ selectedDomain.label }}
-          <IconNavSwap
+          <Icon
+            name="mdi:swap-vertical"
             class="ml-auto h-4 w-4 shrink-0 opacity-50 dark:fill-slate-200"
           />
         </Button>
@@ -89,7 +90,8 @@ const selectedDomain = ref<Domain>(groups[0].domains[0])
                   <AvatarFallback>SC</AvatarFallback>
                 </Avatar>
                 {{ domain.label }}
-                <IconCheck
+                <Icon
+                  name="mdi:check"
                   :class="
                     cn(
                       'ml-auto h-4 w-4',
@@ -115,7 +117,10 @@ const selectedDomain = ref<Domain>(groups[0].domains[0])
                     }
                   "
                 >
-                  <IconAdd class="mr-2 h-5 w-5 dark:fill-slate-200" />
+                  <Icon
+                    name="mdi:plus-circle"
+                    class="mr-2 h-5 w-5 dark:fill-slate-200"
+                  />
                   New Domain
                 </CommandItem>
               </DialogTrigger>

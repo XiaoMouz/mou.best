@@ -12,7 +12,7 @@ import { cn } from '@/utils/shadcn'
       :class="cn($route.path === '/service/overview' && 'text-primary')"
     >
       <div class="flex flex-row flex-nowrap items-center space-x-1">
-        <IconOverview /> <span>Overview</span>
+        <Icon name="mdi:view-agenda-outline" /> <span>Overview</span>
       </div>
     </nuxt-link>
     <nuxt-link
@@ -21,7 +21,7 @@ import { cn } from '@/utils/shadcn'
       :class="cn($route.path === '/service/proxy' && 'text-primary')"
     >
       <div class="flex flex-row flex-nowrap items-center space-x-1">
-        <IconWeb /> <span>Proxy</span>
+        <Icon name="mdi:server-network" /> <span>Proxy</span>
       </div>
     </nuxt-link>
     <nuxt-link
@@ -30,7 +30,7 @@ import { cn } from '@/utils/shadcn'
       :class="cn($route.path === '/service/link' && 'text-primary')"
     >
       <div class="flex flex-row flex-nowrap items-center space-x-1">
-        <IconLink /> <span>Friend Link</span>
+        <Icon name="mdi:link-variant" /> <span>Friend Link</span>
       </div>
     </nuxt-link>
     <nuxt-link
@@ -39,7 +39,7 @@ import { cn } from '@/utils/shadcn'
       :class="cn($route.path === '/service/manage' && 'text-primary')"
     >
       <div class="flex flex-row flex-nowrap items-center space-x-1">
-        <IconConnect /> <span>Control</span>
+        <Icon name="mdi:cloud-cog" /> <span>Control</span>
       </div>
     </nuxt-link>
   </nav>

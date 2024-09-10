@@ -14,13 +14,12 @@ const { services } = useOverviewService()
 <template>
   <div class="py-4 px-8 space-y-6 overflow-x-hidden">
     <h1 class="text-3xl font-bold tracking-tight">Overview</h1>
-    <div class="flex flex-col gap-12">
-      <div class="space-y-4">
-        <h1 class="text-xl font-bold tracking-tight">Network</h1>
-        <span class="text-sm text-gray-500"
-          >The network connection stands as the pivotal linchpin for accessing
-          all services.</span
-        >
+    <div class="flex flex-col gap-6">
+      <ServiceOverviewCard
+        title="Network"
+        description="The network connection stands as the pivotal linchpin for accessing
+      all services."
+      >
         <ScrollArea>
           <div class="flex flex-nowrap gap-6 min-w-max pb-4" v-if="netNodes">
             <NetworkCard
@@ -34,13 +33,12 @@ const { services } = useOverviewService()
           </div>
           <ScrollBar orientation="horizontal" />
         </ScrollArea>
-      </div>
-      <div class="space-y-4">
-        <h1 class="text-xl font-bold tracking-tight">Service</h1>
-        <span class="text-sm text-gray-500"
-          >Here are the services that have been deployed. You can check their
-          statuses here.</span
-        >
+      </ServiceOverviewCard>
+      <ServiceOverviewCard
+        title="Service"
+        description="Here are the services that have been deployed. You can check their
+          statuses here."
+      >
         <ScrollArea>
           <div class="flex flex-nowrap gap-6 min-w-max pb-4">
             <ServiceCard
@@ -54,14 +52,12 @@ const { services } = useOverviewService()
           </div>
           <ScrollBar orientation="horizontal" />
         </ScrollArea>
-      </div>
-
-      <div class="space-y-4">
-        <h1 class="text-xl font-bold tracking-tight">Proxy</h1>
-        <span class="text-sm text-gray-500"
-          >Here is the information from the proxy providers. You can check the
-          usage and remaining balance.</span
-        >
+      </ServiceOverviewCard>
+      <ServiceOverviewCard
+        title="Proxy"
+        description="Here is the information from the proxy providers. You can check the
+          usage and remaining balance."
+      >
         <ClientOnly>
           <div>
             <div class="flex flex-col md:flex-row flex-nowrap md:space-x-6">
@@ -70,7 +66,7 @@ const { services } = useOverviewService()
             </div>
           </div>
         </ClientOnly>
-      </div>
+      </ServiceOverviewCard>
     </div>
   </div>
 </template>

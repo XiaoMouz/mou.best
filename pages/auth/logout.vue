@@ -23,7 +23,7 @@ setTimeout(() => {
 </script>
 <template>
   <div class="my-auto text-center">
-    <IconBikeLane class="mx-auto h-14 w-14 fill-green-300" />
+    <Icon name="mdi:run-fast" class="mx-auto h-14 w-14 fill-green-300" />
     <h1 class="text-2xl">Logging out...</h1>
     <span>Redirecting to login page in {{ countDown }} seconds</span>
   </div>

@@ -9,8 +9,10 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/fonts',
     '@nuxtjs/supabase',
+    '@nuxt/icon',
   ],
   ssr: true,
+  icon: {},
   supabase: {
     url: process.env.SUPABASE_URL,
     key: process.env.SUPABASE_KEY,

@@ -1,5 +1,8 @@
 <template>
-  <div class="absolute top-4 left-[50%] z-30 translate-x-[-50%]" v-if="profile.name">
+  <div
+    class="absolute top-4 left-[50%] z-30 translate-x-[-50%]"
+    v-if="profile.name"
+  >
     <Transition name="fade">
       <div
         v-show="show"
@@ -13,13 +16,6 @@
         <div>
           <h1 class="font-bold text-nowrap">Welcome back</h1>
           <span class="text-sm">{{ profile.name }}</span>
-        </div>
-        <div class="hidden">
-          <nuxt-link to="/service">
-            <Button class="p-2 rounded-2xl">
-              <IconControl class="fill-slate-200 dark:fill-slate-800" />
-            </Button>
-          </nuxt-link>
         </div>
       </div>
     </Transition>

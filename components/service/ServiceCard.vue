@@ -13,7 +13,10 @@
           </h1>
           <HoverCard v-if="description">
             <HoverCardTrigger>
-              <IconInfo class="fill-black dark:fill-white" />
+              <Icon
+                name="mdi:information-slab-circle"
+                class="fill-black dark:fill-white"
+              />
             </HoverCardTrigger>
             <HoverCardContent>
               <p class="text-sm text-outcard-foreground">
