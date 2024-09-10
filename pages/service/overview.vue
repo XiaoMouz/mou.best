@@ -10,7 +10,6 @@ definePageMeta({
 const { netNodes } = useOverviewNetNode()
 
 const { services } = useOverviewService()
-
 </script>
 <template>
   <div class="py-4 px-8 space-y-6">
@@ -24,19 +23,18 @@ const { services } = useOverviewService()
         >
         <ClientOnly>
           <div
-            class="flex flex-col md:flex-row flex-nowrap md:space-x-6"
+            class="flex flex-col md:flex-row flex-wrap gap-6"
             v-if="netNodes"
           >
             <NetworkCard
-              class="mt-4 md:mt-0"
               v-for="network in netNodes"
               :key="network.id"
               v-bind="network"
             />
           </div>
           <div v-else>
-            <div class="flex flex-col md:flex-row flex-nowrap md:space-x-6">
-              <ServicePendingCard class="mt-4 md:mt-0" v-for="n in 4" />
+            <div class="flex flex-col md:flex-row flex-nowrap gap-6">
+              <ServicePendingCard v-for="n in 4" />
             </div>
           </div>
         </ClientOnly>
@@ -50,23 +48,30 @@ const { services } = useOverviewService()
         <ClientOnly>
           <div>
             <div class="flex flex-col md:flex-row flex-nowrap md:space-x-6">
-              <ServiceCard v-if="services" class="mt-4 md:mt-0" v-for="service in services" :key="service.id" v-bind="service" />
+              <ServiceCard
+                v-if="services"
+                class="mt-4 md:mt-0"
+                v-for="service in services"
+                :key="service.id"
+                v-bind="service"
+              />
               <ServicePendingCard v-else v-for="n in 4" />
             </div>
           </div>
         </ClientOnly>
       </div>
-      
+
       <div class="space-y-4">
         <h1 class="text-xl font-bold tracking-tight">Proxy</h1>
         <span class="text-sm text-gray-500"
           >Here is the information from the proxy providers. You can check the
-          usage and remaining balance.</span>
-        <ClientOnly> 
+          usage and remaining balance.</span
+        >
+        <ClientOnly>
           <div>
             <div class="flex flex-col md:flex-row flex-nowrap md:space-x-6">
               <!-- <ServicePendingCard class="mt-4 md:mt-0" v-for="n in 4" /> -->
-               <WorkingOnProgree/>
+              <WorkingOnProgree />
             </div>
           </div>
         </ClientOnly>
