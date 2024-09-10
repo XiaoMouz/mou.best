@@ -18,8 +18,10 @@ if (props.title) date.value = new Date(+props.title).toLocaleString()
 </script>
 
 <template>
-  <div class="bg-outcard text-outcard-foreground p-3 border border-gray-300 dark:border-gray-800 rounded-lg absolute sm:-ml-10 md:ml-10 w-40">
-    <span class="text-l font-bold">Delay : {{ delay }} ms</span>
+  <div
+    class="bg-outcard text-outcard-foreground p-2 border border-gray-300 dark:border-gray-800 rounded-lg absolute -top-14 sm:-ml-10 md:ml-10 w-40"
+  >
+    <span class="text-l">Delay : {{ delay }} ms</span>
     <div class="flex flex-row items-center space-x-1">
       <span>Status:</span>
       <div

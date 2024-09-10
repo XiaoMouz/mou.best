@@ -1,18 +1,22 @@
 <template>
-  <div class="min-h-screen h-screen">
-    <div class="border-b">
-      <div class="flex h-16 items-center px-4">
-        <NavDomain />
-        <NavTopbar class="mx-6" />
-        <div class="ml-auto flex items-center space-x-4">
-          <NavUser />
+  <ScrollArea>
+    <ScrollBar orientation="vertical" />
+    <div class="min-h-screen h-screen">
+      <div class="border-b">
+        <div class="flex h-16 items-center px-4">
+          <NavDomain />
+          <NavTopbar class="mx-6" />
+
+          <div class="ml-auto flex items-center space-x-4">
+            <NavUser />
+          </div>
         </div>
       </div>
+      <div class="p-4 min-h-full w-full">
+        <slot />
+      </div>
     </div>
-    <div class="p-4 min-h-full w-full">
-      <slot />
-    </div>
-  </div>
+  </ScrollArea>
 </template>
 
 <script setup lang="ts">

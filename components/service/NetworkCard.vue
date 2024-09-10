@@ -38,7 +38,11 @@
             </div>
             <div class="flex flex-row items-center space-x-2">
               <span class="text-sm text-outcard-foreground">Status:</span>
-              <ServiceNetStatusIndicator v-bind:status="pingStatus" />
+              <ServiceNetStatusIndicator
+                class="cursor-pointer"
+                @click="ping"
+                v-bind:status="pingStatus"
+              />
             </div>
             <div class="flex flex-row items-center space-x-2" v-if="pingStatus">
               <span class="text-sm text-outcard-foreground">Delay:</span>
@@ -63,7 +67,11 @@
             <div>
               <div class="flex flex-row items-center space-x-2">
                 <span class="text-sm text-outcard-foreground">Status:</span>
-                <ServiceNetStatusIndicator :status="controledStatus" />
+                <ServiceNetStatusIndicator
+                  class="cursor-pointer"
+                  @click="fetchRemoteTest"
+                  :status="controledStatus"
+                />
               </div>
             </div>
             <div>
