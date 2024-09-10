@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-lg border border-gray-300 dark:border-gray-800 bg-outcard text-card-foreground shadow-sm flex-nowarp md:w-56 h-32 md:h-32"
+    class="relative rounded-lg border border-gray-300 dark:border-gray-800 bg-outcard text-card-foreground shadow-sm flex-nowarp w-56 h-32"
   >
     <div class="p-2 px-4 flex flex-col space-y-2">
       <div class="flex flow-row items-center justify-between">
@@ -59,11 +59,11 @@
               }}</span>
             </div>
           </div>
-          <div v-else class="space-y-2 absolute flex flex-row md:flex-col">
+          <div v-else class="space-y-2 absolute flex flex-col">
             <div>
               <div class="flex flex-row items-center space-x-2">
                 <span class="text-sm text-outcard-foreground">Status:</span>
-                <ServiceNetStatusIndicator :status="controledStatus"/>
+                <ServiceNetStatusIndicator :status="controledStatus" />
               </div>
             </div>
             <div>
@@ -98,11 +98,13 @@ import {
   type NetTestNode,
 } from '~/types/overview/net-test-node'
 
-const LineChart = defineAsyncComponent(() => import('../ui/chart-line/LineChart.vue'))
+const LineChart = defineAsyncComponent(
+  () => import('../ui/chart-line/LineChart.vue')
+)
 
 const props = defineProps<NetTestNode>()
 
-const { remoteTestResult,fetchRemoteTest  } = useNetworkCardData(props.id)
+const { remoteTestResult, fetchRemoteTest } = useNetworkCardData(props.id)
 
 // Server Side Delay
 // const serverDelay = computed<number | undefined>(() => {
@@ -113,17 +115,12 @@ const { remoteTestResult,fetchRemoteTest  } = useNetworkCardData(props.id)
 
 const showServerReport = ref(false)
 
-
-
-
 const { pingStatus, pingTime, ping } = usePing(props.address)
-
 
 onMounted(async () => {
   ping()
-  fetchRemoteTest() 
+  fetchRemoteTest()
 })
-
 
 function showReport() {
   showServerReport.value = !showServerReport.value

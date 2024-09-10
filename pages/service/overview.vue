@@ -12,32 +12,28 @@ const { netNodes } = useOverviewNetNode()
 const { services } = useOverviewService()
 </script>
 <template>
-  <div class="py-4 px-8 space-y-6">
+  <div class="py-4 px-8 space-y-6 overflow-x-hidden">
     <h1 class="text-3xl font-bold tracking-tight">Overview</h1>
-    <div class="flex flex-col xl:flex-col flex-wrap gap-12">
+    <div class="flex flex-col gap-12">
       <div class="space-y-4">
         <h1 class="text-xl font-bold tracking-tight">Network</h1>
         <span class="text-sm text-gray-500"
           >The network connection stands as the pivotal linchpin for accessing
           all services.</span
         >
-        <ClientOnly>
-          <div
-            class="flex flex-col md:flex-row flex-wrap gap-6"
-            v-if="netNodes"
-          >
+        <ScrollArea>
+          <div class="flex flex-nowrap gap-6 min-w-max pb-4" v-if="netNodes">
             <NetworkCard
               v-for="network in netNodes"
               :key="network.id"
               v-bind="network"
             />
           </div>
-          <div v-else>
-            <div class="flex flex-col md:flex-row flex-nowrap gap-6">
-              <ServicePendingCard v-for="n in 4" />
-            </div>
+          <div v-else class="flex flex-nowrap gap-6 min-w-max">
+            <ServicePendingCard v-for="n in 4" :key="n" />
           </div>
-        </ClientOnly>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </div>
       <div class="space-y-4">
         <h1 class="text-xl font-bold tracking-tight">Service</h1>
@@ -45,20 +41,19 @@ const { services } = useOverviewService()
           >Here are the services that have been deployed. You can check their
           statuses here.</span
         >
-        <ClientOnly>
-          <div>
-            <div class="flex flex-col md:flex-row flex-nowrap md:space-x-6">
-              <ServiceCard
-                v-if="services"
-                class="mt-4 md:mt-0"
-                v-for="service in services"
-                :key="service.id"
-                v-bind="service"
-              />
-              <ServicePendingCard v-else v-for="n in 4" />
-            </div>
+        <ScrollArea>
+          <div class="flex flex-nowrap gap-6 min-w-max pb-4">
+            <ServiceCard
+              v-if="services"
+              class="mt-4 md:mt-0"
+              v-for="service in services"
+              :key="service.id"
+              v-bind="service"
+            />
+            <ServicePendingCard v-else v-for="n in 4" :key="n" />
           </div>
-        </ClientOnly>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </div>
 
       <div class="space-y-4">

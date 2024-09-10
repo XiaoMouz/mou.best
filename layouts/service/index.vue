@@ -9,7 +9,7 @@
         </div>
       </div>
     </div>
-    <div class="p-4 min-h-full">
+    <div class="p-4 min-h-full w-full">
       <slot />
     </div>
   </div>

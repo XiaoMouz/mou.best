@@ -1,10 +1,8 @@
 <template>
   <div
-    class="rounded-lg border border-gray-300 dark:border-gray-800 bg-outcard text-card-foreground shadow-sm flex-nowarp md:w-60 md:h-34"
+    class="rounded-lg border border-gray-300 dark:border-gray-800 bg-outcard text-card-foreground shadow-sm flex-nowarp w-60 h-34"
   >
-  <div class="card-bg-inner">
-
-  </div>
+    <div class="card-bg-inner"></div>
     <div class="p-2 px-4 flex flex-col space-y-2">
       <div class="flex flow-row items-center justify-between">
         <div class="flex flow-row items-center space-x-2">
@@ -30,7 +28,12 @@
         <div class="flex flex-col space-y-1">
           <div class="flex flex-row items-center space-x-2">
             <span class="text-sm text-outcard-foreground">Address:</span>
-            <a :href="linkTo" target="_blank" class="text-sm text-outcard-foreground hover:underline">{{ address }}</a>
+            <a
+              :href="linkTo"
+              target="_blank"
+              class="text-sm text-outcard-foreground hover:underline"
+              >{{ address }}</a
+            >
           </div>
           <div class="flex flex-row items-center space-x-2">
             <span class="text-sm text-outcard-foreground">Status:</span>
@@ -42,7 +45,11 @@
           </div>
           <div class="flex flex-row items-center space-x-2">
             <span class="text-sm text-outcard-foreground">Due Date:</span>
-            <span v-if="props.dueTimestamp" class="text-sm text-outcard-foreground">{{ new Date(props.dueTimestamp * 1000).toLocaleString() }}</span>
+            <span
+              v-if="props.dueTimestamp"
+              class="text-sm text-outcard-foreground"
+              >{{ new Date(props.dueTimestamp * 1000).toLocaleString() }}</span
+            >
             <span v-else class="text-sm text-outcard-foreground">N/A</span>
           </div>
         </div>
@@ -53,14 +60,13 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import type { NetService } from '~/types/overview/service-info';
+import type { NetService } from '~/types/overview/service-info'
 
 const props = defineProps<NetService>()
 </script>
 
-
 <style scoped>
-.card-bg-inner{
+.card-bg-inner {
   position: absolute;
   background: url(https://mou.best/images/banner.jpg) no-repeat center center;
   background-size: cover;
