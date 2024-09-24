@@ -1,5 +1,5 @@
-import Me from '~/components/home/Me.vue'
-import NowPlaying from '~/components/home/NowPlaying.vue'
+import Me from '~/components/Me.vue'
+import NowPlaying from '~/components/NowPlaying.vue'
 
 import Pokemon from '~/components/icon/Pokemon.vue'
 import HumenTransfer from '~/components/icon/HumenTransfer.vue'

@@ -31,10 +31,7 @@ onMounted(() => {
     <div
       class="flex items-center justify-center h-screen bg-white dark:bg-black"
     >
-      <LoadingCycle
-        class="border-gray-800 dark:border-gray-200"
-        :size-class="`w-10 h-10`"
-      />
+      <UiLoadingCycle />
     </div>
   </div>
 </template>

@@ -21,10 +21,10 @@ const nestedProps = computed(() => {
 
 const isReverse = useHomeMeta().homeMetaIsReverse
 const translateYout = computed(() => {
-  return isReverse.value ? '-100%' : '100%'
+  return isReverse.value ? '100%' : '-100%'
 })
 const translateYin = computed(() => {
-  return isReverse.value ? '100%' : '-100%'
+  return isReverse.value ? '-100%' : '100%'
 })
 
 const nextItem = () => {

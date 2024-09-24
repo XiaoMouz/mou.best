@@ -10,5 +10,5 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div></div>
+  <UiLoadingCycle />
 </template>
