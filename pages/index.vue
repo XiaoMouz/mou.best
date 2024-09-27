@@ -131,7 +131,7 @@ onUnmounted(() => {
   right: 0;
   top: 0;
   bottom: 0;
-  background: url(https://mou.best/images/banner.jpg) no-repeat center center;
+`  background: url(/images/banner.jpg) no-repeat center center;
   background-size: cover;
   z-index: -1;
 }
