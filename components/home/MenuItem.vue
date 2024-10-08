@@ -37,6 +37,7 @@ function changeToActive() {
     }"
     @click="changeToActive"
   >
-    <component class="w-6 h-6" :is="icon" />
+    <Icon v-if="typeof icon === 'string'" :name="icon.toString()" />
+    <component class="w-6 h-6" v-else :is="icon" />
   </div>
 </template>

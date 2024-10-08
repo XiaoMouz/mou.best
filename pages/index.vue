@@ -44,7 +44,19 @@ const prevItem = () => {
     menu.value[index - 1].active = true
   }
 }
-
+function throttle<T extends (...args: any[]) => any>(
+  fn: T,
+  wait: number
+): (...args: Parameters<T>) => ReturnType<T> | undefined {
+  let lastTime = 0
+  return function (...args: Parameters<T>): ReturnType<T> | undefined {
+    const now = new Date().getTime()
+    if (now - lastTime >= wait) {
+      lastTime = now
+      return fn(...args)
+    }
+  }
+}
 onMounted(() => {
   document.addEventListener('touchstart', handleTouchStart, false)
   document.addEventListener('touchmove', handleTouchMove, false)
@@ -86,13 +98,17 @@ onMounted(() => {
     xDown = null
     yDown = null
   }
-  window.addEventListener('wheel', (e) => {
-    if (e.deltaY > 0) {
-      nextItem()
-    } else {
-      prevItem()
-    }
-  })
+  // 添加节流到 wheel 事件
+  window.addEventListener(
+    'wheel',
+    throttle((e) => {
+      if (e.deltaY > 0) {
+        nextItem()
+      } else {
+        prevItem()
+      }
+    }, 200)
+  )
 })
 
 onMounted(() => {

@@ -12,14 +12,16 @@ const isDark = useDark()
         class="flex w-10 h-10 items-center justify-center rounded-full transition duration-300 cursor-pointer hover:bg-slate-400 dark:hover:bg-gray-400 fill-gray-900 dark:fill-slate-100 ease-in-out"
         @click="isDark ? (isDark = false) : (isDark = true)"
       >
-        <Transition name="fade">
-          <Icon
-            name="mdi:weather-night"
-            class="absolute w-5 h-5"
-            v-if="isDark"
-          />
-          <Icon name="mdi:weather-sunny" class="absolute w-5 h-5" v-else />
-        </Transition>
+        <ClientOnly>
+          <Transition name="fade">
+            <Icon
+              name="mdi:weather-night"
+              class="absolute w-5 h-5"
+              v-if="isDark"
+            />
+            <Icon name="mdi:weather-sunny" class="absolute w-5 h-5" v-else />
+          </Transition>
+        </ClientOnly>
       </div>
     </div>
 
