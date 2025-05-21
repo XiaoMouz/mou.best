@@ -10,10 +10,7 @@ const snippets = [
   <div class="flex flex-col space-y-4">
     <div class="flex flex-col space-y-2 md:flex-row">
       <div>
-        <img
-          class="min-w-40 h-40 rounded-full"
-          src="https://avatars.githubusercontent.com/u/54032212?v=4"
-        />
+        <img class="min-w-40 h-40 rounded-full" src="https://avatars.githubusercontent.com/u/54032212?v=4" />
       </div>
       <div class="md:ml-8 flex flex-col justify-start space-y-5 xl:min-w-48">
         <h1 class="text-4xl font-bold">Hej! 👋</h1>

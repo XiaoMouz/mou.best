@@ -47,21 +47,9 @@ export const useHomeMeta = () => {
         props: {},
       },
       {
-        key: 'NowPlaying',
-        active: false,
-        enable: true,
-        props: {},
-      },
-      {
         key: 'Blog',
         active: false,
         enable: true,
-        props: {},
-      },
-      {
-        key: 'Game',
-        active: false,
-        enable: false,
         props: {},
       },
     ]

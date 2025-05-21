@@ -4,20 +4,14 @@ source: https://github.com/unixzii/cyandev.io/blob/main/src/components/typewrite
 -->
 <template>
   <div class="text-lg md:text-lg">
-    <div
-      class="absolute w-0 h-0 overflow-hidden"
-      role="marquee"
-      aria-label="a description with typewriter effect"
-    >
+    <div class="absolute w-0 h-0 overflow-hidden" role="marquee" aria-label="a description with typewriter effect">
       {{ description }}
     </div>
     <div class="inline overflow-hidden" aria-hidden="true">
       {{ content }}
     </div>
-    <div
-      class="inline-block w-2 ml-0.5 bg-caret font-bold text-blue-400 rounded-sm select-none"
-      :class="{ 'animate-smooth-blink': idle }"
-    >
+    <div class="inline-block w-2 ml-0.5 bg-caret font-bold text-blue-400 rounded-sm select-none"
+      :class="{ 'animate-smooth-blink': idle }">
       |
     </div>
   </div>
@@ -128,7 +122,6 @@ export default {
       const currentIndex = index.value
       const nextIndex = (currentIndex + 1) % props.snippets.length
 
-      // todo:令人恶心的 if，但是不是很想改
       if (transition.value?.stage === TypewriterTransitionStage.Idle) {
         delay.value = rangedRandom(1500, 3000)
         idle.value = true
