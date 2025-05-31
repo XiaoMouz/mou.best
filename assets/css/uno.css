@@ -1,0 +1,103 @@
+:root {
+  --background: hsla(0, 0%, 100%, 0.777);
+  --foreground: hsla(240, 10%, 4%, 0.921);
+  --transparent-background: hsla(0, 0%, 100%, 0.6);
+  --transparent-foreground: hsla(240, 10%, 4%, 0.6);
+
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 10%, 3.9%);
+
+  --outcard: hsl(0, 0%, 92%);
+  --outcard-foreground: hsl(240, 10%, 3.9%);
+
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 10%, 3.9%);
+
+  --primary: hsl(207, 68%, 53%);
+  --primary-foreground: hsl(0, 0%, 98%);
+
+  --secondary: hsl(192, 57%, 56%);
+  --secondary-foreground: hsl(240, 5.9%, 10%);
+
+  --muted: hsl(240, 4.8%, 95.9%);
+  --muted-foreground: hsl(240, 3.8%, 46.1%);
+
+  --accent: hsl(240, 4.8%, 95.9%);
+  --accent-foreground: hsl(240, 5.9%, 10%);
+
+  --destructive: hsl(33, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+
+  --border: hsl(240, 5.9%, 90%);
+  --input: hsl(240, 5.9%, 90%);
+  --ring: hsl(240, 5.9%, 10%);
+  --radius: 0.5rem;
+
+  --vis-tooltip-background-color: none !important;
+  --vis-tooltip-border-color: none !important;
+  --vis-tooltip-text-color: none !important;
+  --vis-tooltip-shadow-color: none !important;
+  --vis-tooltip-backdrop-filter: none !important;
+  --vis-tooltip-padding: none !important;
+
+  --vis-primary-color: var(--primary);
+  /* change to any hsl value you want */
+  --vis-secondary-color: hsl(160, 81%, 40%);
+  --vis-text-color: var(--muted-foreground);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --transparent-background: hsla(240, 10%, 4%, 0.6);
+  --transparent-foreground: hsla(0, 0%, 98%, 0.6);
+
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+
+  --outcard: hsl(0, 0%, 8%);
+  --outcard-foreground: hsl(0, 0%, 98%);
+
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+
+  --primary: hsl(197, 100%, 71%);
+  --primary-foreground: hsl(240, 5.9%, 10%);
+
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --ring: hsl(240, 4.9%, 83.9%);
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background/50  dark:bg-background text-foreground;
+
+  color: var(--foreground);
+}
+
+.gradient-text {
+  color: transparent;
+  --un-from-opacity: 100%; /* define opacity variable */
+  --un-gradient-from: color-mix(in oklab, var(--colors-primary-DEFAULT) var(--un-from-opacity), transparent);
+  --un-to-opacity: 70%; /* define opacity variable */
+  --un-gradient-to: color-mix(in oklab, var(--colors-primary-DEFAULT) var(--un-to-opacity), transparent);
+  -webkit-background-clip: text;
+  background-clip: text;  background-image: linear-gradient(to right, var(--un-gradient-from), var(--un-gradient-to));
+
+}
