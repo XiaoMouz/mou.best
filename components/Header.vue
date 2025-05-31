@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const navItems = [
     { id: "home", name: "Home", href: "#home" },
-    { id: "blog", name: "Blog", href: "/blog" },
+    // { id: "blog", name: "Blog", href: "/blog" },
 
 ] as const
 type NavItemIds = typeof navItems[number]['id'];

@@ -1,5 +1,13 @@
 <script setup lang="ts">
-
+useHead({
+    title: "Hello!I'm XiaoMouz",
+    meta: [
+        { name: "description", content: "Hello!I'm XiaoMouz" },
+    ],
+    link: [
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+    ],
+})
 </script>
 <template>
     <div relative flex min-h-screen flex-col overflow-hidden>
