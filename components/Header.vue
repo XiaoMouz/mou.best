@@ -2,8 +2,11 @@
 const navItems = [
     { id: "home", name: "Home", href: "#home" },
     // { id: "blog", name: "Blog", href: "/blog" },
+    // { id: "friends", name: "Friends", href: "/friends" }
 
 ] as const
+
+
 type NavItemIds = typeof navItems[number]['id'];
 
 const scrolled = ref(false)
@@ -54,7 +57,8 @@ const determineActiveSection = (): NavItemIds => {
             </NuxtLink>
             <nav flex items-center space-x-6>
                 <div relative flex space-x-4 items-center>
-                    <div v-for="item in navItems" :key="item.id" relative>
+                    <div v-for="item in navItems" :key="item.id" relative
+                        :style="` animation: fade-in-down ${(navItems.findIndex((v) => item.id == v.id) + 1) * 2 * 0.1}s linear 1;`">
                         <div v-if="activeSection === item.href.substring(1)" class="animate-ease h-full absolute inset-0 rounded-md
                             -z-10 bg-primary/20" />
                         <NuxtLink :href="item.href"
@@ -89,5 +93,23 @@ const determineActiveSection = (): NavItemIds => {
 
 .me-logo-animation {
     animation: rainbow 4s infinite;
+}
+
+@keyframes fade-in-down {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+
+    60% {
+        opacity: 0.6;
+        transform: translate3d(0, -85%, 0)
+    }
+
+
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 </style>
