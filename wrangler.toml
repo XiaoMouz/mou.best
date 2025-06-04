@@ -1,1 +1,6 @@
 name = "mou-best"
+
+routes = [
+    { pattern = "mou.best", custom_domain = true },
+    { pattern = "www.mou.best", custom_domain = true },
+]
