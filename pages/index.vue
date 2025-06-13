@@ -6,6 +6,7 @@
             <div w-full>
                 <IndexHero />
                 <IndexAbout />
+                <IndexBlog />
             </div>
         </main>
     </div>
