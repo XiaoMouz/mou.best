@@ -13,6 +13,12 @@ useDark()
 </script>
 
 <template>
+  <LoadingIndicator>
+    <div class="flex items-center justify-center flex-col gap-4 h-screen">
+      <UiLoading size-class="size-10" />
+      <span class="ml-2 text-lg">Loading...</span>
+    </div>
+  </LoadingIndicator>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
