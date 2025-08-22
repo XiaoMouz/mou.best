@@ -21,16 +21,6 @@ const snippets = [
                 <div class="max-w-[700px] text-muted-foreground">
                     <p class="text-lg"></p>
                 </div>
-                <div class="flex flex-col sm:flex-row gap-4 mt-6">
-                    <a class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50  bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 rounded-2xl"
-                        href="#about">Falling Down
-                    </a>
-
-                    <!-- <a href="" target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50  border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-8 rounded-2xl">
-                        My Resume</a> -->
-
-                </div>
                 <div class="flex gap-4 mt-6">
                     <HeroSoicalButton href="https://github.com/XiaoMouz" label="GitHub">
                         <IconGithub fill-foreground size-5 />
