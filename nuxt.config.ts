@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@unocss/nuxt',
     '@vueuse/nuxt',
+    '@tresjs/nuxt',
   ],
   vite: {
     optimizeDeps: {
