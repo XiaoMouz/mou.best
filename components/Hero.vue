@@ -5,7 +5,7 @@
     <!-- Main Heading Group -->
     <div class="space-y-8 max-w-4xl mx-auto">
       <button
-        @click="$emit('navigate', 'resume')"
+        @click="router.push('/resume')"
         class="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container border border-outline-variant/30 text-secondary text-sm font-medium mb-4 hover:bg-surface-container-high hover:border-primary/50 hover:text-primary transition-all duration-300 cursor-pointer"
       >
         <span class="relative flex h-2 w-2">
@@ -98,15 +98,6 @@
 import { Github, Twitter, Send, Bot, ArrowRight } from 'lucide-vue-next'
 import Typewriter from './Typewriter.vue'
 
-interface Props {
-  onNavigate?: (view: string) => void
-}
-
-defineProps<Props>()
-
-defineEmits<{
-  navigate: [view: string]
-}>()
-
+const router = useRouter()
 const { t } = useLanguage()
 </script>

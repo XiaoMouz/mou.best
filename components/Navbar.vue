@@ -14,17 +14,12 @@ interface NavbarProps {
   } | null
 }
 
-interface NavbarEmits {
-  (e: 'navigate', view: string): void
-}
-
 const props = withDefaults(defineProps<NavbarProps>(), {
   themeOverride: null
 })
 
-const emit = defineEmits<NavbarEmits>()
-
 // Composables
+const router = useRouter()
 const { isDark, toggleTheme } = useTheme()
 const { language, toggleLanguage, t } = useLanguage()
 
@@ -82,19 +77,18 @@ const handleMouseLeave = () => {
   }, 200)
 }
 
-// Navigation handlers
+// Navigation handlers using Nuxt Router
 const handleNavClick = (item: NavItem) => {
-  if (item.children) {
-    // Toggle dropdown on click if needed, or go to main games page
-    emit('navigate', item.id)
-  } else {
-    emit('navigate', item.id)
-    isMobileMenuOpen.value = false
-  }
+  const path = item.id === 'home' ? '/' : `/${item.id}`
+  router.push(path)
+  isMobileMenuOpen.value = false
 }
 
 const handleChildClick = (childId: string) => {
-  emit('navigate', childId)
+  // Convert IDs like 'media-johnwick' to '/media/johnwick'
+  const parts = childId.split('-')
+  const path = `/${parts[0]}/${parts[1]}`
+  router.push(path)
   openDropdown.value = null
   isMobileMenuOpen.value = false
 }
@@ -194,7 +188,7 @@ onUnmounted(() => {
       <!-- Logo Area -->
       <div
         class="flex items-center gap-4 cursor-pointer"
-        @click="emit('navigate', 'home')"
+        @click="router.push('/')"
       >
         <div class="relative group">
           <div

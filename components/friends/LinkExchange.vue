@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Link, ExternalLink } from 'lucide-vue-next'
 
-const { t } = useI18n()
+const { t } = useLanguage()
 
 const friendLinks = [
   {
