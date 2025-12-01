@@ -1,0 +1,96 @@
+@import '@unocss/reset/tailwind.css';
+
+:root {
+  /* Light Mode Palette (Material 3 Inspired) */
+  --background: 248 249 255; /* #F8F9FF */
+  --on-background: 26 28 30; /* #1A1C1E */
+
+  --surface: 253 252 255; /* #FDFCFF */
+  --surface-container: 240 242 248; /* Slightly darker than bg */
+  --surface-container-high: 231 235 242;
+
+  --primary: 40 94 167; /* #285EA7 - Darker blue for light mode contrast */
+  --on-primary: 255 255 255;
+  --primary-container: 214 227 255; /* #D6E3FF */
+  --on-primary-container: 0 27 61; /* #001B3D */
+
+  --secondary: 83 95 112; /* #535F70 */
+  --on-secondary: 255 255 255;
+  --secondary-container: 215 227 246; /* #D7E3F6 */
+  --on-secondary-container: 17 28 43; /* #111C2B */
+
+  --tertiary: 109 87 105; /* #6D5769 */
+  --tertiary-container: 247 218 240; /* #F7DAF0 */
+
+  --outline: 116 119 127; /* #74777F */
+  --outline-variant: 196 199 207; /* #C4C7CF */
+}
+
+.dark {
+  /* Dark Mode Palette */
+  --background: 17 19 24; /* #111318 */
+  --on-background: 226 226 233; /* #E2E2E9 */
+
+  --surface: 20 18 24; /* #141218 */
+  --surface-container: 31 33 41; /* #1F2129 */
+  --surface-container-high: 43 41 48; /* #2B2930 */
+
+  --primary: 168 199 250; /* #A8C7FA - Pastel blue */
+  --on-primary: 0 48 98; /* #003062 */
+  --primary-container: 0 71 138; /* #00478A */
+  --on-primary-container: 214 227 255; /* #D6E3FF */
+
+  --secondary: 190 198 220; /* #BEC6DC */
+  --on-secondary: 40 49 65; /* #283141 */
+  --secondary-container: 62 71 89; /* #3E4759 */
+  --on-secondary-container: 218 226 249; /* #DAE2F9 */
+
+  --tertiary: 224 187 221; /* #E0BBDD */
+  --tertiary-container: 93 63 90; /* #5D3F5A */
+
+  --outline: 142 144 153; /* #8E9099 */
+  --outline-variant: 68 71 78; /* #44474E */
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--on-background));
+  font-family: system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar for Material feel */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--outline-variant));
+  border-radius: 10px;
+  border: 3px solid rgb(var(--background));
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--outline));
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.05);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 2px;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+}
