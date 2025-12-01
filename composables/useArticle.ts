@@ -1,9 +1,18 @@
 import type { Comment } from '~/types'
 
+export interface ArticleConfig {
+  allowSectionComments: boolean
+  allowGeneralComments: boolean
+}
+
 export const useArticle = () => {
   const activeSection = useState<string | null>('activeSection', () => null)
   const isDrawerOpen = useState('isDrawerOpen', () => false)
   const comments = useState<Comment[]>('comments', () => [])
+  const config = useState<ArticleConfig>('articleConfig', () => ({
+    allowSectionComments: true,
+    allowGeneralComments: true
+  }))
 
   // Mock comment store
   const COMMENT_STORE: Record<string, Comment[]> = {
@@ -14,6 +23,15 @@ export const useArticle = () => {
         avatar: 'https://ui-avatars.com/api/?name=Sarah&background=random',
         content: 'This is a crucial point! Zero bundle size changes everything.',
         timestamp: '2 hours ago'
+      }
+    ],
+    '1-general': [
+      {
+        id: 'c2',
+        author: 'Lee Robinson',
+        avatar: 'https://ui-avatars.com/api/?name=Lee&background=random',
+        content: 'Great summary of RSC architecture.',
+        timestamp: '1 day ago'
       }
     ]
   }
@@ -49,12 +67,18 @@ export const useArticle = () => {
     comments.value = updated
   }
 
+  const setConfig = (newConfig: Partial<ArticleConfig>) => {
+    config.value = { ...config.value, ...newConfig }
+  }
+
   return {
     activeSection: computed(() => activeSection.value),
     isDrawerOpen: computed(() => isDrawerOpen.value),
     comments: computed(() => comments.value),
+    config: computed(() => config.value),
     openSection,
     closeComments,
-    addComment
+    addComment,
+    setConfig
   }
 }

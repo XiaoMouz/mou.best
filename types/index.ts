@@ -60,16 +60,31 @@ export interface Friend {
   steamId?: string
 }
 
+export type ContentType = 'article' | 'note' | 'showcase'
+export type Language = 'en' | 'zh'
+export type AccessLevel = 'public' | 'locked' | 'private'
+
 export interface ContentItem {
   id: number
+  type: ContentType
   title: string
   excerpt: string
   date: string
-  category: string
-  readTime: string
-  content?: any // Vue component or markdown content
-  isLocked?: boolean
-  unlockCode?: string
+  readTime?: string
+  tags: string[]
+  image?: string
+  language: Language
+  access?: AccessLevel
+  allowSectionComments?: boolean
+  allowGeneralComments?: boolean
+  theme?: {
+    primaryColor?: string
+    backgroundColor?: string
+    borderColor?: string
+    fontFamily?: string
+  }
+  embeddedComponent?: Component
+  body: Component | string | any
 }
 
 export interface Comment {

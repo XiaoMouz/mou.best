@@ -11,25 +11,43 @@
     />
 
     <main class="relative">
+      <!-- Home -->
       <Hero v-if="currentView === 'home'" @navigate="handleNavigate" />
-      <About v-else-if="currentView === 'about'" />
+
+      <!-- About Page -->
+      <AboutPage v-else-if="currentView === 'about'" />
+
+      <!-- Friends Page -->
+      <FriendsPage v-else-if="currentView === 'friends'" />
+
+      <!-- Resume Page -->
+      <Resume v-else-if="currentView === 'resume'" @back="() => handleNavigate('home')" />
+
+      <!-- Articles List -->
       <Articles v-else-if="currentView === 'articles'" @view-article="handleViewArticle" />
 
-      <!-- Placeholder for other views -->
-      <div v-else class="relative z-10 py-20 px-4 max-w-6xl mx-auto text-center">
-        <h2 class="text-4xl font-bold text-on-background mb-4">
-          {{ currentView }}
-        </h2>
-        <p class="text-on-surface-variant">
-          This section is under construction
-        </p>
-        <button
-          @click="handleNavigate('home')"
-          class="mt-8 px-6 py-3 bg-primary text-on-primary rounded-full hover:bg-primary/90 transition-colors"
-        >
-          Back to Home
-        </button>
-      </div>
+      <!-- Article View -->
+      <ArticleView
+        v-else-if="currentView === 'article' && activeArticle"
+        :item="activeArticle"
+        :is-unlocked="isArticleUnlocked"
+        @back="() => handleNavigate('articles')"
+        @unlock="handleUnlockArticle"
+      />
+
+      <!-- Games View -->
+      <Games
+        v-else-if="isGameView"
+        :target-game-id="currentView === 'games' ? null : currentView"
+        @theme-change="handleThemeChange"
+      />
+
+      <!-- Media View -->
+      <Media
+        v-else-if="isMediaView"
+        :target-media-id="currentView === 'media' ? null : currentView"
+        @theme-change="handleThemeChange"
+      />
     </main>
 
     <footer v-if="!isImmersiveView && currentView !== 'article' && currentView !== 'resume'" class="relative z-10 py-12 text-center border-t border-outline-variant/10 bg-surface/50 backdrop-blur-sm mt-12">
@@ -39,24 +57,42 @@
         <span>•</span>
         <span>Nuxt 3</span>
         <span>•</span>
-        <span>Tailwind</span>
+        <span>UnoCSS</span>
       </div>
     </footer>
   </div>
 </template>
 
 <script setup lang="ts">
-const { currentView, activeArticleId, navigate, viewArticle } = usePortfolio()
-const { isDark, navbarTheme, initTheme, toggleTheme, resetNavbarTheme } = useTheme()
+import { contentData } from '~/data/content'
+
+const { currentView, activeArticleId, unlockedIds, navigate, viewArticle, unlockArticle } = usePortfolio()
+const { isDark, navbarTheme, initTheme, toggleTheme, setNavbarTheme, resetNavbarTheme } = useTheme()
 
 const isImmersiveView = computed(() => {
   return currentView.value.startsWith('games') || currentView.value.startsWith('media')
+})
+
+const isGameView = computed(() => {
+  return currentView.value.startsWith('games')
+})
+
+const isMediaView = computed(() => {
+  return currentView.value.startsWith('media')
 })
 
 const navActiveView = computed(() => {
   if (currentView.value === 'resume') return ''
   if (activeArticleId.value) return 'articles'
   return currentView.value
+})
+
+const activeArticle = computed(() => {
+  return activeArticleId.value ? contentData.find(c => c.id === activeArticleId.value) : null
+})
+
+const isArticleUnlocked = computed(() => {
+  return activeArticleId.value ? unlockedIds.value.includes(activeArticleId.value) : false
 })
 
 const handleNavigate = (view: string) => {
@@ -70,6 +106,16 @@ const handleNavigate = (view: string) => {
 
 const handleViewArticle = (id: number) => {
   viewArticle(id)
+}
+
+const handleUnlockArticle = () => {
+  if (activeArticleId.value) {
+    unlockArticle(activeArticleId.value)
+  }
+}
+
+const handleThemeChange = (theme: any) => {
+  setNavbarTheme(theme)
 }
 
 // Initialize theme on mount
