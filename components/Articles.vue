@@ -9,18 +9,28 @@
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div v-if="articles.length === 0" class="text-center text-on-surface-variant">
+      No articles found.
+    </div>
+
+    <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <article
-        v-for="article in contentData"
-        :key="article.id"
+        v-for="article in articles"
+        :key="article.slug"
         class="bg-surface-container rounded-2xl p-6 border border-outline-variant/20 hover:border-primary/50 transition-all cursor-pointer group"
-        @click="$emit('view-article', article.id)"
+        @click="$emit('view-article', article.slug)"
       >
         <div class="flex items-start justify-between mb-4">
-          <span class="px-3 py-1 bg-primary-container text-on-primary-container rounded-full text-xs">
-            {{ article.category }}
-          </span>
-          <Lock v-if="article.isLocked" :size="16" class="text-outline" />
+          <div class="flex gap-2 flex-wrap">
+            <span
+              v-for="tag in article.tags?.slice(0, 2)"
+              :key="tag"
+              class="px-3 py-1 bg-primary-container text-on-primary-container rounded-full text-xs"
+            >
+              {{ tag }}
+            </span>
+          </div>
+          <Lock v-if="article.isEncrypted" :size="16" class="text-outline flex-shrink-0" />
         </div>
 
         <h3 class="text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">
@@ -33,7 +43,7 @@
 
         <div class="flex items-center justify-between text-xs text-outline">
           <span>{{ article.date }}</span>
-          <span>{{ article.readTime }}</span>
+          <span v-if="article.readTime">{{ article.readTime }}</span>
         </div>
       </article>
     </div>
@@ -42,10 +52,13 @@
 
 <script setup lang="ts">
 import { Lock } from 'lucide-vue-next'
-import { contentData } from '~/data/content'
+
+defineProps<{
+  articles: any[]
+}>()
 
 defineEmits<{
-  'view-article': [id: number]
+  'view-article': [slug: string]
 }>()
 
 const { t } = useLanguage()

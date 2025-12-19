@@ -1,34 +1,187 @@
 <script setup lang="ts">
-import { contentData } from '~/data/content'
-
 const route = useRoute()
 const router = useRouter()
-const { unlockedIds, unlockArticle } = usePortfolio()
+const slug = computed(() => route.params.id as string)
 
-const articleId = computed(() => Number(route.params.id))
-const article = computed(() => contentData.find(c => c.id === articleId.value))
-const isUnlocked = computed(() => unlockedIds.value.includes(articleId.value))
+const { getUnlockedArticle } = useEncryptedArticles()
+
+// Try to fetch from Nuxt Content first
+const { data: contentArticle } = await useAsyncData(
+  `article-${slug.value}`,
+  async () => {
+    try {
+      return await queryCollection('articles')
+        .path(`/articles/${slug.value}`)
+        .first()
+    } catch (error) {
+      console.error('Error fetching article:', error)
+      return {}
+    }
+  }
+)
+
+// If not found in content, check if it's an encrypted article
+const isEncryptedArticle = ref(false)
+const article = ref<any>(null)
+
+if (!contentArticle.value) {
+  // Check if unlocked in localStorage
+  const unlockedData = getUnlockedArticle(slug.value)
+
+  if (unlockedData) {
+    isEncryptedArticle.value = true
+    article.value = unlockedData
+  } else {
+    // Check if the article exists in encrypted articles
+    const { data: encryptedList } = await useFetch('/api/articles/encrypted')
+    const encryptedArticle = encryptedList.value?.articles?.find(
+      (a: any) => a.slug === slug.value
+    )
+
+    if (encryptedArticle) {
+      isEncryptedArticle.value = true
+    } else {
+      // Article not found anywhere, redirect to articles list
+      router.push('/articles')
+    }
+  }
+} else {
+  article.value = contentArticle.value
+}
 
 const handleBack = () => {
   router.push('/articles')
 }
 
-const handleUnlock = () => {
-  unlockArticle(articleId.value)
+const handleUnlocked = () => {
+  // Reload the unlocked article
+  const unlockedData = getUnlockedArticle(slug.value)
+  if (unlockedData) {
+    article.value = unlockedData
+  }
 }
 
-// If article not found, redirect to articles
-if (!article.value) {
-  router.push('/articles')
-}
+console.log('🚀 ~ article:', article.value)
 </script>
 
 <template>
-  <ArticleView
-    v-if="article"
-    :item="article"
-    :is-unlocked="isUnlocked"
-    @back="handleBack"
-    @unlock="handleUnlock"
-  />
+  <div class="article-detail-page">
+    <ClientOnly>
+      <!-- Password unlock screen for encrypted articles -->
+      <PasswordUnlock
+        v-if="isEncryptedArticle && !article"
+        :slug="slug"
+        :title="slug"
+        @unlocked="handleUnlocked"
+      />
+
+      <!-- Article content for unlocked or public articles -->
+      <div v-else-if="article" class="max-w-4xl mx-auto px-4 py-12">
+        <button
+          class="mb-8 flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors"
+          @click="handleBack"
+        >
+          ← Back to Articles
+        </button>
+
+        <article class="prose prose-lg dark:prose-invert max-w-none">
+          <h1 class="text-4xl font-bold text-on-background mb-4">
+            {{ article.title }}
+          </h1>
+
+          <div
+            class="flex items-center gap-4 text-sm text-on-surface-variant mb-8"
+          >
+            <span v-if="article.date">{{ article.date }}</span>
+            <span v-if="article.readTime">{{ article.readTime }}</span>
+          </div>
+
+          <div
+            v-if="article.tags && article.tags.length > 0"
+            class="flex gap-2 mb-8"
+          >
+            <span
+              v-for="tag in article.tags"
+              :key="tag"
+              class="px-3 py-1 bg-primary-container text-on-primary-container rounded-full text-xs"
+            >
+              {{ tag }}
+            </span>
+          </div>
+
+          <!-- For Nuxt Content articles -->
+          <ContentRenderer
+            v-if="contentArticle"
+            :value="contentArticle"
+            class="article-content"
+          />
+
+          <!-- For encrypted articles (markdown string) -->
+          <div
+            v-else-if="isEncryptedArticle && article.content"
+            class="article-content"
+          >
+            <MDC class="article-content" :value="article.content" />
+          </div>
+        </article>
+      </div>
+    </ClientOnly>
+  </div>
 </template>
+
+<style scoped>
+.article-detail-page {
+  min-height: 100vh;
+  padding-top: 4rem;
+}
+
+.prose {
+  color: var(--color-text);
+}
+
+.article-content :deep(h1),
+.article-content :deep(h2),
+.article-content :deep(h3) {
+  color: var(--color-text);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.article-content :deep(p) {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.article-content :deep(code) {
+  background: var(--color-surface);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+}
+
+.article-content :deep(pre) {
+  background: var(--color-surface);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.article-content :deep(a) {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.article-content :deep(ul),
+.article-content :deep(ol) {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.article-content :deep(blockquote) {
+  border-left: 4px solid var(--color-primary);
+  padding-left: 1rem;
+  font-style: italic;
+  margin: 1rem 0;
+}
+</style>

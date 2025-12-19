@@ -6,7 +6,13 @@ export default defineNuxtConfig({
   // Enable SSR (default is true, but being explicit)
   ssr: true,
 
-  modules: ['@unocss/nuxt', '@vueuse/nuxt', '@nuxtjs/i18n'],
+  modules: [
+    '@unocss/nuxt',
+    '@vueuse/nuxt',
+    '@nuxtjs/i18n',
+    '@nuxt/content',
+    '@nuxtjs/mdc',
+  ],
 
   css: ['~/assets/css/main.css'],
 
