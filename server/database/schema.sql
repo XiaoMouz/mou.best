@@ -9,6 +9,10 @@ CREATE TABLE IF NOT EXISTS encrypted_articles (
   tags TEXT,                    -- JSON array
   date TEXT NOT NULL,
   read_time TEXT,
+  -- 自定义字段
+  image TEXT,                   -- 头图 URL
+  image_alt TEXT,               -- 头图描述
+  theme TEXT,                   -- JSON object for theme config
   created_at TEXT DEFAULT CURRENT_TIMESTAMP,
   updated_at TEXT DEFAULT CURRENT_TIMESTAMP
 );

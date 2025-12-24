@@ -28,6 +28,9 @@ const allArticles = computed(() => {
         date: article.date,
         readTime: article.readTime,
         tags: article.tags || [],
+        image: article.image,
+        imageAlt: article.imageAlt,
+        theme: article.theme,
         isEncrypted: false,
       }))
     )

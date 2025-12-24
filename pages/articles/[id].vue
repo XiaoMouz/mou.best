@@ -61,6 +61,51 @@ const handleUnlocked = () => {
   }
 }
 
+// Compute theme styles
+const themeStyles = computed(() => {
+  if (!article.value?.theme) return {}
+
+  const theme = article.value.theme
+  const fontSizeMap = {
+    sm: '0.875rem',
+    base: '1rem',
+    lg: '1.125rem',
+    xl: '1.25rem',
+  }
+
+  const fontFamilyMap = {
+    sans: 'ui-sans-serif, system-ui, sans-serif',
+    serif: 'ui-serif, Georgia, serif',
+    mono: 'ui-monospace, monospace',
+    custom: theme.customFontFamily || 'inherit',
+  }
+
+  const fontWeightMap = {
+    light: '300',
+    normal: '400',
+    medium: '500',
+    semibold: '600',
+    bold: '700',
+  }
+
+  const lineHeightMap = {
+    tight: '1.25',
+    normal: '1.5',
+    relaxed: '1.75',
+    loose: '2',
+  }
+
+  return {
+    '--article-primary-color': theme.primaryColor || 'inherit',
+    '--article-bg-color': theme.backgroundColor || 'inherit',
+    '--article-text-color': theme.textColor || 'inherit',
+    fontSize: theme.fontSize ? fontSizeMap[theme.fontSize] : undefined,
+    fontFamily: theme.fontFamily ? fontFamilyMap[theme.fontFamily] : undefined,
+    fontWeight: theme.fontWeight ? fontWeightMap[theme.fontWeight] : undefined,
+    lineHeight: theme.lineHeight ? lineHeightMap[theme.lineHeight] : undefined,
+  }
+})
+
 console.log('🚀 ~ article:', article.value)
 </script>
 
@@ -77,6 +122,18 @@ console.log('🚀 ~ article:', article.value)
 
       <!-- Article content for unlocked or public articles -->
       <div v-else-if="article" class="max-w-4xl mx-auto px-4 py-12">
+        <!-- Header Image -->
+        <div
+          v-if="article.image"
+          class="article-header-image mb-8 -mx-4 md:mx-0 rounded-xl overflow-hidden"
+        >
+          <img
+            :src="article.image"
+            :alt="article.imageAlt || article.title"
+            class="w-full h-64 md:h-96 object-cover"
+          >
+        </div>
+
         <button
           class="mb-8 flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors"
           @click="handleBack"
@@ -84,7 +141,10 @@ console.log('🚀 ~ article:', article.value)
           ← Back to Articles
         </button>
 
-        <article class="prose prose-lg dark:prose-invert max-w-none">
+        <article
+          class="prose prose-lg dark:prose-invert max-w-none article-themed"
+          :style="themeStyles"
+        >
           <h1 class="text-4xl font-bold text-on-background mb-4">
             {{ article.title }}
           </h1>
@@ -139,6 +199,18 @@ console.log('🚀 ~ article:', article.value)
   color: var(--color-text);
 }
 
+/* Theme-aware styling */
+.article-themed {
+  color: var(--article-text-color, var(--color-text));
+  background-color: var(--article-bg-color, transparent);
+}
+
+.article-themed :deep(h1),
+.article-themed :deep(h2),
+.article-themed :deep(h3) {
+  color: var(--article-primary-color, var(--color-text));
+}
+
 .article-content :deep(h1),
 .article-content :deep(h2),
 .article-content :deep(h3) {
@@ -183,5 +255,9 @@ console.log('🚀 ~ article:', article.value)
   padding-left: 1rem;
   font-style: italic;
   margin: 1rem 0;
+}
+
+.article-header-image {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 </style>

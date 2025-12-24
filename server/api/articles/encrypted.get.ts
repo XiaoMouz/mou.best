@@ -13,7 +13,10 @@ export default defineEventHandler(async () => {
         excerpt,
         tags,
         date,
-        read_time as readTime
+        read_time as readTime,
+        image,
+        image_alt as imageAlt,
+        theme
       FROM encrypted_articles
       ORDER BY date DESC
     `).all()
@@ -23,6 +26,7 @@ export default defineEventHandler(async () => {
       articles: articles.map(article => ({
         ...article,
         tags: article.tags ? JSON.parse(article.tags as string) : [],
+        theme: article.theme ? JSON.parse(article.theme as string) : null,
         isEncrypted: true,
       })),
     }

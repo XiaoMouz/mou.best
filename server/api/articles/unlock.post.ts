@@ -60,6 +60,9 @@ export default defineEventHandler(async (event) => {
         tags: article.tags ? JSON.parse(article.tags as string) : [],
         date: article.date,
         readTime: article.readTime,
+        image: article.image,
+        imageAlt: article.image_alt,
+        theme: article.theme ? JSON.parse(article.theme as string) : null,
       },
     }
   } catch (error: any) {
