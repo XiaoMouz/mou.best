@@ -8,7 +8,6 @@ image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=60
 imageAlt: "Abstract colorful gradient background"
 theme:
   fontSize: "lg"
-  fontFamily: "serif"
   lineHeight: "relaxed"
   primaryColor: "#6366f1"
 ---
@@ -21,9 +20,9 @@ Welcome to the ultimate guide on customizing your articles! This article demonst
 
 This article uses a **custom theme** with:
 - **Font Size**: Large (lg)
-- **Font Family**: Serif
 - **Line Height**: Relaxed
 - **Primary Color**: Indigo (#6366f1)
+- **Font Family**: Default (system-ui, same as the rest of the site)
 
 You can customize these in the frontmatter of any article!
 

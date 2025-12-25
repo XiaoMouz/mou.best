@@ -74,7 +74,7 @@ const themeStyles = computed(() => {
   }
 
   const fontFamilyMap = {
-    sans: 'ui-sans-serif, system-ui, sans-serif',
+    sans: 'system-ui, -apple-system, sans-serif',
     serif: 'ui-serif, Georgia, serif',
     mono: 'ui-monospace, monospace',
     custom: theme.customFontFamily || 'inherit',
@@ -100,7 +100,7 @@ const themeStyles = computed(() => {
     '--article-bg-color': theme.backgroundColor || 'inherit',
     '--article-text-color': theme.textColor || 'inherit',
     fontSize: theme.fontSize ? fontSizeMap[theme.fontSize] : undefined,
-    fontFamily: theme.fontFamily ? fontFamilyMap[theme.fontFamily] : undefined,
+    fontFamily: theme.fontFamily ? fontFamilyMap[theme.fontFamily] : 'system-ui, -apple-system, sans-serif',
     fontWeight: theme.fontWeight ? fontWeightMap[theme.fontWeight] : undefined,
     lineHeight: theme.lineHeight ? lineHeightMap[theme.lineHeight] : undefined,
   }
@@ -197,6 +197,7 @@ console.log('🚀 ~ article:', article.value)
 
 .prose {
   color: var(--color-text);
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 /* Theme-aware styling */
@@ -217,11 +218,13 @@ console.log('🚀 ~ article:', article.value)
   color: var(--color-text);
   margin-top: 2rem;
   margin-bottom: 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .article-content :deep(p) {
   margin-bottom: 1rem;
   line-height: 1.7;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .article-content :deep(code) {
@@ -229,6 +232,7 @@ console.log('🚀 ~ article:', article.value)
   padding: 0.2rem 0.4rem;
   border-radius: 0.25rem;
   font-size: 0.9em;
+  font-family: ui-monospace, monospace;
 }
 
 .article-content :deep(pre) {
@@ -248,6 +252,7 @@ console.log('🚀 ~ article:', article.value)
 .article-content :deep(ol) {
   margin-left: 1.5rem;
   margin-bottom: 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .article-content :deep(blockquote) {
@@ -255,6 +260,7 @@ console.log('🚀 ~ article:', article.value)
   padding-left: 1rem;
   font-style: italic;
   margin: 1rem 0;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .article-header-image {
