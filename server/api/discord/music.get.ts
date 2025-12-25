@@ -1,3 +1,5 @@
+import type { LanyardResponse } from '~/server/types/lanyard'
+
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
 
@@ -14,16 +16,20 @@ export default defineEventHandler(async (event) => {
   }
 
   const CACHE_KEY = 'discord:music'
-  const CACHE_TTL = 600 // 10 minutes in seconds
+  const CACHE_TTL = 60 // 1 minute in seconds
 
   try {
     // Try to get from cache first
     const storage = useStorage('cache')
     const cached = await storage.getItem(CACHE_KEY)
 
+    if (cached) {
+      return cached
+    }
+
     // Fetch from Lanyard API
     const lanyardUrl = `https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`
-    const response: any = await $fetch(lanyardUrl)
+    const response: LanyardResponse = await $fetch(lanyardUrl)
 
     if (!response.success || !response.data) {
       throw new Error('Failed to fetch Discord presence data')
@@ -35,7 +41,7 @@ export default defineEventHandler(async (event) => {
     // Check for music activity (type 2 = "Listening")
     // Supports Spotify, NetEase Cloud Music, Apple Music, YouTube Music, etc.
     const musicActivity = presence.activities?.find(
-      (activity: any) => activity.type === 2
+      (activity) => activity.type === 2
     )
 
     let result
@@ -56,15 +62,15 @@ export default defineEventHandler(async (event) => {
         }
       }
       // NetEase Cloud Music & other platforms with custom RPC
-      else if (musicActivity.assets?.large_image) {
+      else if (musicActivity.name.includes('Music')) {
         // Check if it's a Music Presence proxy URL or external asset
-        if (musicActivity.assets.large_image.startsWith('mp:external/')) {
+        if (musicActivity?.assets?.large_image?.startsWith('mp:external/')) {
           // Music Presence external URL format
           albumArt = `https://cdn.discordapp.com/external/${musicActivity.assets.large_image.replace(
             'mp:external/',
             ''
           )}`
-        } else if (musicActivity.assets.large_image.startsWith('http')) {
+        } else if (musicActivity?.assets?.large_image?.startsWith('http')) {
           albumArt = musicActivity.assets.large_image
         }
       }
