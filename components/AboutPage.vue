@@ -35,26 +35,20 @@ interface SteamStatus {
 }
 
 const steamStatus = ref<SteamStatus>({
-  isOnline: true,
-  currentGame: {
-    name: 'Elden Ring',
-    appId: 1245620,
-    playTime: 145,
-    artUrl: 'https://images.unsplash.com/photo-1605901309584-818e25960b8f?q=80&w=200&auto=format&fit=crop',
-    details: 'Shadow of the Erdtree'
-  },
+  isOnline: false,
+  currentGame: null,
   profileUrl: 'https://steamcommunity.com'
 })
 
-// TODO: Steam API integration
-// const fetchSteamStatus = async () => {
-//   try {
-//     const response = await $fetch('/api/steam/status')
-//     steamStatus.value = response
-//   } catch (error) {
-//     console.error('Failed to fetch Steam status:', error)
-//   }
-// }
+// Fetch Steam status from API
+const fetchSteamStatus = async () => {
+  try {
+    const response = await $fetch<SteamStatus>('/api/steam/status')
+    steamStatus.value = response
+  } catch (error) {
+    console.error('Failed to fetch Steam status:', error)
+  }
+}
 
 // Music Status - Mock data (ready for Spotify/Last.fm API integration)
 interface NowPlaying {
@@ -68,27 +62,19 @@ interface NowPlaying {
 }
 
 const nowPlaying = ref<NowPlaying>({
-  isPlaying: true,
-  track: {
-    name: 'Midnight City',
-    artist: 'M83',
-    albumArt: undefined,
-    url: undefined
-  }
+  isPlaying: false,
+  track: null
 })
 
-// TODO: Spotify/Last.fm API integration
-// const fetchNowPlaying = async () => {
-//   try {
-//     // Option 1: Spotify
-//     const response = await $fetch('/api/spotify/now-playing')
-//     // Option 2: Last.fm
-//     // const response = await $fetch('/api/lastfm/recent-tracks')
-//     nowPlaying.value = response
-//   } catch (error) {
-//     console.error('Failed to fetch now playing:', error)
-//   }
-// }
+// Fetch music status from Discord API (via Lanyard)
+const fetchNowPlaying = async () => {
+  try {
+    const response = await $fetch<NowPlaying>('/api/discord/music')
+    nowPlaying.value = response
+  } catch (error) {
+    console.error('Failed to fetch now playing:', error)
+  }
+}
 
 // Tech Stack
 const techStack = [
@@ -149,19 +135,19 @@ const devEnvWindows = [
   { icon: Send, label: 'Scoop', color: 'bg-cyan-600/20', iconColor: 'text-cyan-400' }
 ]
 
-// Auto-refresh for Steam status and music (when API is integrated)
-// onMounted(() => {
-//   fetchSteamStatus()
-//   fetchNowPlaying()
-//
-//   // Refresh every 30 seconds
-//   const interval = setInterval(() => {
-//     fetchSteamStatus()
-//     fetchNowPlaying()
-//   }, 30000)
-//
-//   onUnmounted(() => clearInterval(interval))
-// })
+// Auto-refresh for Steam status and music
+onMounted(() => {
+  fetchSteamStatus()
+  fetchNowPlaying()
+
+  // Refresh every 5 minutes (300 seconds)
+  const interval = setInterval(() => {
+    fetchSteamStatus()
+    fetchNowPlaying()
+  }, 300000)
+
+  onUnmounted(() => clearInterval(interval))
+})
 </script>
 
 <template>
@@ -287,7 +273,10 @@ const devEnvWindows = [
                 {{ steamStatus.currentGame.details }} • {{ steamStatus.currentGame.playTime }} hrs
               </p>
             </template>
-            <p v-else class="text-blue-200/60 text-sm">Not playing anything</p>
+            <div v-else class="flex flex-col gap-2">
+              <p class="text-xl text-blue-200/80">{{ t('about.notPlaying') }}</p>
+              <p class="text-blue-200/40 text-xs">{{ t('about.checkBackLater') }}</p>
+            </div>
           </div>
           <div class="flex items-center gap-4">
             <div class="text-right hidden md:block">
@@ -301,6 +290,9 @@ const devEnvWindows = [
             <div v-if="steamStatus.currentGame" class="w-16 h-16 rounded-xl bg-black/50 overflow-hidden border border-white/10 shadow-lg">
               <img :src="steamStatus.currentGame.artUrl" alt="Game Art" class="w-full h-full object-cover" />
             </div>
+            <div v-else class="w-16 h-16 rounded-xl bg-black/20 overflow-hidden border border-white/5 flex items-center justify-center">
+              <Gamepad2 :size="32" class="text-blue-200/20" />
+            </div>
           </div>
         </div>
       </div>
@@ -309,8 +301,8 @@ const devEnvWindows = [
       <div class="col-span-1 row-span-1 bg-tertiary-container text-on-tertiary-container rounded-[2.5rem] p-6 flex flex-col justify-between border border-white/5 relative overflow-hidden">
         <div class="absolute top-[-20%] right-[-20%] w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
         <div class="flex items-center justify-between mb-4 relative z-10">
-          <span class="p-2 rounded-full bg-white/10">
-            <Music :size="20" />
+          <span class="p-2 rounded-full bg-white/10" :class="nowPlaying.isPlaying ? 'animate-pulse' : ''">
+            <Music :size="20" :class="nowPlaying.isPlaying ? 'animate-[spin_3s_linear_infinite]' : ''" />
           </span>
           <div v-if="nowPlaying.isPlaying" class="flex gap-1">
             <div class="w-1 h-3 bg-white/40 rounded-full animate-[bounce_1s_infinite]"></div>
@@ -324,7 +316,10 @@ const devEnvWindows = [
             <div class="font-bold text-lg leading-tight">{{ nowPlaying.track.name }}</div>
             <div class="text-sm opacity-80">{{ nowPlaying.track.artist }}</div>
           </template>
-          <div v-else class="text-sm opacity-60">No music playing</div>
+          <div v-else class="flex flex-col gap-1">
+            <div class="text-sm opacity-60">{{ t('about.noMusic') }}</div>
+            <div class="text-xs opacity-40">{{ t('about.silence') }}</div>
+          </div>
         </div>
       </div>
 

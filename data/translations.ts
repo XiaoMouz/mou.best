@@ -31,7 +31,11 @@ export const translations = {
       playing: 'Currently Playing',
       steamStatus: 'STEAM STATUS',
       online: 'ONLINE',
+      notPlaying: 'Not playing anything',
+      checkBackLater: 'Check back later for updates',
       onRepeat: 'On Repeat',
+      noMusic: 'No music playing',
+      silence: 'Enjoying the silence',
       photography: 'Photography',
       checkGallery: 'Check my gallery',
       devEnv: {
@@ -171,7 +175,11 @@ export const translations = {
       playing: '最近在玩',
       steamStatus: 'STEAM 状态',
       online: '在线',
+      notPlaying: '暂未游戏',
+      checkBackLater: '稍后再来看看吧',
       onRepeat: '单曲循环',
+      noMusic: '没有音乐播放',
+      silence: '享受宁静时刻',
       photography: '摄影',
       checkGallery: '查看相册',
       devEnv: {

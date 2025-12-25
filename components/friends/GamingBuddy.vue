@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { Gamepad2, type LucideIcon } from 'lucide-vue-next'
 
 export interface GamingHistoryItem {
@@ -7,6 +7,18 @@ export interface GamingHistoryItem {
   event: string
   icon: LucideIcon
   image?: string // Background to switch to
+}
+
+interface SteamStatus {
+  isOnline: boolean
+  currentGame: {
+    name: string
+    appId: number
+    playTime: number
+    artUrl: string
+    details?: string
+  } | null
+  profileUrl: string
 }
 
 interface GamingBuddyProps {
@@ -20,6 +32,7 @@ interface GamingBuddyProps {
   history: GamingHistoryItem[]
   className?: string
   themeColor?: string // hex color for accents
+  steamUserId?: string // Optional: if provided, will fetch live Steam data
 }
 
 const props = withDefaults(defineProps<GamingBuddyProps>(), {
@@ -29,6 +42,56 @@ const props = withDefaults(defineProps<GamingBuddyProps>(), {
 
 const activeBg = ref(props.defaultBg)
 
+// Steam integration
+const steamStatus = ref<SteamStatus | null>(null)
+const isSteamLoading = ref(false)
+
+// Fetch Steam status if steamUserId is provided
+const fetchSteamStatus = async () => {
+  if (!props.steamUserId) return
+
+  isSteamLoading.value = true
+  try {
+    const response = await $fetch<SteamStatus>(`/api/steam/status?userId=${props.steamUserId}`)
+    steamStatus.value = response
+  } catch (error) {
+    console.error('Failed to fetch Steam status for', props.name, error)
+    steamStatus.value = null
+  } finally {
+    isSteamLoading.value = false
+  }
+}
+
+// Computed properties for display
+const displayStatus = computed(() => {
+  if (props.steamUserId && steamStatus.value) {
+    return steamStatus.value.isOnline ? 'Online' : 'Offline'
+  }
+  return props.status
+})
+
+const displayGame = computed(() => {
+  if (props.steamUserId && steamStatus.value?.currentGame) {
+    return steamStatus.value.currentGame.name
+  }
+  return props.mainGame
+})
+
+const displayGameImg = computed(() => {
+  if (props.steamUserId && steamStatus.value?.currentGame) {
+    return steamStatus.value.currentGame.artUrl
+  }
+  return props.mainGameImg
+})
+
+const displayGameDetails = computed(() => {
+  if (props.steamUserId && steamStatus.value?.currentGame) {
+    const game = steamStatus.value.currentGame
+    return game.details || `${game.playTime} hrs played`
+  }
+  return 'Currently Playing'
+})
+
 // Collect all unique images to render as layers
 const backgroundLayers = computed(() => {
   const images = new Set<string>()
@@ -37,6 +100,23 @@ const backgroundLayers = computed(() => {
     if (item.image) images.add(item.image)
   })
   return Array.from(images)
+})
+
+// Auto-refresh Steam status
+let refreshInterval: NodeJS.Timeout | null = null
+
+onMounted(() => {
+  if (props.steamUserId) {
+    fetchSteamStatus()
+    // Refresh every 5 minutes
+    refreshInterval = setInterval(fetchSteamStatus, 300000)
+  }
+})
+
+onUnmounted(() => {
+  if (refreshInterval) {
+    clearInterval(refreshInterval)
+  }
 })
 </script>
 
@@ -61,9 +141,21 @@ const backgroundLayers = computed(() => {
 
     <!-- Floating HUD Elements -->
     <div class="absolute top-6 right-6 flex flex-col items-end gap-2 z-20 pointer-events-none">
-      <div class="px-3 py-1 bg-black/60 backdrop-blur-md border border-green-500/50 text-green-400 text-xs font-bold uppercase tracking-widest rounded shadow-[0_0_10px_rgba(74,222,128,0.2)] flex items-center gap-2">
-        <div :class="`w-2 h-2 rounded-full ${status === 'Online' ? 'bg-green-500 animate-pulse' : 'bg-gray-500'}`"></div>
-        {{ status }}
+      <div :class="`px-3 py-1 bg-black/60 backdrop-blur-md border text-xs font-bold uppercase tracking-widest rounded flex items-center gap-2 ${
+        displayStatus === 'Online'
+          ? 'border-green-500/50 text-green-400 shadow-[0_0_10px_rgba(74,222,128,0.2)]'
+          : displayStatus === 'Streaming'
+          ? 'border-purple-500/50 text-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.2)]'
+          : 'border-gray-500/50 text-gray-400'
+      }`">
+        <div :class="`w-2 h-2 rounded-full ${
+          displayStatus === 'Online'
+            ? 'bg-green-500 animate-pulse'
+            : displayStatus === 'Streaming'
+            ? 'bg-purple-500 animate-pulse'
+            : 'bg-gray-500'
+        }`"></div>
+        {{ displayStatus }}
       </div>
       <div class="px-3 py-1 bg-black/60 backdrop-blur-md border border-white/10 text-blue-200 text-xs font-mono rounded" :style="{ color: `${themeColor}dd` }">
         {{ level }}
@@ -117,12 +209,23 @@ const backgroundLayers = computed(() => {
 
         <!-- Current Game Card -->
         <div class="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10 flex items-center gap-4 hover:bg-white/10 transition-colors cursor-pointer group/game">
-          <div class="w-12 h-12 rounded-lg bg-gray-800 overflow-hidden shrink-0 border border-white/10 group-hover/game:border-white/50 transition-colors">
-            <img :src="mainGameImg" class="w-full h-full object-cover" alt="Game" />
+          <div class="w-12 h-12 rounded-lg bg-gray-800 overflow-hidden shrink-0 border border-white/10 group-hover/game:border-white/50 transition-colors relative">
+            <img :src="displayGameImg" class="w-full h-full object-cover" alt="Game" />
+            <div v-if="isSteamLoading" class="absolute inset-0 bg-black/50 flex items-center justify-center">
+              <div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+            </div>
           </div>
-          <div>
-            <div class="text-[10px] uppercase tracking-wider font-bold mb-0.5" :style="{ color: themeColor }">Currently Playing</div>
-            <div class="text-white font-bold group-hover/game:text-blue-200 transition-colors">{{ mainGame }}</div>
+          <div class="flex-1">
+            <div class="text-[10px] uppercase tracking-wider font-bold mb-0.5 flex items-center gap-2" :style="{ color: themeColor }">
+              {{ displayGameDetails }}
+              <span v-if="steamUserId && !steamStatus?.currentGame" class="text-white/40">(Not playing)</span>
+            </div>
+            <div class="text-white font-bold group-hover/game:text-blue-200 transition-colors">{{ displayGame }}</div>
+          </div>
+          <div v-if="steamUserId && steamStatus?.profileUrl" class="shrink-0">
+            <a :href="steamStatus.profileUrl" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-400 hover:text-blue-300 transition-colors">
+              Steam Profile →
+            </a>
           </div>
         </div>
 

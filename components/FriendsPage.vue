@@ -63,6 +63,7 @@ const { t } = useLanguage()
               mainGame="Apex Legends"
               mainGameImg="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=200"
               defaultBg="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1600&auto=format&fit=crop"
+              steamUserId="76561198229927460"
               :history="[
                   { year: '2019', event: 'Met in Apex S1', icon: Users, image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=1600&auto=format&fit=crop' },
                   { year: '2020', event: 'First 4k Damage', icon: Crosshair, image: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=1600&auto=format&fit=crop' },
@@ -81,6 +82,7 @@ const { t } = useLanguage()
               mainGame="League of Legends"
               mainGameImg="https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?q=80&w=200"
               defaultBg="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop"
+              steamUserId="76561198157142591"
               :history="[
                   { year: '2015', event: 'Bot Lane Duo', icon: Users, image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600&auto=format&fit=crop' },
                   { year: '2017', event: 'Clash Winners', icon: Trophy, image: 'https://images.unsplash.com/photo-1511882150382-421056c8d32e?q=80&w=1600&auto=format&fit=crop' },
@@ -99,6 +101,7 @@ const { t } = useLanguage()
               mainGame="Minecraft"
               mainGameImg="https://images.unsplash.com/photo-1627856014759-0852292463fe?q=80&w=200"
               defaultBg="https://images.unsplash.com/photo-1587573089734-09cb69c0f2b4?q=80&w=1600&auto=format&fit=crop"
+              steamUserId="76561199263563573"
               :history="[
                   { year: '2016', event: 'First Server', icon: Map, image: 'https://images.unsplash.com/photo-1587573089734-09cb69c0f2b4?q=80&w=1600&auto=format&fit=crop' },
                   { year: '2019', event: 'The End Dragon', icon: Skull, image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1600&auto=format&fit=crop' },
@@ -117,6 +120,7 @@ const { t } = useLanguage()
               mainGame="Celeste"
               mainGameImg="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=200"
               defaultBg="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1600&auto=format&fit=crop"
+              steamUserId="76561199034242571"
               :history="[
                   { year: '2020', event: 'Discovered TAS', icon: Zap, image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1600&auto=format&fit=crop' },
                   { year: '2021', event: 'First Sub 20', icon: Timer, image: 'https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?q=80&w=1600&auto=format&fit=crop' },
