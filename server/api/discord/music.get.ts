@@ -1,5 +1,21 @@
 import type { LanyardResponse } from '~/server/types/lanyard'
 
+interface CachedMusicData {
+  data: Result
+  timestamp: number
+}
+
+type Result = {
+  isPlaying: boolean
+  track: {
+    name: string
+    artist: string
+    albumArt?: string
+    url?: string
+    platform?: string
+  } | null
+}
+
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
 
@@ -21,10 +37,16 @@ export default defineEventHandler(async (event) => {
   try {
     // Try to get from cache first
     const storage = useStorage('cache')
-    const cached = await storage.getItem(CACHE_KEY)
+    const cached = await storage.getItem<CachedMusicData>(CACHE_KEY)
 
     if (cached) {
-      return cached
+      const now = Date.now()
+      const age = (now - cached.timestamp) / 1000 // Convert to seconds
+
+      if (age < CACHE_TTL) {
+        return cached.data
+      }
+      // If expired, continue to fetch new data
     }
 
     // Fetch from Lanyard API
@@ -92,8 +114,15 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    // Cache the result
-    await storage.setItem(CACHE_KEY, result, { ttl: CACHE_TTL })
+    // Cache the result with timestamp
+    await storage.setItem(
+      CACHE_KEY,
+      {
+        data: result,
+        timestamp: Date.now(),
+      },
+      { ttl: CACHE_TTL }
+    )
 
     return result
   } catch (error) {
