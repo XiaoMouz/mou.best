@@ -77,22 +77,22 @@ const fetchNowPlaying = async () => {
 
 // Tech Stack
 const techStack = [
-  'React',
   'TypeScript',
-  'Next.js',
-  'Node.js',
-  'Tailwind',
-  'PostgreSQL',
-  'Three.js',
-  'Figma',
+  'Vue.js',
+  'React',
+  'C#',
+  'WinUI',
+  'React Native',
+  'Linux',
   'Docker',
+  'PostgreSQL',
 ]
 
 // Profile Stats
 const stats = {
   yearsExp: '5+',
   projects: '20+',
-  coffeeFueled: '100%',
+  fueled: '90%+',
 }
 
 // Social Links
@@ -152,7 +152,7 @@ const devEnvWindows = [
   },
   {
     icon: Terminal,
-    label: 'WSL 2 (Ubuntu)',
+    label: 'WSL 2 (Arch)',
     color: 'bg-yellow-600/20',
     iconColor: 'text-yellow-400',
   },
@@ -262,10 +262,10 @@ onMounted(() => {
           </div>
           <div class="flex flex-col border-l border-outline-variant/20 pl-4">
             <span class="text-3xl font-bold text-primary">{{
-              stats.coffeeFueled
+              stats.fueled
             }}</span>
             <span class="text-sm text-on-surface-variant">{{
-              t('about.coffee')
+              t('about.poweredBy')
             }}</span>
           </div>
         </div>
@@ -431,7 +431,7 @@ onMounted(() => {
 
       <!-- 6. Life / Music (Spotify/Last.fm) -->
       <div
-        class="col-span-1 row-span-1 bg-tertiary-container text-on-tertiary-container rounded-[2.5rem] p-6 flex flex-col justify-between border border-white/5 relative overflow-hidden"
+        class="col-span-1 row-span-1 text-on-tertiary-container rounded-[2.5rem] p-6 flex flex-col justify-between border border-white/5 relative overflow-hidden"
       >
         <!-- Album Art Background with Blur & Animation -->
         <div
@@ -441,13 +441,13 @@ onMounted(() => {
           <img
             :src="nowPlaying.track.albumArt"
             :alt="nowPlaying.track.name"
-            class="w-full h-full object-cover blur-xl scale-110 animate-[pulse_4s_ease-in-out_infinite]"
-            style="animation: albumPulse 8s ease-in-out infinite"
+            class="w-full h-full object-cover blur-xl scale-110 animate-[pulse_8s_ease-in-out_infinite]"
           />
         </div>
 
         <!-- Gradient Overlay -->
         <div
+          v-else
           class="absolute inset-0 bg-gradient-to-br from-tertiary-container/80 via-tertiary-container/60 to-tertiary-container/80"
         ></div>
 
@@ -471,7 +471,7 @@ onMounted(() => {
           </span>
           <div v-if="nowPlaying.isPlaying" class="flex gap-1">
             <div
-              class="w-1 h-3 bg-white/40 rounded-full animate-[bounce_1s_infinite]"
+              class="w-1 h-3 bg-white/40 rounded-full animate-bounce animate-[bounce_1s_infinite]"
             ></div>
             <div
               class="w-1 h-4 bg-white/60 rounded-full animate-[bounce_1.2s_infinite]"

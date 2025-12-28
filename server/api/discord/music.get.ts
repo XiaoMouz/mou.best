@@ -88,7 +88,8 @@ export default defineEventHandler(async (event) => {
         // Check if it's a Music Presence proxy URL or external asset
         if (musicActivity?.assets?.large_image?.startsWith('mp:external/')) {
           // Music Presence external URL format
-          albumArt = `https://cdn.discordapp.com/external/${musicActivity.assets.large_image.replace(
+          //https://media.discordapp.net/external/bEEJA5QIH4RlEazMvSNGgIE0YPDEq5GpemPhHQzWlto/https/proxy.musicpresence.io/v0/hhEnxN0_-bGq5qQyxX2MHw/I7mHtnVcasQPlm9TLtMyAtZKGmjLxqET3CbKEz9HWXI/0dc2fcc4
+          albumArt = `https://media.discordapp.net/external/${musicActivity.assets.large_image.replace(
             'mp:external/',
             ''
           )}`
