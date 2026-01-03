@@ -23,42 +23,41 @@ const CHAPTERS = [
     subtitle: 'The Boogeyman',
     quote:
       "People keep asking if I'm back and I haven't really had an answer. But now, yeah, I'm thinkin' I'm back.",
-    bg: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2525&auto=format&fit=crop',
+    bg: '/media/johnwick/johnwick-1-bg.jpg',
     color: '#3b82f6',
-    mainChar:
-      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1200',
+    mainChar: '/media/johnwick/jw1-main.png',
     cast: [
       {
         name: 'Viggo Tarasov',
         role: 'Target',
-        img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200',
+        img: '/media/johnwick/viggotarasov.png',
       },
       {
         name: 'Iosef Tarasov',
         role: 'Target',
-        img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200',
+        img: '/media/johnwick/ioseftarasov.png',
       },
       {
         name: 'Marcus',
         role: 'Ally',
-        img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200',
+        img: '/media/johnwick/marcus.png',
       },
     ],
     gallery: [
       {
-        src: 'https://images.unsplash.com/photo-1583195764036-6dc248ac07d9?q=80&w=800',
-        title: 'The Puppy',
+        src: '/media/johnwick/jw1-1.png',
+        title: 'John Wick & The Puppy',
       },
       {
-        src: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=800',
+        src: '/media/johnwick/jw1-2.png',
         title: 'Mustang 1969',
       },
       {
-        src: 'https://images.unsplash.com/photo-1514820402329-de527fdd2d7d?q=80&w=800',
+        src: '/media/johnwick/jw1-3.png',
         title: 'The Red Circle',
       },
       {
-        src: 'https://images.unsplash.com/photo-1596484552885-6bb04b77f9c2?q=80&w=800',
+        src: '/media/johnwick/jw1-4.png',
         title: 'Continental NY',
       },
     ],
@@ -69,42 +68,41 @@ const CHAPTERS = [
     subtitle: 'Excommunicado',
     quote:
       "Whoever comes, whoever it is... I'll kill them. I'll kill them all.",
-    bg: 'https://images.unsplash.com/photo-1542259681-d4cd7193bc70?q=80&w=2669&auto=format&fit=crop',
+    bg: '/media/johnwick/johnwick-2-bg.png',
     color: '#a855f7',
-    mainChar:
-      'https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?q=80&w=1200',
+    mainChar: '/media/johnwick/jw2-main.png',
     cast: [
       {
         name: 'Santino',
         role: 'Target',
-        img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200',
+        img: '/media/johnwick/santino.png',
       },
       {
         name: 'Cassian',
         role: 'Adversary',
-        img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200',
+        img: '/media/johnwick/cassian.png',
       },
       {
         name: 'Ares',
         role: 'Enforcer',
-        img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200',
+        img: '/media/johnwick/ares.png',
       },
     ],
     gallery: [
       {
-        src: 'https://images.unsplash.com/photo-1517604931442-710c8ef555c9?q=80&w=800',
+        src: '/media/johnwick/jw2-1.png',
         title: 'Rome Catacombs',
       },
       {
-        src: 'https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=800',
+        src: '/media/johnwick/jw2-2.png',
         title: 'Hall of Mirrors',
       },
       {
-        src: 'https://images.unsplash.com/photo-1533109721025-d1ae7ee7c1e1?q=80&w=800',
+        src: '/media/johnwick/jw2-3.png',
         title: 'The Marker',
       },
       {
-        src: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800',
+        src: '/media/johnwick/jw2-4.png',
         title: 'Sommelier',
       },
     ],
@@ -114,42 +112,41 @@ const CHAPTERS = [
     title: 'Parabellum',
     subtitle: 'Prepare for War',
     quote: 'Si vis pacem, para bellum.',
-    bg: 'https://images.unsplash.com/photo-1517604931442-710c8ef555c9?q=80&w=2669&auto=format&fit=crop',
+    bg: '/media/johnwick/johnwick-3-bg.png',
     color: '#eab308',
-    mainChar:
-      'https://images.unsplash.com/photo-1504257432389-52343af06ae3?q=80&w=1200',
+    mainChar: '/media/johnwick/jw3-main.png',
     cast: [
       {
         name: 'Sofia',
         role: 'Ally',
-        img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200',
+        img: '/media/johnwick/sofia.png',
       },
       {
         name: 'Zero',
         role: 'Adversary',
-        img: 'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=80&w=200',
+        img: '/media/johnwick/zero.png',
       },
       {
         name: 'Adjudicator',
         role: 'High Table',
-        img: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=200',
+        img: '/media/johnwick/adjudicator.png',
       },
     ],
     gallery: [
       {
-        src: 'https://images.unsplash.com/photo-1500048993953-d23a436266cf?q=80&w=800',
+        src: '/media/johnwick/jw3-1.png',
         title: 'Casablanca',
       },
       {
-        src: 'https://images.unsplash.com/photo-1514820402329-de527fdd2d7d?q=80&w=800',
+        src: '/media/johnwick/jw3-2.png',
         title: 'The Elder',
       },
       {
-        src: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=800',
+        src: '/media/johnwick/jw3-3.png',
         title: 'Glass House',
       },
       {
-        src: 'https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?q=80&w=800',
+        src: '/media/johnwick/jw3-4.png',
         title: 'Library',
       },
     ],
@@ -159,42 +156,41 @@ const CHAPTERS = [
     title: 'Chapter 4',
     subtitle: 'Baba Yaga',
     quote: 'Those who cling to death, live. Those who cling to life, die.',
-    bg: 'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=2574&auto=format&fit=crop',
+    bg: '/media/johnwick/johnwick-4-bg.png',
     color: '#ef4444',
-    mainChar:
-      'https://images.unsplash.com/photo-1583195764036-6dc248ac07d9?q=80&w=1200',
+    mainChar: '/media/johnwick/jw4-main.png',
     cast: [
       {
         name: 'Caine',
         role: 'Adversary',
-        img: 'https://images.unsplash.com/photo-1506803682991-6f72481f663c?q=80&w=200',
+        img: '/media/johnwick/caine.jpg',
       },
       {
         name: 'Marquis',
         role: 'Target',
-        img: 'https://images.unsplash.com/photo-1500048993953-d23a436266cf?q=80&w=200',
+        img: '/media/johnwick/marquis.jpg',
       },
       {
         name: 'Killa',
         role: 'Target',
-        img: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=200',
+        img: '/media/johnwick/killa.jpg',
       },
     ],
     gallery: [
       {
-        src: 'https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?q=80&w=800',
+        src: '/media/johnwick/jw4-1.jpg',
         title: 'Osaka Continental',
       },
       {
-        src: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800',
+        src: '/media/johnwick/jw4-2.jpg',
         title: 'Arc de Triomphe',
       },
       {
-        src: 'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800',
+        src: '/media/johnwick/jw4-3.jpg',
         title: 'Sacre Coeur',
       },
       {
-        src: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800',
+        src: '/media/johnwick/jw4-4.png',
         title: 'Radio Station',
       },
     ],
@@ -321,51 +317,6 @@ const handleMouseMove = (e: MouseEvent) => {
         <div
           class="lg:col-span-5 hidden lg:flex flex-col items-center justify-center relative h-full"
         >
-          <!-- Main Character Hero Image -->
-          <div
-            class="relative w-80 h-[450px] transition-transform duration-300 ease-out"
-            :style="{
-              transform: `translate(${mousePos.x * -1}px, ${
-                mousePos.y * -1
-              }px)`,
-            }"
-          >
-            <div
-              class="absolute inset-0 border border-[var(--theme-color)]/30 bg-[var(--theme-color)]/5 backdrop-blur-sm transform rotate-3 transition-colors duration-500"
-            ></div>
-            <div
-              class="absolute inset-0 border border-white/10 transform -rotate-2 bg-black/40 overflow-hidden shadow-2xl"
-            >
-              <img
-                :key="current.id"
-                :src="current.mainChar"
-                alt="John Wick"
-                class="w-full h-full object-cover grayscale contrast-125 brightness-90 animate-[fadeIn_0.5s_ease-out]"
-              />
-              <!-- Scanline Effect -->
-              <div
-                class="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] opacity-20 pointer-events-none"
-              ></div>
-
-              <!-- Overlay Info -->
-              <div
-                class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black to-transparent"
-              >
-                <div
-                  class="font-display font-bold text-2xl text-white uppercase tracking-tighter"
-                >
-                  Baba Yaga
-                </div>
-                <div
-                  class="flex items-center gap-2 text-xs text-[var(--theme-color)] font-mono mt-1"
-                >
-                  <Fingerprint :size="12" />
-                  <span>ID: 994-001-JW</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <!-- Supporting Cast Strip -->
           <div
             class="absolute -bottom-8 -right-8 flex gap-4 transition-transform duration-200"
