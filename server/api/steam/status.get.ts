@@ -3,10 +3,16 @@ export default defineEventHandler(async (event) => {
 
   // Get Steam API credentials from environment
   const STEAM_API_KEY = config.STEAM_API_KEY || process.env.STEAM_API_KEY
-  const DEFAULT_STEAM_USER_ID = config.STEAM_USER_ID || process.env.STEAM_USER_ID
+  const DEFAULT_STEAM_USER_ID =
+    config.STEAM_USER_ID || process.env.STEAM_USER_ID
 
   // Get allowed Steam user IDs from environment (comma-separated)
-  const ALLOWED_STEAM_USERS = (config.ALLOWED_STEAM_USERS || process.env.ALLOWED_STEAM_USERS || DEFAULT_STEAM_USER_ID || '')
+  const ALLOWED_STEAM_USERS = (
+    config.ALLOWED_STEAM_USERS ||
+    process.env.ALLOWED_STEAM_USERS ||
+    DEFAULT_STEAM_USER_ID ||
+    ''
+  )
     .split(',')
     .map((id: string) => id.trim())
     .filter(Boolean)
@@ -28,21 +34,26 @@ export default defineEventHandler(async (event) => {
     return {
       isOnline: false,
       currentGame: null,
-      profileUrl: `https://steamcommunity.com/profiles/${requestedUserId || ''}`,
+      profileUrl: `https://steamcommunity.com/profiles/${
+        requestedUserId || ''
+      }`,
     }
   }
 
   const STEAM_USER_ID = requestedUserId
   const CACHE_KEY = `steam:status:${STEAM_USER_ID}`
-  const CACHE_TTL = 600 // 10 minutes in seconds
+  const CACHE_TTL = 600 * 1000 // 10 minutes in milliseconds
 
   try {
     // Try to get from cache first
     const storage = useStorage('cache')
-    const cached = await storage.getItem(CACHE_KEY)
+    const cached = await storage.getItem<{
+      data: any
+      timestamp: number
+    }>(CACHE_KEY)
 
-    if (cached) {
-      return cached
+    if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+      return cached.data
     }
 
     // Fetch from Steam API
@@ -50,6 +61,7 @@ export default defineEventHandler(async (event) => {
     const summaryUrl = `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${STEAM_API_KEY}&steamids=${STEAM_USER_ID}`
     const summaryResponse = await $fetch(summaryUrl)
     const playerData = summaryResponse?.response?.players?.[0]
+    console.log('🚀 ~ playerData:', playerData)
 
     if (!playerData) {
       throw new Error('Failed to fetch player data')
@@ -66,7 +78,10 @@ export default defineEventHandler(async (event) => {
       ? {
           name: playerData.gameextrainfo,
           appId: playerData.gameid,
-          playTime: Math.round((recentGames.find((g: any) => g.appid === playerData.gameid)?.playtime_forever || 0) / 60), // Convert minutes to hours
+          playTime: Math.round(
+            (recentGames.find((g: any) => g.appid === playerData.gameid)
+              ?.playtime_forever || 0) / 60
+          ), // Convert minutes to hours
           artUrl: `https://cdn.cloudflare.steamstatic.com/steam/apps/${playerData.gameid}/header.jpg`,
           details: playerData.gameserverip ? 'In Game' : 'Playing',
         }
@@ -83,11 +98,16 @@ export default defineEventHandler(async (event) => {
     const result = {
       isOnline: playerData.personastate !== 0, // 0 = Offline
       currentGame,
-      profileUrl: playerData.profileurl || `https://steamcommunity.com/profiles/${STEAM_USER_ID}`,
+      profileUrl:
+        playerData.profileurl ||
+        `https://steamcommunity.com/profiles/${STEAM_USER_ID}`,
     }
 
-    // Cache the result
-    await storage.setItem(CACHE_KEY, result, { ttl: CACHE_TTL })
+    // Cache the result with timestamp
+    await storage.setItem(CACHE_KEY, {
+      data: result,
+      timestamp: Date.now(),
+    })
 
     return result
   } catch (error) {

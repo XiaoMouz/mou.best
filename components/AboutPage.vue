@@ -483,7 +483,12 @@ onMounted(() => {
         </div>
         <div class="relative z-10">
           <div class="text-xs opacity-70 uppercase tracking-widest mb-1">
-            {{ t('about.onPlaying') }}
+            <template v-if="nowPlaying.isPlaying">
+              {{ t('about.onPlaying') }}
+            </template>
+            <template v-else>
+              {{ t('about.pause') }}
+            </template>
           </div>
           <template v-if="nowPlaying.track">
             <div class="font-bold text-lg leading-tight">
