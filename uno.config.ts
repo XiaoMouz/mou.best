@@ -13,7 +13,8 @@ export default defineConfig({
     presetUno(),
     presetIcons({
       collections: {
-        lucide: () => import('@iconify-json/lucide/icons.json').then(i => i.default),
+        lucide: () =>
+          import('@iconify-json/lucide/icons.json').then((i) => i.default),
       },
     }),
     presetTypography(),
@@ -32,6 +33,7 @@ export default defineConfig({
   transformers: [transformerDirectives(), transformerVariantGroup()],
   theme: {
     colors: {
+      accent: 'rgb(var(--accent))',
       // Material Design 3 color tokens
       background: 'rgb(var(--background))',
       'on-background': 'rgb(var(--on-background))',

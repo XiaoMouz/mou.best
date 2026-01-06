@@ -227,7 +227,7 @@ onMounted(() => {
             class="w-20 h-20 rounded-full overflow-hidden border-4 border-surface mb-6 shadow-xl"
           >
             <img
-              src="https://picsum.photos/200/200"
+              src="/me.webp"
               alt="Profile"
               class="w-full h-full object-cover"
             />
