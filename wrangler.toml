@@ -14,3 +14,23 @@ id = "1be06b521598425ca7b6402fde42232d"
 binding = "DB"
 database_name = "mou-best-db"
 database_id = "ff404be0-27ca-4f7a-8420-80712feab329"
+
+[vars]
+STEAM_USER_ID = "76561198304644410"
+ALLOWED_STEAM_USERS = "76561198304644410,76561198229927460,76561198157142591,76561199263563573,76561199034242571"
+DISCORD_USER_ID = "451669810686853132"
+
+[observability]
+enabled = false
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
+
+[observability.traces]
+enabled = false
+persist = true
+head_sampling_rate = 1
