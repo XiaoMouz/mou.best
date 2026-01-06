@@ -1,6 +1,6 @@
 import { createDatabase } from 'db0'
 import sqlite from 'db0/connectors/better-sqlite3'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
@@ -9,7 +9,9 @@ const contentDataPath = join(process.cwd(), 'data/content.ts')
 const contentDataContent = readFileSync(contentDataPath, 'utf-8')
 
 // Parse content data (simplified extraction)
-const contentDataMatch = contentDataContent.match(/export const contentData[^=]*=\s*(\[[\s\S]*?\])/m)
+const contentDataMatch = contentDataContent.match(
+  /export const contentData[^=]*=\s*(\[[\s\S]*?\])/m
+)
 if (!contentDataMatch) {
   console.error('Failed to parse contentData')
   process.exit(1)
@@ -34,8 +36,8 @@ const schemaPath = join(process.cwd(), 'server/database/schema.sql')
 const schema = readFileSync(schemaPath, 'utf-8')
 const statements = schema
   .split(';')
-  .map(s => s.trim())
-  .filter(s => s.length > 0)
+  .map((s) => s.trim())
+  .filter((s) => s.length > 0)
 
 for (const statement of statements) {
   db.exec(statement)
@@ -88,25 +90,36 @@ async function migrateArticles() {
 
     if (article.isLocked) {
       // Migrate to encrypted database
-      console.log(`Migrating encrypted article: ${article.title} (slug: ${slug})`)
-
-      const passwordHash = await bcrypt.hash(article.unlockCode || 'default', 10)
-
-      await db.prepare(`
-        INSERT INTO encrypted_articles (slug, title, excerpt, content, password_hash, tags, date, read_time)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-      `).run(
-        slug,
-        article.title,
-        article.excerpt,
-        `# ${article.title}\n\n${article.excerpt}\n\n<!-- Add full content here -->`,
-        passwordHash,
-        JSON.stringify(article.tags || [article.category]),
-        article.date,
-        article.readTime
+      console.log(
+        `Migrating encrypted article: ${article.title} (slug: ${slug})`
       )
 
-      console.log(`  ✓ Encrypted article created with password: "${article.unlockCode}"`)
+      const passwordHash = await bcrypt.hash(
+        article.unlockCode || 'default',
+        10
+      )
+
+      await db
+        .prepare(
+          `
+        INSERT INTO encrypted_articles (slug, title, excerpt, content, password_hash, tags, date, read_time)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      `
+        )
+        .run(
+          slug,
+          article.title,
+          article.excerpt,
+          `# ${article.title}\n\n${article.excerpt}\n\n<!-- Add full content here -->`,
+          passwordHash,
+          JSON.stringify(article.tags || [article.category]),
+          article.date,
+          article.readTime
+        )
+
+      console.log(
+        `  ✓ Encrypted article created with password: "${article.unlockCode}"`
+      )
       encryptedCount++
     } else {
       // Migrate to Nuxt Content markdown files

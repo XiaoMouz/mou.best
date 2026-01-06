@@ -8,5 +8,8 @@ routes = [
 # KV Namespaces
 [[kv_namespaces]]
 binding = "CACHE"
-id = "your-kv-namespace-id"
-preview_id = "your-preview-kv-namespace-id"
+id = "1be06b521598425ca7b6402fde42232d"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mou-best-db"

@@ -20,9 +20,11 @@ const navActiveView = computed(() => {
 
 // Show footer on most pages except resume, article detail, and immersive views
 const showFooter = computed(() => {
-  return !isImmersiveView.value &&
-         route.path !== '/resume' &&
-         !route.path.match(/^\/articles\/\d+$/)
+  return (
+    !isImmersiveView.value &&
+    route.path !== '/resume' &&
+    !route.path.match(/^\/articles\/\d+$/)
+  )
 })
 
 // Initialize theme on mount
@@ -38,7 +40,9 @@ useHead({
 </script>
 
 <template>
-  <div class="min-h-screen bg-background text-on-background overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container transition-colors duration-300">
+  <div
+    class="min-h-screen flex flex-col bg-background text-on-background overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container transition-colors duration-300"
+  >
     <BackgroundGlow v-if="!isImmersiveView" />
 
     <Navbar
@@ -48,7 +52,7 @@ useHead({
       @toggle-theme="toggleTheme"
     />
 
-    <main class="relative">
+    <main class="relative flex-1">
       <NuxtPage />
     </main>
 
@@ -56,7 +60,9 @@ useHead({
       v-if="showFooter"
       class="relative z-10 py-12 text-center border-t border-outline-variant/10 bg-surface/50 backdrop-blur-sm mt-12"
     >
-      <p class="text-on-surface-variant text-sm">© {{ new Date().getFullYear() }} XiaoMouz. All rights reserved.</p>
+      <p class="text-on-surface-variant text-sm">
+        © {{ new Date().getFullYear() }} XiaoMouz. All rights reserved.
+      </p>
       <div class="mt-4 flex justify-center gap-4 text-xs text-outline">
         <span>Material Design 3</span>
         <span>•</span>

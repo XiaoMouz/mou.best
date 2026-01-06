@@ -1,5 +1,5 @@
 {
-  "name": "xiaomouz-portfolio-nuxt",
+  "name": "mou.best",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,16 +8,17 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "migrate:articles": "tsx scripts/migrate-articles.ts"
+    "migrate:articles": "tsx scripts/migrate-articles.ts",
+    "cloudflare:workers:build": "pnpm build && wrangler --cwd .output deploy"
   },
   "dependencies": {
     "@nuxt/content": "^3.9.0",
     "@nuxtjs/i18n": "10.2.1",
     "@nuxtjs/mdc": "^0.19.1",
-    "@unocss/nuxt": "^0.63.6",
-    "@unocss/reset": "^0.63.6",
+    "@unocss/nuxt": "^66.5.12",
+    "@unocss/reset": "^66.5.12",
     "@vueuse/nuxt": "13.3.0",
-    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "better-sqlite3": "^12.5.0",
     "db0": "^0.3.4",
     "lucide-vue-next": "^0.460.0",
@@ -31,6 +32,6 @@
     "@types/bcrypt": "^6.0.0",
     "@types/node": "^22.14.0",
     "typescript": "~5.8.2",
-    "unocss": "^0.63.6"
+    "unocss": "^66.5.12"
   }
 }
