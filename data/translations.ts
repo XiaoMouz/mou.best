@@ -49,7 +49,7 @@ export const translations = {
         tablet: { name: 'iPad Mini 6', desc: 'Notes & Reading' },
         vr: { name: 'Quest 2', desc: 'Virtual Reality' },
       },
-      quote: '"Code is like humor. When you have to explain it, it\'s bad."',
+      quote: '"Nothing"',
     },
     resume: {
       back: 'Back to Home',
@@ -206,7 +206,7 @@ export const translations = {
         tablet: { name: 'iPad Mini 6', desc: '阅读与笔记' },
         vr: { name: 'Quest 2', desc: '虚拟现实' },
       },
-      quote: '"代码就像幽默。如果你必须解释它，那就是它很烂。"',
+      quote: '"无"',
     },
     resume: {
       back: '返回首页',

@@ -275,15 +275,21 @@ onMounted(() => {
       <div
         class="col-span-1 md:col-span-1 row-span-1 bg-surface-container rounded-[2.5rem] relative overflow-hidden group border border-outline-variant/10 min-h-[200px]"
       >
+        <div
+          className="border-[4px] border-slate-50 z-100 absolute left-[45%] top-[40%] rounded-full location-pulse "
+        >
+          <div className=" bg-blue-400 rounded-full size-5"></div>
+        </div>
+
         <img
-          src="https://images.unsplash.com/photo-1554913508-d017a4c7c813?q=80&w=1000&auto=format&fit=crop"
+          src="/location.png"
           alt="Location"
           class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
         />
         <div
           class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"
         ></div>
-        <div class="absolute bottom-6 left-6 right-6">
+        <div class="absolute bottom-6 left-6 right-6 z-200">
           <div
             class="flex items-center gap-2 text-primary-container bg-primary/90 backdrop-blur-md px-4 py-2 rounded-xl w-fit mb-1"
           >
@@ -587,3 +593,32 @@ onMounted(() => {
     </div>
   </section>
 </template>
+<style scoped>
+@keyframes pulse {
+  0% {
+    transform: scale(0.98);
+    box-shadow: 0 0 0 0 rgba(3, 78, 252, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(3, 78, 252, 0);
+  }
+
+  100% {
+    transform: scale(0.98);
+    box-shadow: 0 0 0 0 rgba(3, 78, 252, 0);
+  }
+}
+
+.location-pulse {
+  border-radius: 100%;
+  box-shadow: 0 0 0 0 rgba(3, 78, 252, 0);
+  transform: scale(1);
+  animation: pulse 3s infinite;
+}
+
+.location-pulse::before {
+  animation-delay: 1s;
+}
+</style>
