@@ -224,7 +224,7 @@ onMounted(() => {
 
         <div class="relative z-10">
           <div
-            class="w-20 h-20 rounded-full overflow-hidden border-4 border-surface mb-6 shadow-xl"
+            class="w-20 h-20 rounded-full overflow-hidden border-4 border-surface mb-3 shadow-xl"
           >
             <img
               src="/me.webp"
@@ -233,17 +233,29 @@ onMounted(() => {
             />
           </div>
           <h2 class="text-3xl font-bold text-on-surface mb-2">XiaoMouz</h2>
-          <div
-            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-sm font-medium mb-6"
-          >
-            <Code2 :size="16" /> {{ t('about.role') }}
+          <div class="inline-flex items-center gap-2 mb-2">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-sm font-medium mb-1"
+            >
+              <Code2 :size="16" /> {{ t('about.roles')[0] }}
+            </div>
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-sm font-medium mb-1"
+            >
+              <Gamepad2 :size="16" /> {{ t('about.roles')[1] }}
+            </div>
           </div>
-          <p class="text-on-surface-variant text-lg leading-relaxed">
-            {{ t('about.bio') }}
-          </p>
+
+          <div class="text-on-surface-variant text-lg leading-relaxed">
+            <div>
+              <template v-for="(bio, idx) in t('about.bio')" :key="idx">
+                <p class="mb-2">{{ bio }}</p>
+              </template>
+            </div>
+          </div>
         </div>
 
-        <div class="mt-8 pt-6 border-t border-outline-variant/20 flex gap-4">
+        <!-- <div class="mt-8 pt-6 border-t border-outline-variant/20 flex gap-4">
           <div class="flex flex-col">
             <span class="text-3xl font-bold text-primary">{{
               stats.yearsExp
@@ -268,7 +280,7 @@ onMounted(() => {
               t('about.poweredBy')
             }}</span>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <!-- 2. Location Widget - Map Style -->
@@ -289,7 +301,7 @@ onMounted(() => {
         <div
           class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"
         ></div>
-        <div class="absolute bottom-6 left-6 right-6 z-200">
+        <div class="absolute bottom-6 left-6 right-6 z-10">
           <div
             class="flex items-center gap-2 text-primary-container bg-primary/90 backdrop-blur-md px-4 py-2 rounded-xl w-fit mb-1"
           >
