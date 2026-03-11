@@ -11,6 +11,9 @@ interface LiveStatus {
 
 const { t, language } = useLanguage()
 
+const clickableCardClass =
+  'group border border-outline-variant/10 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30'
+
 const defaultLiveStatus: LiveStatus = {
   title: null,
   isLive: false,
@@ -89,7 +92,10 @@ onUnmounted(() => {
     href="https://live.mou.best"
     target="_blank"
     rel="noreferrer"
-    class="col-span-1 md:col-span-2 lg:col-span-2 row-span-1 block bg-surface-container-high rounded-[2.5rem] p-6 border border-outline-variant/10 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary/30"
+    :class="[
+      clickableCardClass,
+      'col-span-1 md:col-span-2 lg:col-span-2 row-span-1 block bg-surface-container-high rounded-[2.5rem] p-6 relative overflow-hidden',
+    ]"
   >
     <div
       class="absolute inset-0 opacity-70"

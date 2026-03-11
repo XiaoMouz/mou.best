@@ -21,6 +21,9 @@ import {
 
 const { t } = useLanguage()
 
+const clickableCardClass =
+  'group border border-outline-variant/10 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30'
+
 // Steam Gaming Status - Mock data (ready for API integration)
 interface SteamStatus {
   isOnline: boolean
@@ -320,7 +323,10 @@ onMounted(() => {
           <a
             v-if="social.primary"
             :href="social.url"
-            class="flex-1 bg-primary-container hover:bg-primary/90 rounded-[2rem] p-6 flex flex-col justify-center items-center transition-all duration-300 hover:-translate-y-1 border border-outline-variant/10 group text-on-primary-container"
+            :class="[
+              clickableCardClass,
+              'flex-1 bg-primary-container hover:bg-primary/90 rounded-[2rem] p-6 flex flex-col justify-center items-center text-on-primary-container',
+            ]"
           >
             <component
               :is="social.icon"
@@ -334,7 +340,10 @@ onMounted(() => {
             :href="social.url"
             target="_blank"
             rel="noreferrer"
-            class="flex-1 bg-surface-container hover:bg-surface-container-high rounded-[2rem] p-6 flex flex-col justify-center items-center transition-all duration-300 hover:-translate-y-1 border border-outline-variant/10 group"
+            :class="[
+              clickableCardClass,
+              'flex-1 bg-surface-container hover:bg-surface-container-high rounded-[2rem] p-6 flex flex-col justify-center items-center',
+            ]"
           >
             <component
               :is="social.icon"
@@ -374,8 +383,14 @@ onMounted(() => {
       </div>
 
       <!-- 5. Gaming Status Card (Steam) -->
-      <div
-        class="col-span-1 md:col-span-2 lg:col-span-2 row-span-1 bg-[#1b2838] rounded-[2.5rem] p-6 relative overflow-hidden group border border-outline-variant/10"
+      <a
+        href="https://steamcommunity.com/id/Justjokemou/"
+        target="_blank"
+        rel="noreferrer"
+        :class="[
+          clickableCardClass,
+          'col-span-1 md:col-span-2 lg:col-span-2 row-span-1 block bg-[#1b2838] rounded-[2.5rem] p-6 relative overflow-hidden',
+        ]"
       >
         <div
           class="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-500 via-transparent to-transparent"
@@ -445,7 +460,7 @@ onMounted(() => {
             </div>
           </div>
         </div>
-      </div>
+      </a>
 
       <!-- 6. Life / Music (Spotify/Last.fm) -->
       <div
@@ -523,7 +538,10 @@ onMounted(() => {
 
       <!-- 7. Photography -->
       <div
-        class="col-span-1 row-span-1 bg-surface-container-high rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center border border-outline-variant/10 group cursor-pointer hover:bg-surface-container transition-colors"
+        :class="[
+          clickableCardClass,
+          'col-span-1 row-span-1 bg-surface-container-high rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container',
+        ]"
       >
         <div
           class="w-12 h-12 rounded-2xl bg-secondary/20 text-secondary flex items-center justify-center mb-3 group-hover:scale-110 transition-transform"
