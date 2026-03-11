@@ -61,7 +61,6 @@ export default defineEventHandler(async (event) => {
     const summaryUrl = `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${STEAM_API_KEY}&steamids=${STEAM_USER_ID}`
     const summaryResponse = await $fetch(summaryUrl)
     const playerData = summaryResponse?.response?.players?.[0]
-    console.log('🚀 ~ playerData:', playerData)
 
     if (!playerData) {
       throw new Error('Failed to fetch player data')
@@ -80,20 +79,20 @@ export default defineEventHandler(async (event) => {
           appId: playerData.gameid,
           playTime: Math.round(
             (recentGames.find((g: any) => g.appid === playerData.gameid)
-              ?.playtime_forever || 0) / 60
+              ?.playtime_forever || 0) / 60,
           ), // Convert minutes to hours
           artUrl: `https://cdn.cloudflare.steamstatic.com/steam/apps/${playerData.gameid}/header.jpg`,
           details: playerData.gameserverip ? 'In Game' : 'Playing',
         }
       : recentGames.length > 0
-      ? {
-          name: recentGames[0].name,
-          appId: recentGames[0].appid,
-          playTime: Math.round(recentGames[0].playtime_forever / 60), // Convert minutes to hours
-          artUrl: `https://cdn.cloudflare.steamstatic.com/steam/apps/${recentGames[0].appid}/header.jpg`,
-          details: 'Recently Played',
-        }
-      : null
+        ? {
+            name: recentGames[0].name,
+            appId: recentGames[0].appid,
+            playTime: Math.round(recentGames[0].playtime_forever / 60), // Convert minutes to hours
+            artUrl: `https://cdn.cloudflare.steamstatic.com/steam/apps/${recentGames[0].appid}/header.jpg`,
+            details: 'Recently Played',
+          }
+        : null
 
     const result = {
       isOnline: playerData.personastate !== 0, // 0 = Offline
