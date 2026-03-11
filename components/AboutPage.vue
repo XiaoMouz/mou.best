@@ -590,6 +590,9 @@ onMounted(() => {
           </div>
         </div>
       </div>
+
+      <!-- 9. Live Streaming Status -->
+      <AboutLive />
     </div>
 
     <!-- Footer Quote or Signoff -->
