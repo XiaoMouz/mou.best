@@ -29,6 +29,12 @@ const friendLinks = [
     avatar: 'https://libra.wiki/avatar.png',
   },
   {
+    name: '罗拉',
+    desc: '',
+    url: 'https://luola.me',
+    avatar: 'https://q1.qlogo.cn/g?b=qq&nk=1205027142&s=640',
+  },
+  {
     name: '神代綺凜',
     desc: 'ななひら天下第一！',
     url: 'https://moe.best',
