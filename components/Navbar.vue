@@ -411,52 +411,80 @@ onUnmounted(() => {
     </div>
 
     <!-- Mobile Menu -->
-    <div
-      v-if="isMobileMenuOpen"
-      :class="[
-        'md:hidden absolute top-full left-0 right-0 mx-4 mt-2 p-4 rounded-3xl border shadow-xl flex flex-col gap-2 overflow-hidden animate-fade-in',
-        themeOverride
-          ? 'backdrop-blur-xl'
-          : 'bg-surface-container border-outline-variant/20',
-      ]"
-      :style="mobileMenuStyle"
-    >
-      <div v-for="item in navItems" :key="item.id">
-        <button
-          @click="handleNavClick(item)"
-          :class="[
-            'w-full px-4 py-4 rounded-2xl font-medium text-left flex items-center gap-4 transition-colors',
-            currentView === item.id
-              ? themeOverride
-                ? 'bg-white/10'
-                : 'bg-secondary-container text-on-secondary-container'
-              : themeOverride
-                ? 'text-white'
-                : 'text-on-surface hover:bg-surface-container-high',
-          ]"
-        >
-          <component :is="item.icon" :size="20" />
-          {{ item.label }}
-        </button>
-        <div
-          v-if="item.children"
-          class="ml-8 border-l border-white/10 pl-2 mt-1 space-y-1"
-        >
+    <Transition name="mobile-menu">
+      <div
+        v-if="isMobileMenuOpen"
+        :class="[
+          'md:hidden absolute top-full left-0 right-0 mx-4 mt-2 p-4 rounded-3xl border shadow-xl flex flex-col gap-2 overflow-hidden',
+          themeOverride
+            ? 'backdrop-blur-xl'
+            : 'bg-surface-container border-outline-variant/20',
+        ]"
+        :style="mobileMenuStyle"
+      >
+        <div v-for="item in navItems" :key="item.id">
           <button
-            v-for="child in item.children"
-            :key="child.id"
-            @click="handleChildClick(child.id)"
+            @click="handleNavClick(item)"
             :class="[
-              'w-full px-4 py-3 rounded-xl font-medium text-left flex items-center gap-4 transition-colors',
-              themeOverride
-                ? 'text-white/70 hover:text-white'
-                : 'text-on-surface-variant hover:text-on-surface',
+              'w-full px-4 py-4 rounded-2xl font-medium text-left flex items-center gap-4 transition-colors',
+              currentView === item.id
+                ? themeOverride
+                  ? 'bg-white/10'
+                  : 'bg-secondary-container text-on-secondary-container'
+                : themeOverride
+                  ? 'text-white'
+                  : 'text-on-surface hover:bg-surface-container-high',
             ]"
           >
-            {{ child.label }}
+            <component :is="item.icon" :size="20" />
+            {{ item.label }}
           </button>
+          <div
+            v-if="item.children"
+            class="ml-8 border-l border-white/10 pl-2 mt-1 space-y-1"
+          >
+            <button
+              v-for="child in item.children"
+              :key="child.id"
+              @click="handleChildClick(child.id)"
+              :class="[
+                'w-full px-4 py-3 rounded-xl font-medium text-left flex items-center gap-4 transition-colors',
+                themeOverride
+                  ? 'text-white/70 hover:text-white'
+                  : 'text-on-surface-variant hover:text-on-surface',
+              ]"
+            >
+              {{ child.label }}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </Transition>
   </nav>
 </template>
+
+<style scoped>
+.mobile-menu-enter-active {
+  transition:
+    opacity 0.16s ease-out,
+    transform 0.16s ease-out;
+}
+
+.mobile-menu-leave-active {
+  transition:
+    opacity 0.12s ease-in,
+    transform 0.12s ease-in;
+}
+
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+}
+
+.mobile-menu-enter-to,
+.mobile-menu-leave-from {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+</style>
