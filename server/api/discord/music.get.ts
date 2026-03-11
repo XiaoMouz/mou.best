@@ -58,12 +58,12 @@ export default defineEventHandler(async (event) => {
     }
 
     const presence = response.data
-    console.log('🚀 ~ presence:', presence)
+    // console.log('🚀 ~ presence:', presence)
 
     // Check for music activity (type 2 = "Listening")
     // Supports Spotify, NetEase Cloud Music, Apple Music, YouTube Music, etc.
     const musicActivity = presence.activities?.find(
-      (activity) => activity.type === 2
+      (activity) => activity.type === 2,
     )
 
     let result
@@ -79,7 +79,7 @@ export default defineEventHandler(async (event) => {
         if (musicActivity.assets?.large_image) {
           albumArt = `https://i.scdn.co/image/${musicActivity.assets.large_image.replace(
             'spotify:',
-            ''
+            '',
           )}`
         }
       }
@@ -91,7 +91,7 @@ export default defineEventHandler(async (event) => {
           //https://media.discordapp.net/external/bEEJA5QIH4RlEazMvSNGgIE0YPDEq5GpemPhHQzWlto/https/proxy.musicpresence.io/v0/hhEnxN0_-bGq5qQyxX2MHw/I7mHtnVcasQPlm9TLtMyAtZKGmjLxqET3CbKEz9HWXI/0dc2fcc4
           albumArt = `https://media.discordapp.net/external/${musicActivity.assets.large_image.replace(
             'mp:external/',
-            ''
+            '',
           )}`
         } else if (musicActivity?.assets?.large_image?.startsWith('http')) {
           albumArt = musicActivity.assets.large_image
@@ -122,7 +122,7 @@ export default defineEventHandler(async (event) => {
         data: result,
         timestamp: Date.now(),
       },
-      { ttl: CACHE_TTL }
+      { ttl: CACHE_TTL },
     )
 
     return result
