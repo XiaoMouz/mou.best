@@ -5,28 +5,25 @@ source: https://github.com/unixzii/cyandev.io/blob/main/src/components/typewrite
 <template>
   <ClientOnly>
     <div class="text-3xl text-muted-foreground md:text-4xl">
-      <span class="color-blue">${</span>
       <div
-        class="absolute color-green-600 dark:color-green w-0 h-0 overflow-hidden"
+        class="absolute color-gray dark:color-coolGray w-0 h-0 overflow-hidden"
         role="marquee"
         aria-label="a description with typewriter effect"
       >
         {{ description }}
       </div>
       <div
-        class="inline overflow-hidden px-1 color-green-600 dark:color-green"
+        class="inline overflow-hidden color-gray dark:color-coolGray"
         aria-hidden="true"
       >
         {{ content }}
       </div>
       <div
-        class="inline-block w-2 text-4xl md:text-5xl font-bold text-black-700 dark:text-white-800 rounded-sm select-none"
+        class="inline-block text-4xl md:text-5xl font-bold text-black-700 dark:text-white-800 rounded-sm select-none"
         :class="{ 'animate-smooth-blink': isIdle }"
       >
         |
       </div>
-
-      <span class="color-blue">}</span>
     </div>
   </ClientOnly>
 </template>
