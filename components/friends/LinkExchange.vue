@@ -4,29 +4,66 @@ import { Link, ExternalLink } from 'lucide-vue-next'
 const { t } = useLanguage()
 
 const friendLinks = [
+  // {
+  //   name: 'Rimo 海猫',
+  //   desc: '',
+  //   url: 'https://hoyibox.xyz/',
+  //   avatar: 'https://s3.mou.best/avatars/rimo.png',
+  // },
   {
-    name: 'Sarah Drasner',
-    role: 'Eng Manager',
-    url: 'https://sarah.dev',
-    avatar: 'https://ui-avatars.com/api/?name=Sarah&background=random',
+    name: 'Kevin Deng',
+    desc: 'Open-source enthusiast ▌',
+    url: 'https://sxzz.moe',
+    avatar: 'https://sxzz.dev/avatar.avif',
   },
   {
-    name: 'Josh Comeau',
-    role: 'Educator',
-    url: 'https://joshwcomeau.com',
-    avatar: 'https://ui-avatars.com/api/?name=Josh&background=random',
+    name: 'QPomelo',
+    desc: '',
+    url: 'https://qpomelo.dev',
+    avatar: 'https://qpomelo.dev/icons/avatar.jpeg',
   },
   {
-    name: 'Anthony Fu',
-    role: 'Open Source',
-    url: 'https://antfu.me',
-    avatar: 'https://ui-avatars.com/api/?name=Anthony&background=random',
+    name: 'Libra',
+    desc: '爱吃炒饭的外甥',
+    url: 'https://libra.wiki/',
+    avatar: 'https://libra.wiki/avatar.png',
   },
   {
-    name: 'Lee Robinson',
-    role: 'Vercel VP',
-    url: 'https://leerob.io',
-    avatar: 'https://ui-avatars.com/api/?name=Lee&background=random',
+    name: '神代綺凜',
+    desc: 'ななひら天下第一！',
+    url: 'https://moe.best',
+    avatar: 'https://moe.best/usr/img/avatar1.png',
+  },
+  {
+    name: 'Baoshuo',
+    desc: '',
+    url: 'https://baoshuo.ren',
+    avatar: 'https://cdn.jsdelivr.net/npm/bsi/favicon/192x192.png',
+  },
+  {
+    name: '杰帕斯の小窝',
+    desc: '是杰帕斯哟！Japerz!',
+    url: 'https://japerz.com',
+    avatar: 'https://q.qlogo.cn/g?b=qq&nk=1952135253&s=100',
+  },
+  {
+    name: '雪山深处 - Talaxy',
+    desc: '',
+    url: 'https://www.talaxy.site/',
+    avatar: 'https://www.talaxy.site/icons/icon-96x96.png',
+  },
+
+  {
+    name: 'Fika',
+    desc: '遇到困难睡大觉',
+    url: 'https://fika.ink/',
+    avatar: 'https://pic.imgdb.cn/item/637c14ee16f2c2beb161a26e.jpg',
+  },
+  {
+    name: '浮枕星海',
+    desc: 'Kernel panic at 0xffff467573696f6e',
+    url: 'https://universesaurora.top/',
+    avatar: 'https://universesaurora.top/img/favicon.png',
   },
 ]
 </script>
@@ -56,7 +93,7 @@ const friendLinks = [
           >
             {{ friend.name }}
           </div>
-          <div class="text-xs text-on-surface-variant">{{ friend.role }}</div>
+          <div class="text-xs text-on-surface-variant">{{ friend.desc }}</div>
         </div>
         <ExternalLink
           :size="16"

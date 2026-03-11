@@ -47,7 +47,7 @@ const navItems = computed<NavItem[]>(() => [
   { id: 'home', label: t('nav.home'), icon: Home },
   { id: 'articles', label: t('nav.articles'), icon: BookOpen },
   { id: 'about', label: t('nav.about'), icon: User },
-  // { id: 'friends', label: t('nav.friends'), icon: Users },
+  { id: 'friends', label: t('nav.friends'), icon: Users },
   // {
   //   id: 'media',
   //   label: t('nav.media'),
@@ -253,8 +253,8 @@ onUnmounted(() => {
           class="relative"
           @mouseenter="
             item.children &&
-              item.children.length > 0 &&
-              handleMouseEnter(item.id)
+            item.children.length > 0 &&
+            handleMouseEnter(item.id)
           "
           @mouseleave="handleMouseLeave"
         >
@@ -262,8 +262,9 @@ onUnmounted(() => {
             @click="handleNavClick(item)"
             :style="
               buttonStyle(
-                currentView === item.id ||
-                  (item.children && currentView.startsWith(item.id))
+                currentView ===
+                  (item.id ||
+                    (item.children && currentView.startsWith(item.id))),
               )
             "
             :class="[
@@ -273,8 +274,8 @@ onUnmounted(() => {
                 (item.children && currentView.startsWith(item.id)))
                 ? 'bg-secondary-container text-on-secondary-container shadow-sm'
                 : !themeOverride
-                ? 'text-on-surface hover:bg-surface-container-high'
-                : 'hover:bg-white/10',
+                  ? 'text-on-surface hover:bg-surface-container-high'
+                  : 'hover:bg-white/10',
             ]"
           >
             <component
@@ -284,9 +285,9 @@ onUnmounted(() => {
                 themeOverride
                   ? ''
                   : currentView === item.id ||
-                    (item.children && currentView.startsWith(item.id))
-                  ? 'text-primary'
-                  : 'text-on-surface-variant',
+                      (item.children && currentView.startsWith(item.id))
+                    ? 'text-primary'
+                    : 'text-on-surface-variant',
               ]"
             />
             {{ item.label }}
@@ -430,8 +431,8 @@ onUnmounted(() => {
                 ? 'bg-white/10'
                 : 'bg-secondary-container text-on-secondary-container'
               : themeOverride
-              ? 'text-white'
-              : 'text-on-surface hover:bg-surface-container-high',
+                ? 'text-white'
+                : 'text-on-surface hover:bg-surface-container-high',
           ]"
         >
           <component :is="item.icon" :size="20" />

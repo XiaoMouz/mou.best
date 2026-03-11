@@ -138,7 +138,7 @@ export const translations = {
     },
     friends: {
       title: 'Friends',
-      links: 'Link Exchange',
+      links: 'Friends Link',
       soulmate: 'Soul Resonance',
       childhood: 'Timelines',
       gaming: 'Gaming Duo',
@@ -294,7 +294,7 @@ export const translations = {
     },
     friends: {
       title: '友人帐',
-      links: '友情链接',
+      links: '好朋友们',
       soulmate: '灵魂共鸣',
       childhood: '时光印记',
       gaming: '游戏搭档',
