@@ -19,7 +19,7 @@ export const translations = {
     about: {
       title: 'About',
       me: 'Me',
-      subtitle: 'A normal person',
+      subtitle: 'o7, fly safe',
       roles: ['Developer/2', 'Gamer'],
       bio: [
         "Hey there 👋, I'm Mou. Glad you found this site—it means you're interested in me, and maybe we'll be good friends;",
@@ -195,7 +195,7 @@ export const translations = {
     about: {
       title: '关于',
       me: '我',
-      subtitle: '一个普通人',
+      subtitle: '今天应该吃炒河粉还是福州鱼丸',
       roles: ['恰好会写点代码而已', '真的很喜欢电子游戏'],
       bio: [
         '你好呀👋，我是小莫，不论你从哪里找到的这个站点我都十分开心，因为看起来你有在了解我，我们或许以后会是好朋友；',
