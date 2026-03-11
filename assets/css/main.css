@@ -24,6 +24,20 @@
 
   --outline: 116 119 127; /* #74777F */
   --outline-variant: 196 199 207; /* #C4C7CF */
+
+  /* Compatibility aliases for legacy component styles */
+  --color-background: rgb(var(--background));
+  --color-surface: rgb(var(--surface));
+  --color-surface-container: rgb(var(--surface-container));
+  --color-surface-container-high: rgb(var(--surface-container-high));
+  --color-primary: rgb(var(--primary));
+  --color-primary-hover: rgba(var(--primary), 0.88);
+  --color-primary-alpha: rgba(var(--primary), 0.12);
+  --color-border: rgb(var(--outline-variant));
+  --color-outline: rgb(var(--outline));
+  --color-outline-variant: rgb(var(--outline-variant));
+  --color-text: rgb(var(--on-background));
+  --color-text-secondary: rgb(var(--outline));
 }
 
 .dark {
@@ -50,6 +64,20 @@
 
   --outline: 142 144 153; /* #8E9099 */
   --outline-variant: 68 71 78; /* #44474E */
+
+  /* Compatibility aliases for legacy component styles */
+  --color-background: rgb(var(--background));
+  --color-surface: rgb(var(--surface));
+  --color-surface-container: rgb(var(--surface-container));
+  --color-surface-container-high: rgb(var(--surface-container-high));
+  --color-primary: rgb(var(--primary));
+  --color-primary-hover: rgba(var(--primary), 0.88);
+  --color-primary-alpha: rgba(var(--primary), 0.18);
+  --color-border: rgb(var(--outline-variant));
+  --color-outline: rgb(var(--outline));
+  --color-outline-variant: rgb(var(--outline-variant));
+  --color-text: rgb(var(--on-background));
+  --color-text-secondary: rgb(var(--outline));
 }
 
 /* Smooth scrolling */
