@@ -67,7 +67,7 @@ const { t } = useLanguage()
     </div> -->
 
     <!-- 3. Gaming Squad Section -->
-    <div class="space-y-8">
+    <!-- <div class="space-y-8">
       <h2
         class="text-2xl font-bold text-on-surface flex items-center gap-3 px-4"
       >
@@ -75,10 +75,9 @@ const { t } = useLanguage()
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
-        <!-- 1. The FPS Carry -->
         <FriendsGamingBuddy
-          name="Viper"
-          role="Entry Fragger"
+          name="Happy"
+          role=""
           level="Rank: Predator"
           status="In Lobby"
           themeColor="#ef4444"
@@ -118,7 +117,6 @@ const { t } = useLanguage()
           ]"
         />
 
-        <!-- 2. The Strategist -->
         <FriendsGamingBuddy
           name="Strategos"
           role="Shotcaller"
@@ -161,7 +159,6 @@ const { t } = useLanguage()
           ]"
         />
 
-        <!-- 3. The Explorer -->
         <FriendsGamingBuddy
           name="Nomad"
           role="Survival Expert"
@@ -204,7 +201,6 @@ const { t } = useLanguage()
           ]"
         />
 
-        <!-- 4. The Speedrunner (New) -->
         <FriendsGamingBuddy
           name="Glitch"
           role="Frame Perfect"
@@ -247,7 +243,7 @@ const { t } = useLanguage()
           ]"
         />
       </div>
-    </div>
+    </div> -->
 
     <!-- 4. Hometown Group -->
     <!-- <FriendsHometownGroup /> -->
