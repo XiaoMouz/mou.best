@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   // Enable SSR (default is true, but being explicit)
-  ssr: true,
+  ssr: false,
 
   modules: [
     '@unocss/nuxt',
@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     '@nuxtjs/mdc',
   ],
 
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/uno.css', '~/assets/css/main.css'],
   nitro: {
     preset: 'cloudflare_module',
     cloudflare: {
@@ -40,6 +40,21 @@ export default defineNuxtConfig({
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Exo+2:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap',
+        },
+      ],
+      script: [
+        {
+          innerHTML: `
+            ;(function () {
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                const setting = localStorage.getItem('vueuse-color-scheme') || 'auto'
+                if (setting === 'dark' || (prefersDark && setting !== 'light'))
+                  document.documentElement.classList.toggle('dark', true)
+              })()
+          `,
+          type: 'text/javascript',
+          async: false,
+          defer: false,
         },
       ],
     },
