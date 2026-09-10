@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const router = useRouter()
-
 // Fetch Nuxt Content articles
 const { data: contentArticles } = await useAsyncData('content-articles', async () => {
   try {
@@ -49,11 +47,8 @@ const allArticles = computed(() => {
   })
 })
 
-const handleViewArticle = (slug: string) => {
-  router.push(`/articles/${slug}`)
-}
 </script>
 
 <template>
-  <Articles :articles="allArticles" @view-article="handleViewArticle" />
+  <Articles :articles="allArticles" />
 </template>

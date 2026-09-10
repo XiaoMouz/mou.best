@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import {
   MapPin,
-  Github,
-  Twitter,
   Mail,
   Gamepad2,
   Coffee,
@@ -17,7 +15,9 @@ import {
   Terminal,
   Command,
   AppWindow,
-} from 'lucide-vue-next'
+} from '@lucide/vue'
+import Github from '~/components/icon/Github.vue'
+import Twitter from '~/components/icon/Twitter.vue'
 
 const { t } = useLanguage()
 
@@ -46,7 +46,7 @@ const steamStatus = ref<SteamStatus>({
 // Fetch Steam status from API
 const fetchSteamStatus = async () => {
   try {
-    const response = await $fetch<SteamStatus>('/api/steam/status')
+    const response = (await $fetch('/api/steam/status')) as SteamStatus
     steamStatus.value = response
   } catch (error) {
     console.error('Failed to fetch Steam status:', error)
@@ -71,7 +71,7 @@ const nowPlaying = ref<NowPlaying>({
 // Fetch music status from Discord API (via Lanyard)
 const fetchNowPlaying = async () => {
   try {
-    const response = await $fetch<NowPlaying>('/api/discord/music')
+    const response = (await $fetch('/api/discord/music')) as NowPlaying
     nowPlaying.value = response
   } catch (error) {
     console.error('Failed to fetch now playing:', error)
@@ -608,9 +608,6 @@ onMounted(() => {
           </div>
         </div>
       </div>
-
-      <!-- 9. Live Streaming Status -->
-      <AboutLive />
     </div>
 
     <!-- Footer Quote or Signoff -->

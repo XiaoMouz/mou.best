@@ -10,43 +10,6 @@ export interface NavItem {
   id: string
   label: string
   icon: Component
-  active?: boolean
-  children?: NavItem[] // For dropdowns
-}
-
-export interface GameItem {
-  id: string
-  title: string
-  description: string
-  review: string
-  rating: number // 0-10
-  playtime: string
-  storeLink: string
-  bgImage: string
-  charImage: string
-  theme: {
-    primary: string
-    secondary: string
-    font: string
-    style: 'gta' | 'division' | 'cyberpunk' | 'warthunder' | 'eve'
-  }
-}
-
-export interface MediaItem {
-  id: string
-  title: string
-  category: 'anime' | 'movie' | 'tv' | 'music'
-  description: string
-  review: string
-  rating: number // 0-10
-  year: string
-  image: string
-  theme: {
-    primary: string
-    secondary: string
-    font: string
-    style: string
-  }
 }
 
 export interface Friend {

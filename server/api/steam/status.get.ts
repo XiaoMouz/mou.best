@@ -2,13 +2,14 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
 
   // Get Steam API credentials from environment
-  const STEAM_API_KEY = config.STEAM_API_KEY || process.env.STEAM_API_KEY
+  const STEAM_API_KEY =
+    (config.STEAM_API_KEY as string | undefined) || process.env.STEAM_API_KEY
   const DEFAULT_STEAM_USER_ID =
-    config.STEAM_USER_ID || process.env.STEAM_USER_ID
+    (config.STEAM_USER_ID as string | undefined) || process.env.STEAM_USER_ID
 
   // Get allowed Steam user IDs from environment (comma-separated)
   const ALLOWED_STEAM_USERS = (
-    config.ALLOWED_STEAM_USERS ||
+    (config.ALLOWED_STEAM_USERS as string | undefined) ||
     process.env.ALLOWED_STEAM_USERS ||
     DEFAULT_STEAM_USER_ID ||
     ''
@@ -19,7 +20,8 @@ export default defineEventHandler(async (event) => {
 
   // Get user ID from query parameter, fallback to default
   const query = getQuery(event)
-  const requestedUserId = (query.userId as string) || DEFAULT_STEAM_USER_ID
+  const requestedUserId =
+    (query.userId as string | undefined) || DEFAULT_STEAM_USER_ID || ''
 
   // Validate user ID is in whitelist
   if (!ALLOWED_STEAM_USERS.includes(requestedUserId)) {
@@ -59,7 +61,7 @@ export default defineEventHandler(async (event) => {
     // Fetch from Steam API
     // 1. Get player summaries to check online status
     const summaryUrl = `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${STEAM_API_KEY}&steamids=${STEAM_USER_ID}`
-    const summaryResponse = await $fetch(summaryUrl)
+    const summaryResponse = (await $fetch(summaryUrl)) as any
     const playerData = summaryResponse?.response?.players?.[0]
 
     if (!playerData) {
@@ -68,7 +70,7 @@ export default defineEventHandler(async (event) => {
 
     // 2. Get recently played games
     const recentGamesUrl = `https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${STEAM_API_KEY}&steamid=${STEAM_USER_ID}&format=json`
-    const recentGamesResponse = await $fetch(recentGamesUrl)
+    const recentGamesResponse = (await $fetch(recentGamesUrl)) as any
     const recentGames = recentGamesResponse?.response?.games || []
 
     // Check if player is currently in-game

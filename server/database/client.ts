@@ -1,37 +1,28 @@
-import { createDatabase } from 'db0'
-import sqlite from 'db0/connectors/better-sqlite3'
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { createDatabase, type Database } from 'db0'
+import cloudflareD1 from 'db0/connectors/cloudflare-d1'
 
-let _db: ReturnType<typeof createDatabase> | null = null
+let _db: Promise<Database> | null = null
 
 export function useDatabase() {
-  if (_db) {
-    return _db
+  return (_db ??= createDatabaseForRuntime())
+}
+
+async function createDatabaseForRuntime() {
+  if (!import.meta.dev) {
+    return createDatabase(cloudflareD1({ bindingName: 'DB' }))
   }
 
-  const dataDir = process.env.NUXT_DATA_DIR || join(process.cwd(), '.data')
-  const dbPath = join(dataDir, 'articles.db')
-
-  _db = createDatabase(
-    sqlite({
-      name: dbPath,
-    })
+  const [{ default: nodeSqlite }, { readFile }, { resolve }] =
+    await Promise.all([
+      import('db0/connectors/node-sqlite'),
+      import('node:fs/promises'),
+      import('node:path'),
+    ])
+  const db = createDatabase(nodeSqlite({ name: 'articles' }))
+  const migration = await readFile(
+    resolve(process.cwd(), 'migrations/0001_encrypted_articles.sql'),
+    'utf8',
   )
-
-  // Initialize schema
-  const schemaPath = join(process.cwd(), 'server/database/schema.sql')
-  const schema = readFileSync(schemaPath, 'utf-8')
-
-  // Execute schema
-  const statements = schema
-    .split(';')
-    .map(s => s.trim())
-    .filter(s => s.length > 0)
-
-  for (const statement of statements) {
-    _db.exec(statement)
-  }
-
-  return _db
+  await db.exec(migration)
+  return db
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch, type CSSProperties } from 'vue'
-import { ArrowLeft, Calendar, Clock, Lock, Unlock, MessageSquare, Bookmark, Share2 } from 'lucide-vue-next'
+import { ArrowLeft, Calendar, Clock, Lock, Unlock, MessageSquare, Bookmark, Share2 } from '@lucide/vue'
 import type { ContentItem } from '~/types'
 
 // Props

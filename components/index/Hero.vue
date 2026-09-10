@@ -33,19 +33,19 @@ const snippets = [
         </div>
         <div class="flex gap-4 mt-6">
           <HeroSoicalButton href="https://github.com/XiaoMouz" label="GitHub">
-            <IconGithub fill-foreground size-5 />
+            <IconGithub fill-current size-5 />
           </HeroSoicalButton>
           <HeroSoicalButton
             href="https://space.bilibili.com/64110204"
             label="Bilibili"
           >
-            <IconBilibili fill-foreground size-5 />
+            <IconBilibili fill-current size-5 />
           </HeroSoicalButton>
           <HeroSoicalButton href="https://x.com/XiaoMouz" label="Twitter">
-            <IconTwitter fill-foreground size-5 />
+            <IconTwitter fill-current size-5 />
           </HeroSoicalButton>
           <HeroSoicalButton href="https://t.me/XiaoMouz" label="Telegram">
-            <IconTelegram fill-foreground size-5 />
+            <IconTelegram fill-current size-5 />
           </HeroSoicalButton>
         </div>
       </div>

@@ -55,14 +55,14 @@ export const useEncryptedArticles = () => {
   // Unlock article by verifying password
   const unlockArticle = async (slug: string, password: string) => {
     try {
-      const response = await $fetch<{
+      const response = (await $fetch('/api/articles/unlock', {
+        method: 'POST',
+        body: { slug, password },
+      })) as {
         success: boolean
         article?: any
         error?: string
-      }>('/api/articles/unlock', {
-        method: 'POST',
-        body: { slug, password },
-      })
+      }
 
       if (response.success && response.article) {
         // Store in state

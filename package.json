@@ -8,30 +8,35 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "migrate:articles": "tsx scripts/migrate-articles.ts",
+    "typecheck": "nuxt typecheck",
+    "db:migrate:local": "wrangler d1 migrations apply mou-best-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply mou-best-db --remote",
+    "cloudflare:workers:dry-run": "pnpm build && wrangler --cwd .output deploy --dry-run",
     "cloudflare:workers:build": "pnpm build && wrangler --cwd .output deploy"
   },
   "dependencies": {
-    "@nuxt/content": "^3.9.0",
-    "@nuxtjs/i18n": "10.2.1",
-    "@nuxtjs/mdc": "^0.19.1",
-    "@unocss/nuxt": "^66.5.12",
-    "@unocss/reset": "^66.5.12",
-    "@vueuse/nuxt": "13.3.0",
+    "@lucide/vue": "^1.37.0",
+    "@nuxt/content": "^3.16.0",
+    "@nuxtjs/mdc": "^0.23.1",
+    "@unocss/nuxt": "^66.8.1",
+    "@unocss/reset": "^66.8.1",
+    "@vueuse/nuxt": "^14.4.0",
     "bcryptjs": "^3.0.3",
-    "better-sqlite3": "^12.5.0",
-    "db0": "^0.3.4",
-    "lucide-vue-next": "^0.460.0",
-    "nuxt": "^3.20.1",
-    "vue": "^3.5.24",
-    "vue-router": "^4.6.3"
+    "db0": "^0.4.0",
+    "nuxt": "^4.5.2",
+    "vue": "^3.5.42",
+    "vue-router": "^5.3.0"
   },
-  "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c",
+  "packageManager": "pnpm@11.24.0",
+  "engines": {
+    "node": "24.x"
+  },
   "devDependencies": {
-    "@iconify-json/lucide": "^1.2.16",
-    "@types/bcrypt": "^6.0.0",
-    "@types/node": "^22.14.0",
-    "typescript": "~5.8.2",
-    "unocss": "^66.5.12"
+    "@iconify-json/lucide": "^1.2.127",
+    "@types/node": "^24.13.3",
+    "typescript": "^5.9.3",
+    "unocss": "^66.8.1",
+    "vue-tsc": "^3.3.11",
+    "wrangler": "^4.127.1"
   }
 }

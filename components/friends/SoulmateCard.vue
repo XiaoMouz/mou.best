@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Heart, MessageCircle, Twitter } from 'lucide-vue-next'
+import { Heart, MessageCircle } from '@lucide/vue'
+import Twitter from '~/components/icon/Twitter.vue'
 
 interface SoulmateCardProps {
   image: string

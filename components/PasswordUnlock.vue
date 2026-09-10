@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Lock, Unlock } from 'lucide-vue-next'
+import { Lock, Unlock } from '@lucide/vue'
 
 const props = defineProps<{
   slug: string

@@ -1,8 +1,23 @@
 import { useDatabase } from '~/server/database/client'
 import { verifyPassword } from '~/server/utils/crypto'
 
+interface EncryptedArticleRow {
+  id: number
+  slug: string
+  title: string
+  excerpt: string | null
+  content: string
+  password_hash: string
+  tags: string | null
+  date: string
+  readTime: string | null
+  image: string | null
+  image_alt: string | null
+  theme: string | null
+}
+
 export default defineEventHandler(async (event) => {
-  const db = useDatabase()
+  const db = await useDatabase()
   const body = await readBody(event)
 
   const { slug, password } = body
@@ -26,10 +41,13 @@ export default defineEventHandler(async (event) => {
         password_hash,
         tags,
         date,
-        read_time as readTime
+        read_time as readTime,
+        image,
+        image_alt,
+        theme
       FROM encrypted_articles
       WHERE slug = ?
-    `).get(slug)
+    `).get(slug) as EncryptedArticleRow | undefined
 
     if (!article) {
       throw createError({

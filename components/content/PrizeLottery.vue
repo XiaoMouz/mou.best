@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Dices } from 'lucide-vue-next'
+import { Dices } from '@lucide/vue'
 
 const prizes = ref([
   { id: 1, name: 'CDK Key #1', rarity: 'legendary', probability: 5 },

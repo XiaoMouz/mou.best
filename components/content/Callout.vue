@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AlertCircle, CheckCircle, Info, AlertTriangle } from 'lucide-vue-next'
+import { AlertCircle, CheckCircle, Info, AlertTriangle } from '@lucide/vue'
 
 const props = defineProps<{
   type?: 'info' | 'success' | 'warning' | 'error'

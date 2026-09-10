@@ -12,7 +12,7 @@ import {
   Timer,
   Zap,
   Flag,
-} from 'lucide-vue-next'
+} from '@lucide/vue'
 
 const { t } = useLanguage()
 </script>

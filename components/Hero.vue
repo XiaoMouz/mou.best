@@ -51,19 +51,19 @@
       <!-- Social Icons -->
       <div class="flex items-center justify-center gap-4 mt-12">
         <HeroSoicalButton href="https://github.com/XiaoMouz" label="GitHub">
-          <IconGithub class="fill-foreground size-5" />
+          <IconGithub class="fill-current size-5" />
         </HeroSoicalButton>
         <HeroSoicalButton
           href="https://space.bilibili.com/64110204"
           label="Bilibili"
         >
-          <IconBilibili class="fill-foreground size-5" />
+          <IconBilibili class="fill-current size-5" />
         </HeroSoicalButton>
         <HeroSoicalButton href="https://x.com/XiaoMouz" label="Twitter">
-          <IconTwitter class="fill-foreground size-5" />
+          <IconTwitter class="fill-current size-5" />
         </HeroSoicalButton>
         <HeroSoicalButton href="https://t.me/XiaoMouz" label="Telegram">
-          <IconTelegram class="fill-foreground size-5" />
+          <IconTelegram class="fill-current size-5" />
         </HeroSoicalButton>
       </div>
     </div>
@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { ArrowRight } from 'lucide-vue-next'
+import { ArrowRight } from '@lucide/vue'
 import Typewriter from './Typewriter.vue'
 
 const router = useRouter()

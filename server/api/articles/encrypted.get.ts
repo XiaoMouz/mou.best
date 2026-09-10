@@ -1,7 +1,20 @@
 import { useDatabase } from '~/server/database/client'
 
+interface EncryptedArticleSummaryRow {
+  id: number
+  slug: string
+  title: string
+  excerpt: string | null
+  tags: string | null
+  date: string
+  readTime: string | null
+  image: string | null
+  imageAlt: string | null
+  theme: string | null
+}
+
 export default defineEventHandler(async () => {
-  const db = useDatabase()
+  const db = await useDatabase()
 
   try {
     // Query all encrypted articles, excluding password_hash and content
@@ -19,7 +32,7 @@ export default defineEventHandler(async () => {
         theme
       FROM encrypted_articles
       ORDER BY date DESC
-    `).all()
+    `).all() as EncryptedArticleSummaryRow[]
 
     return {
       success: true,

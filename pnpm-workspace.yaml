@@ -1,4 +1,4 @@
-onlyBuiltDependencies:
-  - bcrypt
-  - better-sqlite3
-  - esbuild
+allowBuilds:
+  better-sqlite3: false
+  esbuild: true
+  workerd: true

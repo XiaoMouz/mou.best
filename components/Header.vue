@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Id from '~/pages/blog/[id].vue'
-
 const navItems = [
   { id: 'home', name: 'Home', href: '/' },
   { id: 'blog', name: 'Blog', href: '/blog' },

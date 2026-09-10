@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { MessageSquarePlus } from 'lucide-vue-next'
+import { MessageSquarePlus } from '@lucide/vue'
 import { useArticle } from '~/composables/useArticle'
 import { useLanguage } from '~/composables/useLanguage'
 

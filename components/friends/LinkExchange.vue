@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Link, ExternalLink } from 'lucide-vue-next'
+import { Link, ExternalLink } from '@lucide/vue'
 
 const { t } = useLanguage()
 

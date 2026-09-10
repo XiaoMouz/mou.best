@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { Gamepad2, type LucideIcon } from 'lucide-vue-next'
+import { Gamepad2, type LucideIcon } from '@lucide/vue'
 
 export interface GamingHistoryItem {
   year: string
@@ -52,7 +52,9 @@ const fetchSteamStatus = async () => {
 
   isSteamLoading.value = true
   try {
-    const response = await $fetch<SteamStatus>(`/api/steam/status?userId=${props.steamUserId}`)
+    const response = (await $fetch(
+      `/api/steam/status?userId=${props.steamUserId}`,
+    )) as SteamStatus
     steamStatus.value = response
   } catch (error) {
     console.error('Failed to fetch Steam status for', props.name, error)

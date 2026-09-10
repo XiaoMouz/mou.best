@@ -14,11 +14,11 @@
     </div>
 
     <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <article
+      <NuxtLink
         v-for="article in articles"
         :key="article.slug"
-        class="article-card group cursor-pointer overflow-hidden"
-        @click="$emit('view-article', article.slug)"
+        :to="`/articles/${article.slug}`"
+        class="article-card group block overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
         <!-- 头图 -->
         <div
@@ -60,20 +60,16 @@
             <span v-if="article.readTime">{{ article.readTime }}</span>
           </div>
         </div>
-      </article>
+      </NuxtLink>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { Lock } from 'lucide-vue-next'
+import { Lock } from '@lucide/vue'
 
 defineProps<{
   articles: any[]
-}>()
-
-defineEmits<{
-  'view-article': [slug: string]
 }>()
 
 const { t } = useLanguage()
@@ -97,4 +93,3 @@ const { t } = useLanguage()
   position: relative;
 }
 </style>
-

@@ -99,14 +99,21 @@ const themeStyles = computed(() => {
     '--article-primary-color': theme.primaryColor || 'inherit',
     '--article-bg-color': theme.backgroundColor || 'inherit',
     '--article-text-color': theme.textColor || 'inherit',
-    fontSize: theme.fontSize ? fontSizeMap[theme.fontSize] : undefined,
-    fontFamily: theme.fontFamily ? fontFamilyMap[theme.fontFamily] : 'system-ui, -apple-system, sans-serif',
-    fontWeight: theme.fontWeight ? fontWeightMap[theme.fontWeight] : undefined,
-    lineHeight: theme.lineHeight ? lineHeightMap[theme.lineHeight] : undefined,
+    fontSize: theme.fontSize
+      ? fontSizeMap[theme.fontSize as keyof typeof fontSizeMap]
+      : undefined,
+    fontFamily: theme.fontFamily
+      ? fontFamilyMap[theme.fontFamily as keyof typeof fontFamilyMap]
+      : 'system-ui, -apple-system, sans-serif',
+    fontWeight: theme.fontWeight
+      ? fontWeightMap[theme.fontWeight as keyof typeof fontWeightMap]
+      : undefined,
+    lineHeight: theme.lineHeight
+      ? lineHeightMap[theme.lineHeight as keyof typeof lineHeightMap]
+      : undefined,
   }
 })
 
-console.log('🚀 ~ article:', article.value)
 </script>
 
 <template>

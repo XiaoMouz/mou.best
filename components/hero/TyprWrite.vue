@@ -109,8 +109,8 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const content = ref(props.snippets[0])
-    const description = ref(props.snippets[0])
+    const content = ref(props.snippets[0] ?? '')
+    const description = ref(props.snippets[0] ?? '')
     const isIdle = ref(true)
     const isTyping = ref(false)
     let transition: TypewriterState | null = null
@@ -123,9 +123,9 @@ export default defineComponent({
 
     function runTypewriter() {
       if (!transition) {
-        const from = props.snippets[curIdx]
+        const from = props.snippets[curIdx] ?? ''
         curIdx = nextIdx()
-        const to = props.snippets[curIdx]
+        const to = props.snippets[curIdx] ?? ''
         transition = new TypewriterState(from, to)
         description.value = to
         isIdle.value = false

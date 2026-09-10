@@ -3,7 +3,7 @@
     xmlns="http://www.w3.org/2000/svg"
     x="0px"
     y="0px"
-    fill="current"
+    fill="currentColor"
     style="
       width: 1.5em;
       height: 1.5em;

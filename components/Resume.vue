@@ -4,8 +4,6 @@ import {
   ArrowLeft,
   Download,
   Mail,
-  Github,
-  Linkedin,
   MapPin,
   Building2,
   GraduationCap,
@@ -27,7 +25,8 @@ import {
   X,
   ChevronRight,
   Box,
-} from 'lucide-vue-next'
+} from '@lucide/vue'
+import Github from '~/components/icon/Github.vue'
 import { useLanguage } from '~/composables/useLanguage'
 
 interface Skill {

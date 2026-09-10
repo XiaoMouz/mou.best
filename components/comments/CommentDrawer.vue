@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { X, Send, MessageSquare } from 'lucide-vue-next'
+import { X, Send, MessageSquare } from '@lucide/vue'
 import { useArticle } from '~/composables/useArticle'
 import { useLanguage } from '~/composables/useLanguage'
 

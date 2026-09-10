@@ -2,7 +2,6 @@ export const useTheme = () => {
   // Default to light theme to prevent dark flash on SSR
   // The theme will be corrected by the script in nuxt.config
   const isDark = useState('isDark', () => false)
-  const navbarTheme = useState<any>('navbarTheme', () => null)
 
   const initTheme = () => {
     if (process.client) {
@@ -35,20 +34,9 @@ export const useTheme = () => {
     }
   }
 
-  const setNavbarTheme = (theme: any) => {
-    navbarTheme.value = theme
-  }
-
-  const resetNavbarTheme = () => {
-    navbarTheme.value = null
-  }
-
   return {
     isDark: computed(() => isDark.value),
-    navbarTheme: computed(() => navbarTheme.value),
     initTheme,
     toggleTheme,
-    setNavbarTheme,
-    resetNavbarTheme,
   }
 }

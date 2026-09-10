@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Star, Clock, ChevronDown } from 'lucide-vue-next'
+import { Star, Clock, ChevronDown } from '@lucide/vue'
 
 const { t } = useLanguage()
 const activeTimeline = ref<number | null>(null)

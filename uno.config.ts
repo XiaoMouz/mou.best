@@ -23,10 +23,6 @@ export default defineConfig({
         sans: 'DM Sans',
         serif: 'DM Serif Display',
         mono: 'DM Mono',
-        cinzel: 'Cinzel',
-        exo: 'Exo 2',
-        oswald: 'Oswald',
-        playfair: 'Playfair Display',
       },
     }),
   ],
@@ -55,8 +51,5 @@ export default defineConfig({
       'on-surface': 'rgb(var(--on-background))',
       'on-surface-variant': 'rgb(var(--outline))',
     },
-  },
-  shortcuts: {
-    'clip-path-slant': 'clip-[polygon(0_0,100%_0,95%_100%,0%_100%)]',
   },
 })
