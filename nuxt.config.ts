@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: '.',
 
-  // Enable SSR (default is true, but being explicit)
+  // SPA mode: pages are rendered on the client only.
   ssr: false,
 
   modules: [

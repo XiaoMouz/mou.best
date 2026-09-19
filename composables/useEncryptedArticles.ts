@@ -19,7 +19,7 @@ export const useEncryptedArticles = () => {
 
   // Load from localStorage on client side
   const loadFromStorage = () => {
-    if (process.client) {
+    if (import.meta.client) {
       try {
         const stored = localStorage.getItem(STORAGE_KEY)
         if (stored) {
@@ -33,7 +33,7 @@ export const useEncryptedArticles = () => {
 
   // Save to localStorage
   const saveToStorage = () => {
-    if (process.client) {
+    if (import.meta.client) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(unlockedArticles.value))
       } catch (error) {
@@ -93,7 +93,7 @@ export const useEncryptedArticles = () => {
   // Clear all unlocked articles
   const clearUnlocked = () => {
     unlockedArticles.value = {}
-    if (process.client) {
+    if (import.meta.client) {
       localStorage.removeItem(STORAGE_KEY)
     }
   }
@@ -105,7 +105,7 @@ export const useEncryptedArticles = () => {
   }
 
   // Initialize on mount
-  if (process.client) {
+  if (import.meta.client) {
     loadFromStorage()
   }
 

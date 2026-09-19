@@ -19,7 +19,11 @@ database_id = "ff404be0-27ca-4f7a-8420-80712feab329"
 STEAM_USER_ID = "76561198304644410"
 ALLOWED_STEAM_USERS = "76561198304644410,76561198229927460,76561198157142591,76561199263563573,76561199034242571"
 DISCORD_USER_ID = "451669810686853132"
-STEAM_API_KEY = "A49D27B102123352292F2DAA622F4C86"
+
+# STEAM_API_KEY is a secret and must NOT live in this file (it is committed to git).
+# Set it once per environment instead:
+#   wrangler secret put STEAM_API_KEY
+# For local dev, put it in .dev.vars / .env (both are gitignored).
 
 [observability]
 enabled = false

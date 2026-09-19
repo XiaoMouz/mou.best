@@ -23,6 +23,7 @@ const { data: contentArticle } = await useAsyncData(
 // If not found in content, check if it's an encrypted article
 const isEncryptedArticle = ref(false)
 const article = ref<any>(null)
+const encryptedTitle = ref('')
 
 if (!contentArticle.value) {
   // Check if unlocked in localStorage
@@ -40,6 +41,7 @@ if (!contentArticle.value) {
 
     if (encryptedArticle) {
       isEncryptedArticle.value = true
+      encryptedTitle.value = encryptedArticle.title
     } else {
       // Article not found anywhere, redirect to articles list
       router.push('/articles')
@@ -123,7 +125,7 @@ const themeStyles = computed(() => {
       <PasswordUnlock
         v-if="isEncryptedArticle && !article"
         :slug="slug"
-        :title="slug"
+        :title="encryptedTitle || slug"
         @unlocked="handleUnlocked"
       />
 

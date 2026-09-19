@@ -33,3 +33,6 @@ xiaomouz-portfolio
 .drafts
 
 .wrangler
+# Cloudflare local secrets
+.dev.vars
+.dev.vars.*

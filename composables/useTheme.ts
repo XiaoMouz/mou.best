@@ -4,7 +4,7 @@ export const useTheme = () => {
   const isDark = useState('isDark', () => false)
 
   const initTheme = () => {
-    if (process.client) {
+    if (import.meta.client) {
       const savedTheme = localStorage.getItem('theme')
       const systemPrefersDark = window.matchMedia(
         '(prefers-color-scheme: dark)',
@@ -21,7 +21,7 @@ export const useTheme = () => {
   }
 
   const toggleTheme = () => {
-    if (process.client) {
+    if (import.meta.client) {
       if (isDark.value) {
         document.documentElement.classList.remove('dark')
         localStorage.setItem('theme', 'light')
