@@ -1,9 +1,20 @@
 <script setup lang="ts">
 import { Link, ExternalLink } from '@lucide/vue'
 
-const { t } = useLanguage()
+const { t, language } = useLanguage()
 
-const friendLinks = [
+/** A field that differs per locale; a plain string is used for every locale. */
+type Localized = string | { en: string; zh: string }
+
+const localized = (value: Localized) =>
+  typeof value === 'string' ? value : value[language.value]
+
+const friendLinks: {
+  name: Localized
+  desc: Localized
+  url: string
+  avatar: string
+}[] = [
   // {
   //   name: 'Rimo 海猫',
   //   desc: '',
@@ -11,10 +22,10 @@ const friendLinks = [
   //   avatar: 'https://s3.mou.best/avatars/rimo.png',
   // },
   {
-    name: 'Kevin Deng',
-    desc: 'Open-source enthusiast ▌',
+    name: { en: 'Kevin Deng', zh: '智子' },
+    desc: '探寻存在的意义',
     url: 'https://sxzz.moe',
-    avatar: 'https://sxzz.dev/avatar.avif',
+    avatar: 'https://sxzz.dev/avatar-zh.avif',
   },
   {
     name: 'QPomelo',
@@ -90,16 +101,18 @@ const friendLinks = [
       >
         <img
           :src="friend.avatar"
-          :alt="friend.name"
+          :alt="localized(friend.name)"
           class="w-12 h-12 rounded-full border-2 border-surface group-hover:border-primary transition-colors"
         />
         <div>
           <div
             class="font-bold text-on-surface group-hover:text-primary transition-colors"
           >
-            {{ friend.name }}
+            {{ localized(friend.name) }}
           </div>
-          <div class="text-xs text-on-surface-variant">{{ friend.desc }}</div>
+          <div class="text-xs text-on-surface-variant">
+            {{ localized(friend.desc) }}
+          </div>
         </div>
         <ExternalLink
           :size="16"
